@@ -12,6 +12,7 @@ public class GridManager : MonoBehaviour
     public TileBase emptyTile; // Tile to represent an empty grid cell
     public TileBase occupiedTile; // Tile to represent an occupied grid cell
 
+    public bool debugMode;
     private void Awake()
     {
         // Initialize the grid with the specified size using arrays
@@ -24,7 +25,10 @@ public class GridManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        UpdateGridVisuals();
+        if (debugMode)
+        {
+            UpdateGridVisuals();
+        }
     }
 
     // Function to place an object at a specific grid position
