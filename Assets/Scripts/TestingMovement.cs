@@ -7,10 +7,12 @@ public class TestingMovement : MonoBehaviour
 
     void Start()
     {
+
+
         movementScript = GetComponent<Movement>(); // Get the Movement script component
         if (movementScript == null)
         {
-            Debug.LogError("No Movement script found on this GameObject.");
+            Debug.Log("No Movement script found on this GameObject.");
             return;
         }
 
@@ -23,6 +25,7 @@ public class TestingMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space)) // Example: Press space to move to a new random grid position
         {
             Vector3Int randomGridPosition = GetRandomGridPosition();
+            Debug.Log("Moving to grid position: " + randomGridPosition);
             movementScript.MoveToGrid(randomGridPosition);
         }
     }
