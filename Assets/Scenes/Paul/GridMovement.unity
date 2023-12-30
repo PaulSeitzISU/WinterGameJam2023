@@ -3826,6 +3826,7 @@ MonoBehaviour:
   tilemap: {fileID: 1059129053}
   emptyTile: {fileID: 11400000, guid: 9c7c2e8e0776cc04d8032a4b8439c587, type: 2}
   occupiedTile: {fileID: 11400000, guid: 754d592a15ed4e946bfacdaf20744568, type: 2}
+  debugMode: 0
 --- !u!1001 &6938144183642019683
 PrefabInstance:
   m_ObjectHideFlags: 0
