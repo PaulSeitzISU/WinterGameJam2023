@@ -37,7 +37,7 @@ public class GridManager : MonoBehaviour
         int x = gridPosition.x + (gridSize / 2);
         int y = gridPosition.y + (gridSize / 2);
 
-        Debug.Log("placing object at " + x + " " + y);
+        //Debug.Log("placing object at " + x + " " + y);
 
         if (IsValidGridPosition(new Vector2Int(x, y)))
         {

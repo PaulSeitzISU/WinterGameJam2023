@@ -53,7 +53,7 @@ public class Prop : MonoBehaviour
         // Inform the GridManager about the occupied tiles
         foreach (Vector2Int tile in occupiedTiles)
         {
-            Debug.Log("Informing GridManager about occupied tile: " + tile);
+            //Debug.Log("Informing GridManager about occupied tile: " + tile);
             gridManager.PlaceObject(gameObject, tile);
         }
     }

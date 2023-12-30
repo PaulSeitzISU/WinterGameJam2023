@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 6938144183618512010}
   - component: {fileID: 7171892939230196683}
   - component: {fileID: 57340909}
+  - component: {fileID: -3697134277137350725}
   m_Layer: 0
-  m_Name: TempMovement
+  m_Name: PatrolEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,7 +118,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilemap: {fileID: 0}
   gridManager: {fileID: 0}
+  isMoving: 0
 --- !u!114 &57340909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6938144183618512011}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 674f8f20ec0810947ae6d52a490a3f7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementScript: {fileID: 7171892939230196683}
+  targetGridPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &-3697134277137350725
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,8 +142,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6938144183618512011}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 674f8f20ec0810947ae6d52a490a3f7f, type: 3}
+  m_Script: {fileID: 11500000, guid: 81041dcb6ce78ee4ba82f40db542e3cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementScript: {fileID: 7171892939230196683}
-  targetGridPosition: {x: 0, y: 0, z: 0}
+  movement: {fileID: 0}
+  gridManager: {fileID: 0}
+  yOffSet: 1
+  xOffSet: 1

@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
     public Tilemap tilemap; // Reference to your Tilemap component
     public GridManager gridManager; // Reference to the GridManager
     private Vector2Int currentGridPosition;
-    private bool isMoving = false;
+    public bool isMoving = false;
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +66,7 @@ public class Movement : MonoBehaviour
 
     public void MoveToGrid(Vector3Int targetGridPosition)
     {
+        //Debug.Log("Moving to grid position: " + targetGridPosition);
         if (isMoving)
         {
             Debug.LogWarning("Already moving.");
