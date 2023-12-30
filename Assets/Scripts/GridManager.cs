@@ -12,7 +12,7 @@ public class GridManager : MonoBehaviour
     public TileBase emptyTile; // Tile to represent an empty grid cell
     public TileBase occupiedTile; // Tile to represent an occupied grid cell
 
-    private void Start()
+    private void Awake()
     {
         // Initialize the grid with the specified size using arrays
         gridObjects = new GameObject[gridSize, gridSize];
@@ -94,6 +94,7 @@ public class GridManager : MonoBehaviour
         int y = gridPosition.y + (gridSize / 2);
 
             //Debug.Log("grid position" + x + " " + y);
+            
             if( gridObjects[x, y] != null)
             {   
                 //Debug.Log("gameobject in space" + gridObjects[x][y]);
@@ -159,7 +160,7 @@ public class GridManager : MonoBehaviour
                 if (isOccupied)
                 {
                     tilemap.SetTile(new Vector3Int(x, y, 0), occupiedTile);
-                    Debug.Log("Tile is occupied at " + x + " " + y);
+                    //Debug.Log("Tile is occupied at " + x + " " + y);
                 }
                 else
                 {
