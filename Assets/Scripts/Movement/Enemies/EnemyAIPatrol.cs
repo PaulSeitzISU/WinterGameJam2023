@@ -16,6 +16,7 @@ public class EnemyAIPatrol : MonoBehaviour
     public int xOffSet;
 
     public int visibilityRadius;
+    public List<GameObject> objectsInRadius;
 
     private Vector2Int startGridPosition;
     private Vector2Int targetGridPosition;
@@ -27,8 +28,8 @@ public class EnemyAIPatrol : MonoBehaviour
         startGridPosition = movement.GetGridTilePosition();
     }
 
-    private void FixedUpdate()
-    {
+    public void Patrol()
+    {   
         // Move in a rectangle pattern
         if (!movingToCorner)
         {
@@ -40,6 +41,7 @@ public class EnemyAIPatrol : MonoBehaviour
             // When at a corner, check if the enemy is within a specific tile
             if (!movement.isMoving)
             {
+                CheckForGameObjects();
                 movingToCorner = false;
             }
         }
@@ -54,20 +56,15 @@ public class EnemyAIPatrol : MonoBehaviour
             switch (moveCount)
             {
                 case 0:
-                    targetGridPosition = new Vector2Int(startGridPosition.x + xOffSet, startGridPosition.y);
                     movement.MoveToGrid(new Vector3Int(startGridPosition.x + xOffSet, startGridPosition.y, 0));
-                    
                     break;
                 case 1:
-                    targetGridPosition = new Vector2Int(startGridPosition.x + xOffSet, startGridPosition.y + yOffSet);
                     movement.MoveToGrid(new Vector3Int(startGridPosition.x + xOffSet, startGridPosition.y + yOffSet, 0));
                     break;
                 case 2:
-                    targetGridPosition = new Vector2Int(startGridPosition.x, startGridPosition.y + yOffSet);
                     movement.MoveToGrid(new Vector3Int(startGridPosition.x, startGridPosition.y + yOffSet, 0));
                     break;
                 case 3:
-                    targetGridPosition = new Vector2Int(startGridPosition.x, startGridPosition.y);
                     movement.MoveToGrid(new Vector3Int(startGridPosition.x, startGridPosition.y , 0));
                     break;
             }
@@ -79,18 +76,20 @@ public class EnemyAIPatrol : MonoBehaviour
         }
     }
 
-        private void CheckForGameObjects()
+private void CheckForGameObjects()
+{
+    objectsInRadius = gridManager.GetObjectsInRadius(movement.currentGridPosition, visibilityRadius, gameObject);
+
+    if (objectsInRadius.Count > 0)
     {
-        List<GameObject> objectsInRadius = gridManager.GetObjectsInRadius(movement.GetGridTilePosition(), visibilityRadius);
-        if (objectsInRadius.Count > 0)
+        //Debug.Log("Objects detected at corner: " + objectsInRadius.Count);
+        foreach (GameObject obj in objectsInRadius)
         {
-            Debug.Log("Objects detected at corner: " + objectsInRadius.Count);
-            foreach (GameObject obj in objectsInRadius)
-            {
-                Debug.Log("Object detected: " + obj.name);
-            }
+            //Debug.Log("Object detected: " + obj.name);
         }
     }
+}
+
 
 }
 

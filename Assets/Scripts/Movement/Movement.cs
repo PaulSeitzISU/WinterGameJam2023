@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -7,7 +8,8 @@ public class Movement : MonoBehaviour
 {
     public Tilemap tilemap; // Reference to your Tilemap component
     public GridManager gridManager; // Reference to the GridManager
-    private Vector2Int currentGridPosition;
+    public AStar aStar; // Reference to the AStar script
+    public Vector2Int currentGridPosition;
     public bool isMoving = false;
 
     // Start is called before the first frame update
@@ -26,6 +28,14 @@ public class Movement : MonoBehaviour
         if (gridManager == null)
         {
             Debug.LogError("No GridManager found in the scene.");
+            return;
+        }
+
+        aStar = GameObject.Find("Tilemap").GetComponent<AStar>(); // Find the AStar script in the scene
+
+        if (aStar == null)
+        {
+            Debug.LogError("No AStar script found in the scene.");
             return;
         }
 
@@ -80,32 +90,50 @@ public class Movement : MonoBehaviour
         }
     }
 
+    // List<Vector3Int> CalculatePath(Vector2Int start, Vector2Int end)
+    // {
+    //     List<Vector3Int> path = new List<Vector3Int>();
+
+    //     Vector2Int direction = end - start;
+
+    //     int x = start.x;
+    //     int y = start.y;
+
+    //     int xStep = (int)Mathf.Sign(direction.x);
+    //     int yStep = (int)Mathf.Sign(direction.y);
+
+    //     int steps = Mathf.Max(Mathf.Abs(direction.x), Mathf.Abs(direction.y));
+
+    //     for (int i = 0; i <= steps; i++)
+    //     {
+    //         path.Add(new Vector3Int(x, y, 0));
+
+    //         if (i < Mathf.Abs(direction.x))
+    //             x += xStep;
+
+    //         if (i < Mathf.Abs(direction.y))
+    //             y += yStep;
+    //     }
+
+    //     return path;
+    // }
+
     List<Vector3Int> CalculatePath(Vector2Int start, Vector2Int end)
     {
-        List<Vector3Int> path = new List<Vector3Int>();
+        Debug.Log("start" + start.x + " " + start.y + "end" + end.x + " " + end.y );
+        //Debug.Log(aStar.FindPath(aStar.grid[start.x, start.y], aStar.grid[end.x, end.y]));
+        List<AStar.AStarNode> tempPath = aStar.FindPath(aStar.grid[start.x + (gridManager.gridSize/2), start.y + (gridManager.gridSize/2)], aStar.grid[end.x + (gridManager.gridSize/2), end.y + (gridManager.gridSize/2)]);
+  
+        List<Vector3Int> convertPath = new List<Vector3Int>();
 
-        Vector2Int direction = end - start;
-
-        int x = start.x;
-        int y = start.y;
-
-        int xStep = (int)Mathf.Sign(direction.x);
-        int yStep = (int)Mathf.Sign(direction.y);
-
-        int steps = Mathf.Max(Mathf.Abs(direction.x), Mathf.Abs(direction.y));
-
-        for (int i = 0; i <= steps; i++)
+        foreach (AStar.AStarNode node in tempPath)
         {
-            path.Add(new Vector3Int(x, y, 0));
-
-            if (i < Mathf.Abs(direction.x))
-                x += xStep;
-
-            if (i < Mathf.Abs(direction.y))
-                y += yStep;
+            convertPath.Add(new Vector3Int(node.x - ( gridManager.gridSize/2 ), node.y - ( gridManager.gridSize/2 ), 0));
+            Debug.Log(node.x - ( gridManager.gridSize/2 ) + " " + (node.y - ( gridManager.gridSize/2 )));
         }
 
-        return path;
+        return convertPath;
+
     }
 
     IEnumerator FollowPath(List<Vector3Int> path)
