@@ -178,6 +178,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PatrolEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 6938144183618512011, guid: 3f849021d07cdf543af31f2da573a5f2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7171892939230196683, guid: 3f849021d07cdf543af31f2da573a5f2, type: 3}
       propertyPath: tilemap
       value: 
@@ -294,6 +298,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &789897274 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6938144183618512011, guid: fa266ae2390631b4d83e508618bcc8fc, type: 3}
+  m_PrefabInstance: {fileID: 6938144183642019683}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &789897280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789897274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5114a9b5c2083bc4a84cbfe6075f1779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  searchmap: {fileID: 1059129053}
+  gridManager: {fileID: 0}
+  walkTile: {fileID: 11400000, guid: 754d592a15ed4e946bfacdaf20744568, type: 2}
+  masterScan: []
+  chaceScan: []
 --- !u!1 &916729501
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,7 +581,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6938144183618512011, guid: fa266ae2390631b4d83e508618bcc8fc, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa266ae2390631b4d83e508618bcc8fc, type: 3}
@@ -616,7 +642,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6938144183618512011, guid: fa266ae2390631b4d83e508618bcc8fc, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7171892939230196683, guid: fa266ae2390631b4d83e508618bcc8fc, type: 3}
       propertyPath: tilemap
@@ -689,7 +715,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6938144183618512011, guid: fa266ae2390631b4d83e508618bcc8fc, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa266ae2390631b4d83e508618bcc8fc, type: 3}
@@ -795,7 +821,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6938144183618512011, guid: fa266ae2390631b4d83e508618bcc8fc, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa266ae2390631b4d83e508618bcc8fc, type: 3}
@@ -3906,12 +3932,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47c4ee1a985e2034d9358f18e5abd6e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridSize: 40
+  gridSize: 80
   tilemap: {fileID: 1059129053}
   emptyTile: {fileID: 11400000, guid: 9c7c2e8e0776cc04d8032a4b8439c587, type: 2}
   occupiedTile: {fileID: 11400000, guid: 754d592a15ed4e946bfacdaf20744568, type: 2}
   aStar: {fileID: 0}
-  debugMode: 1
+  debugMode: 0
 --- !u!114 &1508778731
 MonoBehaviour:
   m_ObjectHideFlags: 0
