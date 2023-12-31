@@ -136,12 +136,22 @@ public class Movement : MonoBehaviour
 
     }
 
-    IEnumerator FollowPath(List<Vector3Int> path)
+    IEnumerator FollowPath(List<Vector3Int> path, int depth = -1)
     {
         isMoving = true;
 
         foreach (Vector3Int gridPos in path)
         {
+            if (depth == 0)
+            {
+                isMoving = false;
+                yield break;
+            }
+            else if (depth > 0)
+            {
+                depth--;
+            }
+            
             Vector3 targetWorldPosition = tilemap.GetCellCenterWorld(gridPos);
 
             // Check if the target tile is occupied

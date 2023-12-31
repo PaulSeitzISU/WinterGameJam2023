@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 6938144183618512010}
   - component: {fileID: 7171892939230196683}
   - component: {fileID: 57340909}
+  - component: {fileID: 86853445}
   - component: {fileID: -3697134277137350725}
+  - component: {fileID: 86853446}
   m_Layer: 0
   m_Name: PatrolEnemy
   m_TagString: Untagged
@@ -118,6 +120,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilemap: {fileID: 0}
   gridManager: {fileID: 0}
+  aStar: {fileID: 0}
+  currentGridPosition: {x: 0, y: 0}
   isMoving: 0
 --- !u!114 &57340909
 MonoBehaviour:
@@ -133,6 +137,68 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementScript: {fileID: 7171892939230196683}
   targetGridPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &86853445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6938144183618512011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c260023afe9b9bf4bad67816687d10d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visibilityRadius: 5
+  objectsInRadius: []
+  patrolSpeed: 3
+  chaseSpeed: 5
+  attackDistance: 1.5
+  fleeDistance: 8
+  PlayerList: []
+  StartState: 1
+  OnIdle:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPatrol:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -3697134277137350725}
+        m_TargetAssemblyTypeName: EnemyAIPatrol, Assembly-CSharp
+        m_MethodName: Patrol
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnChase:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 86853446}
+        m_TargetAssemblyTypeName: EnemyAIChase, Assembly-CSharp
+        m_MethodName: Chase
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  OnFlee:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDead:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &-3697134277137350725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,5 +213,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movement: {fileID: 0}
   gridManager: {fileID: 0}
-  yOffSet: 1
-  xOffSet: 1
+  yOffSet: 2
+  xOffSet: 2
+--- !u!114 &86853446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6938144183618512011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a2face3dbb2bc49835a725ac7f17e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movement: {fileID: 0}
+  gridManager: {fileID: 0}
+  enemyBrain: {fileID: 0}
+  tilemap: {fileID: 0}

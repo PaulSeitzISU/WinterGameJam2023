@@ -130,18 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -3697134277137350725, guid: 3f849021d07cdf543af31f2da573a5f2, type: 3}
-      propertyPath: xOffSet
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -3697134277137350725, guid: 3f849021d07cdf543af31f2da573a5f2, type: 3}
-      propertyPath: yOffSet
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -3697134277137350725, guid: 3f849021d07cdf543af31f2da573a5f2, type: 3}
-      propertyPath: visibilityRadius
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 6938144183618512008, guid: 3f849021d07cdf543af31f2da573a5f2, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -200,69 +188,6 @@ PrefabInstance:
       objectReference: {fileID: 1508778730}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f849021d07cdf543af31f2da573a5f2, type: 3}
---- !u!1 &86853438 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6938144183618512011, guid: 3f849021d07cdf543af31f2da573a5f2, type: 3}
-  m_PrefabInstance: {fileID: 43004113}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &86853439 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -3697134277137350725, guid: 3f849021d07cdf543af31f2da573a5f2, type: 3}
-  m_PrefabInstance: {fileID: 43004113}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 86853438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81041dcb6ce78ee4ba82f40db542e3cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &86853445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 86853438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c260023afe9b9bf4bad67816687d10d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  patrolSpeed: 3
-  chaseSpeed: 5
-  attackDistance: 1.5
-  fleeDistance: 8
-  StartState: 1
-  OnIdle:
-    m_PersistentCalls:
-      m_Calls: []
-  OnPatrol:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 86853439}
-        m_TargetAssemblyTypeName: EnemyAIPatrol, Assembly-CSharp
-        m_MethodName: Patrol
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnChase:
-    m_PersistentCalls:
-      m_Calls: []
-  OnAttack:
-    m_PersistentCalls:
-      m_Calls: []
-  OnFlee:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDead:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1001 &243428949
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3985,6 +3910,7 @@ MonoBehaviour:
   tilemap: {fileID: 1059129053}
   emptyTile: {fileID: 11400000, guid: 9c7c2e8e0776cc04d8032a4b8439c587, type: 2}
   occupiedTile: {fileID: 11400000, guid: 754d592a15ed4e946bfacdaf20744568, type: 2}
+  aStar: {fileID: 0}
   debugMode: 1
 --- !u!114 &1508778731
 MonoBehaviour:

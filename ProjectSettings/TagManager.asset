@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Grid
   - Tilemap
+  - Enemy
   layers:
   - Default
   - TransparentFX
