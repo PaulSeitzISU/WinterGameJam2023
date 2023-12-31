@@ -32,7 +32,7 @@ public class AStar : MonoBehaviour
         InitializeGrid();
     }
 
-    void InitializeGrid()
+    public void InitializeGrid()
     {
         grid = new AStarNode[gridManager.gridSize, gridManager.gridSize];
 
