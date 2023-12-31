@@ -12,6 +12,8 @@ public class GridManager : MonoBehaviour
     public TileBase emptyTile; // Tile to represent an empty grid cell
     public TileBase occupiedTile; // Tile to represent an occupied grid cell
 
+    public AStar aStar; // Reference to the AStar script
+
     public bool debugMode;
     private void Awake()
     {
@@ -19,6 +21,8 @@ public class GridManager : MonoBehaviour
         gridObjects = new GameObject[gridSize, gridSize];
 
         // No need to initialize the array elements to null as arrays in C# are initialized to default values (null for reference types)
+
+        aStar = GetComponent<AStar>(); // Find the AStar script in the scene
 
         // tilemap = GameObject.Find("Tilemap").GetComponent<Tilemap>(); // Get the Tilemap component
     }

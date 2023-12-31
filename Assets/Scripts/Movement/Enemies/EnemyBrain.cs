@@ -20,12 +20,16 @@ public class EnemyBrain : MonoBehaviour
     // Reference to movement script, grid manager, and other necessary components
     private Movement movement;
     private GridManager gridManager;
+    public int visibilityRadius;
+    public List<GameObject> objectsInRadius;
 
     // Other variables necessary for the enemy's behavior
     public float patrolSpeed = 3.0f;
     public float chaseSpeed = 5.0f;
     public float attackDistance = 1.5f;
     public float fleeDistance = 8.0f;
+
+    public List<GameObject> PlayerList = new List<GameObject>();
 
     [SerializeField] public EnemyState StartState;
 
@@ -98,7 +102,7 @@ public class EnemyBrain : MonoBehaviour
     {
         // Implement patrol behavior here
         // Move the enemy in a predefined patrol pattern using the Movement script
-
+        CheckForGameObjects();
         OnPatrol.Invoke();
     }
 
@@ -134,4 +138,27 @@ public class EnemyBrain : MonoBehaviour
 
         OnDead.Invoke();
     }
+
+    private void CheckForGameObjects()
+{
+    objectsInRadius = gridManager.GetObjectsInRadius(movement.currentGridPosition, visibilityRadius, gameObject);
+
+    if (objectsInRadius.Count > 0)
+    {
+        //Debug.Log("Objects detected at corner: " + objectsInRadius.Count);
+        foreach (GameObject obj in objectsInRadius)
+        {
+            if(obj.tag == "Player")
+            {
+                if(!PlayerList.Contains(obj))
+                {
+                    PlayerList.Add(obj);
+                }
+                //Debug.Log("Player detected at corner");
+                TransitionToState(EnemyState.Chase);
+            }
+        }
+    }
+}
+
 }

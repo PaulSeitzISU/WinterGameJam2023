@@ -15,9 +15,6 @@ public class EnemyAIPatrol : MonoBehaviour
     public int yOffSet;
     public int xOffSet;
 
-    public int visibilityRadius;
-    public List<GameObject> objectsInRadius;
-
     private Vector2Int startGridPosition;
     private Vector2Int targetGridPosition;
 
@@ -41,7 +38,6 @@ public class EnemyAIPatrol : MonoBehaviour
             // When at a corner, check if the enemy is within a specific tile
             if (!movement.isMoving)
             {
-                CheckForGameObjects();
                 movingToCorner = false;
             }
         }
@@ -75,21 +71,5 @@ public class EnemyAIPatrol : MonoBehaviour
             moveCount = 0;
         }
     }
-
-private void CheckForGameObjects()
-{
-    objectsInRadius = gridManager.GetObjectsInRadius(movement.currentGridPosition, visibilityRadius, gameObject);
-
-    if (objectsInRadius.Count > 0)
-    {
-        //Debug.Log("Objects detected at corner: " + objectsInRadius.Count);
-        foreach (GameObject obj in objectsInRadius)
-        {
-            //Debug.Log("Object detected: " + obj.name);
-        }
-    }
-}
-
-
 }
 

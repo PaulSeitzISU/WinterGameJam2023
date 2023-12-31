@@ -61,8 +61,22 @@ public class AStar : MonoBehaviour
         }
     }
 
+    public void UpdateGrid()
+    {
+        // Example: Assign values to the grid nodes (walkable or not)
+        for (int x = 0; x < gridManager.gridSize; x++)
+        {
+            for (int y = 0; y < gridManager.gridSize; y++)
+            {
+                bool isWalkable = !gridManager.IsGridPositionOccupied(new Vector2Int(x - (gridManager.gridSize / 2), y - (gridManager.gridSize / 2)));
+                grid[x, y].isWalkable = isWalkable;
+            }
+        }
+    }
+
     public List<AStarNode> FindPath(AStarNode startNode, AStarNode targetNode)
     {
+        UpdateGrid();
         List<AStarNode> openSet = new List<AStarNode>();
         HashSet<AStarNode> closedSet = new HashSet<AStarNode>();
 

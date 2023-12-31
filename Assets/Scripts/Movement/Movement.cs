@@ -120,7 +120,7 @@ public class Movement : MonoBehaviour
 
     List<Vector3Int> CalculatePath(Vector2Int start, Vector2Int end)
     {
-        Debug.Log("start" + start.x + " " + start.y + "end" + end.x + " " + end.y );
+        //Debug.Log("start" + start.x + " " + start.y + "end" + end.x + " " + end.y );
         //Debug.Log(aStar.FindPath(aStar.grid[start.x, start.y], aStar.grid[end.x, end.y]));
         List<AStar.AStarNode> tempPath = aStar.FindPath(aStar.grid[start.x + (gridManager.gridSize/2), start.y + (gridManager.gridSize/2)], aStar.grid[end.x + (gridManager.gridSize/2), end.y + (gridManager.gridSize/2)]);
   
@@ -129,7 +129,7 @@ public class Movement : MonoBehaviour
         foreach (AStar.AStarNode node in tempPath)
         {
             convertPath.Add(new Vector3Int(node.x - ( gridManager.gridSize/2 ), node.y - ( gridManager.gridSize/2 ), 0));
-            Debug.Log(node.x - ( gridManager.gridSize/2 ) + " " + (node.y - ( gridManager.gridSize/2 )));
+            //Debug.Log(node.x - ( gridManager.gridSize/2 ) + " " + (node.y - ( gridManager.gridSize/2 )));
         }
 
         return convertPath;
