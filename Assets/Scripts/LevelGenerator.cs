@@ -161,6 +161,12 @@ public class LevelGenerator: MonoBehaviour
 
     private void PopulateTilemap()
     {
+        // Add left and bottom walls to level
+        for (int i = -1; i <= levelSize -1; i++)
+        {
+            tilemap.SetTile(new Vector3Int(i, -1, 1), wallTile);
+            tilemap.SetTile(new Vector3Int(-1, i, 1), wallTile);
+        }
         tilemap.SetTilesBlock(new BoundsInt(new Vector3Int(), new Vector3Int(levelSize, levelSize, 1)), map.Cast<TileBase>().ToArray());
     }
     
@@ -189,17 +195,6 @@ public class LevelGenerator: MonoBehaviour
                 return map[positionToCheck.x, positionToCheck.y] == floorTile;
             }
         );
-
- /*       foreach (int pos in Enumerable.Range(roomPos.y, roomSize.y - 1))
-        {
-            Vector2Int positionToCheck = new Vector2Int(doorXPosition + (positiveDirection ? 1 : -1), pos);
-            if (vertical) // Mirror x and y
-                Mirror(ref positionToCheck);
-
-            // Check if tile in front of door is floor
-            map[positionToCheck.x, positionToCheck.y] = debugTile;
-        }
-*/
 
         if (validYPositions.Count() == 0)
         {
