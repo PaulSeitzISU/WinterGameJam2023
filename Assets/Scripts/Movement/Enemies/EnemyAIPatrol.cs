@@ -22,7 +22,7 @@ public class EnemyAIPatrol : MonoBehaviour
     {
         movement = GetComponent<Movement>(); // Get the Movement component
         gridManager = GameObject.Find("Tilemap").GetComponent<GridManager>(); // Get the GridManager component
-        startGridPosition = movement.GetGridTilePosition();
+        startGridPosition = movement.GetGridTilePosition(transform.position);
     }
 
     public void Patrol()

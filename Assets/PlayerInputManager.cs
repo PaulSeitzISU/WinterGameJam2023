@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PlayerInputManager : MonoBehaviour
 {
     [SerializeField] GameObject selectionObject;
     GameObject currentSelection;
+    [SerializeField] GameObject indicator;
+    GameObject currentIndicator;
     [SerializeField] float selectionRadius = 1f;
     [SerializeField][Range(0,4)] int currentState; // 0 is movement, 1 is Split, 2 is Spit, 3 is Rush, 4 is Leap
     [SerializeField] GameObject[] abilitySprites = new GameObject[5];
@@ -60,7 +63,7 @@ public class PlayerInputManager : MonoBehaviour
             if (currentSelection == null)
             {
                 Selection(mousePosition);
-
+                currentSelection.GetComponent<PathSearch>().Search(gameObject,5);
             }
             else if (currentState == 0)
             {
@@ -84,13 +87,22 @@ public class PlayerInputManager : MonoBehaviour
             }
             else {Selection(mousePosition);}
         }
+        if (currentSelection != null && currentIndicator == null) { 
+            currentIndicator = Instantiate(indicator,MousePositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition)),Quaternion.identity);
+        }
+        else
+        {
+            if (currentSelection == null) return;
+            currentIndicator.transform.position = (Vector3Int)currentSelection.GetComponent<Movement>().GetGridTilePosition(MousePositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
+        }
     }
     Vector3Int MousePositionOnGrid(Vector3 mousePosition)
     {
         Vector3Int gridPosition = new Vector3Int(Mathf.RoundToInt(mousePosition.x), Mathf.RoundToInt(mousePosition.y),0);
+        
         return gridPosition;
     }
-    void Selection(Vector3 mousePosition)
+    GameObject Selection(Vector3 mousePosition)
     {
         mousePosition += new Vector3(0, 0, 10); // brings the mouse position to 0 on the z for selection purposes
         Debug.Log(mousePosition);
@@ -110,7 +122,7 @@ public class PlayerInputManager : MonoBehaviour
                 currentSelection.GetComponent<PlayerController>().DeSelection();
                 currentSelection = null;
             }
-            return;
+            return currentSelection;
         }
 
         if (!currentSelection)
@@ -118,13 +130,14 @@ public class PlayerInputManager : MonoBehaviour
             currentSelection = thisSelection;
             currentSelection.GetComponent<PlayerController>().Selected();
         }
-        else if (thisSelection == currentSelection) { return; }
+        else if (thisSelection == currentSelection) { return currentSelection; }
         else
         {
             currentSelection.GetComponent<PlayerController>().DeSelection();
             currentSelection = thisSelection;
             currentSelection.GetComponent<PlayerController>().Selected();
         }
+        return thisSelection;
     }
     void ChangeState(int state = 0)
     {
