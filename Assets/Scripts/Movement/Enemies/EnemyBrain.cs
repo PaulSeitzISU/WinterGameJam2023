@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Tilemaps;
 
 public enum EnemyState
 {
@@ -15,12 +16,13 @@ public enum EnemyState
 
 public class EnemyBrain : MonoBehaviour
 {
-    private EnemyState currentState = EnemyState.Idle;
+    public EnemyState currentState { get; private set; }
 
     // Reference to movement script, grid manager, and other necessary components
     private Health health;
     private Movement movement;
     private GridManager gridManager;
+    private Tilemap tilemap;
     public int visibilityRadius;
     public List<GameObject> objectsInRadius;
 
@@ -28,6 +30,8 @@ public class EnemyBrain : MonoBehaviour
     public float patrolSpeed = 3.0f;
     public float chaseSpeed = 5.0f;
     public float attackDistance = 1.5f;
+    public float attackDistanceMin = -1f;
+
     public float fleeDistance = 8.0f;
 
     public List<GameObject> PlayerList = new List<GameObject>();
@@ -49,10 +53,18 @@ public class EnemyBrain : MonoBehaviour
         movement = GetComponent<Movement>();
         health = GetComponent<Health>();
         gridManager = GameObject.Find("Tilemap").GetComponent<GridManager>(); // Find the GridManager in the scene
+        tilemap = GameObject.Find("Tilemap").GetComponent<Tilemap>(); // Get the Tilemap component
     }
 
     private void Update()
     {
+        //TakeTurn();
+        
+    }
+
+    public void TakeTurn()
+    {
+        CheckForGameObjects();
         UpdateState();
     }
 
@@ -104,7 +116,6 @@ public class EnemyBrain : MonoBehaviour
     {
         // Implement patrol behavior here
         // Move the enemy in a predefined patrol pattern using the Movement script
-        CheckForGameObjects();
         OnPatrol.Invoke();
     }
 
@@ -158,6 +169,21 @@ public class EnemyBrain : MonoBehaviour
                 }
                 //Debug.Log("Player detected at corner");
                 TransitionToState(EnemyState.Chase);
+            }
+        }
+        //check if the player is next to the enemy
+        foreach(GameObject player in PlayerList)
+        {
+            if (player != null)
+            {
+                if (Vector3.Distance(player.transform.position, transform.position) > attackDistanceMin)
+                {
+                    TransitionToState(EnemyState.Flee);
+                }
+                else if (Vector3.Distance(player.transform.position, transform.position) < attackDistance)
+                {
+                    TransitionToState(EnemyState.Attack);
+                }
             }
         }
     }

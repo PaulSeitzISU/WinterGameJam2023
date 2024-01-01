@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAIPatrol : MonoBehaviour
+public class EnemyAIPatrolRectangle : MonoBehaviour
 {
     public Movement movement; // Reference to the Movement script
     public GridManager gridManager; // Reference to the GridManager script
