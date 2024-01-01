@@ -18,6 +18,7 @@ public class EnemyBrain : MonoBehaviour
     private EnemyState currentState = EnemyState.Idle;
 
     // Reference to movement script, grid manager, and other necessary components
+    private Health health;
     private Movement movement;
     private GridManager gridManager;
     public int visibilityRadius;
@@ -46,6 +47,7 @@ public class EnemyBrain : MonoBehaviour
         currentState = StartState;
         // Get references to necessary components
         movement = GetComponent<Movement>();
+        health = GetComponent<Health>();
         gridManager = GameObject.Find("Tilemap").GetComponent<GridManager>(); // Find the GridManager in the scene
     }
 

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -15,6 +16,13 @@ public class GridManager : MonoBehaviour
     public AStar aStar; // Reference to the AStar script
 
     public bool debugMode;
+    public bool debugGridNum;
+
+    public GameObject textPrefab; // Reference to your TextMeshPro prefab
+    public Transform textParent; // Parent object for text objects
+    public Camera cam;
+
+
     private void Awake()
     {
         // Initialize the grid with the specified size using arrays
@@ -25,6 +33,12 @@ public class GridManager : MonoBehaviour
         aStar = GetComponent<AStar>(); // Find the AStar script in the scene
 
         // tilemap = GameObject.Find("Tilemap").GetComponent<Tilemap>(); // Get the Tilemap component
+        if(debugGridNum)
+        {
+        SpawnTextObjects();
+
+        }
+
     }
 
     void FixedUpdate()
@@ -181,6 +195,25 @@ public class GridManager : MonoBehaviour
                 {
                     tilemap.SetTile(new Vector3Int(x, y, 0), emptyTile);
                 }
+            }
+        }
+    }
+
+        void SpawnTextObjects()
+    {
+        if (textPrefab == null || textParent == null)
+        {
+            Debug.LogError("TextPrefab or TextParent not assigned!");
+            return;
+        }
+
+        for (int x = -gridSize / 2; x < gridSize / 2; x++)
+        {
+            for (int y = -gridSize / 2; y < gridSize / 2; y++)
+            {
+                //Debug.Log(cam.WorldToScreenPoint(new Vector3(x,y,0)));
+                GameObject textObject = Instantiate(textPrefab, cam.WorldToScreenPoint(new Vector3(x + 0.5f, y + 0.5f, 0)), Quaternion.identity, textParent);
+                textObject.GetComponent<TMP_Text>().SetText(x + ", " + y + "\n" + (x + (gridSize/2))  + ", " + (y + (gridSize/2)));
             }
         }
     }
