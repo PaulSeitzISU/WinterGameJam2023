@@ -7,9 +7,15 @@ using UnityEngine.Tilemaps;
 
 public class LevelGenerator: MonoBehaviour
 {
+    // For other classes to access rooms
+    public List<Partition> rooms = new List<Partition>();
+
     public int levelSize;
     public int maxRoomSize;
     public int minRoomSize;
+    public float demolishWallChance; // Probability for a wall to be demolished when connecting rooms
+    public float largeRoomChance; // Chance of generating a room twice as large
+
     public Tilemap tilemap;
     public TileBase wallTile;
     public TileBase floorTile;
@@ -17,7 +23,7 @@ public class LevelGenerator: MonoBehaviour
 
     private TileBase[,] map;
 
-    private class Partition
+    public class Partition
     {
         public enum Type
         {
@@ -64,7 +70,13 @@ public class LevelGenerator: MonoBehaviour
             Partition curPartition = toProcess.Pop();
             bool largeX = curPartition.size.x > maxRoomSize + 1;
             bool largeY = curPartition.size.y > maxRoomSize + 1;
-            if (!(largeX || largeY))
+            // Chance to generate a large room
+            int largeRoomSize = maxRoomSize * 2;
+            bool generateLargeRoom = Random.value < largeRoomChance
+                && curPartition.size.y < largeRoomSize
+                && curPartition.size.x < largeRoomSize;
+
+            if (!(largeX || largeY) || generateLargeRoom)
             {
                 // Mark as room
                 curPartition.type = Partition.Type.Room;
@@ -74,6 +86,9 @@ public class LevelGenerator: MonoBehaviour
                     {
                         map[i, j] = floorTile;
                     }
+
+                // Make room accessible to other classes
+                rooms.Add(curPartition);
             }
             else
             {
@@ -123,11 +138,11 @@ public class LevelGenerator: MonoBehaviour
         // Use 2 stacks to reverse order of tree
         while (stack1.Count > 0)
         {
-            Partition cur = stack1.Pop();
-            if (cur.type != Partition.Type.Room)
+            Partition curPartition = stack1.Pop();
+            if (curPartition.type != Partition.Type.Room)
             {
-                stack2.Push(cur);
-                foreach (Partition child in cur.children)
+                stack2.Push(curPartition);
+                foreach (Partition child in curPartition.children)
                     if (child.type != Partition.Type.Room)
                         stack1.Push(child);
             }
@@ -137,7 +152,6 @@ public class LevelGenerator: MonoBehaviour
             // Connect children
             Partition cur = stack2.Pop();
             bool[] childIsRoom = cur.children.Select(child => child.type == Partition.Type.Room).ToArray();
-
 
             if (childIsRoom[0])
             {
@@ -150,7 +164,17 @@ public class LevelGenerator: MonoBehaviour
             else
             {
                 List<Partition> validChildren = GetBorderRooms(cur);
-                ConnectRoom(validChildren.ElementAt(Random.Range(0, validChildren.Count())), cur.type, true);
+                // Connect more rooms if partition is large
+                int numToConnect = Mathf.Min((cur.type == Partition.Type.Horizontal ? cur.size.y : cur.size.y) / maxRoomSize, validChildren.Count());
+                
+                while (numToConnect > 0)
+                {
+                    int index = Random.Range(0, validChildren.Count() - 1);
+                    ConnectRoom(validChildren.ElementAt(index), cur.type, true);
+                    validChildren.RemoveAt(index);
+                    numToConnect--;
+                }
+
             }
                 
         }
@@ -172,6 +196,9 @@ public class LevelGenerator: MonoBehaviour
     
     private void ConnectRoom(Partition room, Partition.Type axis, bool positiveDirection)
     {
+        // Check if should demolish wall
+        bool demolishWall = Random.value < demolishWallChance;
+
         // Mirror vertical case into horizontal case
         bool horizontal = axis == Partition.Type.Horizontal;
         Vector2Int roomSize = room.size;
@@ -181,10 +208,14 @@ public class LevelGenerator: MonoBehaviour
             Mirror(ref roomSize);
             Mirror(ref roomPos);
         }
-        
+
         int doorXPosition = roomPos.x + (positiveDirection ? (roomSize.x) : 0) - 1;
 
-        var validYPositions = Enumerable.Range(roomPos.y, roomSize.y - 1).Where(
+        var range = Enumerable.Range(roomPos.y, roomSize.y - 1);
+        if (roomSize.y > 2 && !demolishWall)
+            range = range.Skip(1).Take(range.Count() - 2);
+
+        var validYPositions = range.Where(
             candidateYPosition =>
             {
                 Vector2Int positionToCheck = new Vector2Int(doorXPosition + (positiveDirection ? 1 : -1), candidateYPosition);
@@ -202,17 +233,30 @@ public class LevelGenerator: MonoBehaviour
         }
         else
         {
-            Vector2Int selectedPosition = new Vector2Int(
-                doorXPosition,
-                validYPositions.ElementAt(Random.Range(0, validYPositions.Count()))
-            );
-            if (horizontal)
-                Mirror(ref selectedPosition);
+            if (demolishWall) // Chance to demolish wall
+            {
+                foreach (int y in validYPositions)
+                {
+                    if (!horizontal)
+                        map[doorXPosition, y] = floorTile;
+                    else
+                        map[y, doorXPosition] = floorTile;
+                }
+            }
+            else
+            {
+                Vector2Int selectedPosition = new Vector2Int(
+                    doorXPosition,
+                    validYPositions.ElementAt(Random.Range(0, validYPositions.Count()))
+                );
+                if (horizontal)
+                    Mirror(ref selectedPosition);
 
-            map[
-                selectedPosition.x,
-                selectedPosition.y
-            ] = floorTile;
+                map[
+                    selectedPosition.x,
+                    selectedPosition.y
+                ] = floorTile;
+            }
         }
     }
 

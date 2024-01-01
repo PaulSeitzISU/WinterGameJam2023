@@ -237,11 +237,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelSize: 50
-  maxRoomSize: 9
-  minRoomSize: 1
+  maxRoomSize: 10
+  minRoomSize: 4
+  demolishWallChance: 0.15
+  largeRoomChance: 0.15
   tilemap: {fileID: 2018952877}
   wallTile: {fileID: 11400000, guid: de57b95d415c0194f8c5cb0992cff90c, type: 2}
   floorTile: {fileID: 11400000, guid: 83f65f89a860a4f40a14b31c1b262ae1, type: 2}
+  debugTile: {fileID: 11400000, guid: b22c9568b3595ae40bcab5f7c80ff0e8, type: 2}
 --- !u!4 &1454385276
 Transform:
   m_ObjectHideFlags: 0
