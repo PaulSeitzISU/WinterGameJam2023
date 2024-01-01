@@ -40,7 +40,7 @@ public class Movement : MonoBehaviour
         }
 
         // Register the object in the GridManager at the current position
-        currentGridPosition = GetGridTilePosition();
+        currentGridPosition = GetGridTilePosition(transform.position);
         gridManager.PlaceObject(gameObject, currentGridPosition);
     }
 
@@ -54,7 +54,7 @@ public class Movement : MonoBehaviour
             return;
         }
 
-        Vector2Int newGridPosition = GetGridTilePosition();
+        Vector2Int newGridPosition = GetGridTilePosition(transform.position);
 
         if (newGridPosition != currentGridPosition)
         {
@@ -66,10 +66,10 @@ public class Movement : MonoBehaviour
         }
     }
 
-    public Vector2Int GetGridTilePosition()
+    public Vector2Int GetGridTilePosition(Vector3 worldPosition)
     {
         // Get the position in world space and convert it to the position on the tilemap
-        Vector3Int cellPosition = tilemap.WorldToCell(transform.position);
+        Vector3Int cellPosition = tilemap.WorldToCell(worldPosition);
 
         return new Vector2Int(cellPosition.x, cellPosition.y);
     }
@@ -82,7 +82,7 @@ public class Movement : MonoBehaviour
             Debug.LogWarning("Already moving.");
             return;
         }
-        List<Vector3Int> path = CalculatePath(GetGridTilePosition(), new Vector2Int(targetGridPosition.x, targetGridPosition.y));
+        List<Vector3Int> path = CalculatePath(GetGridTilePosition(transform.position), new Vector2Int(targetGridPosition.x, targetGridPosition.y));
 
         if (path != null && path.Count > 0)
         {
