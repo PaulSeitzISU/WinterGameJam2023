@@ -12,17 +12,17 @@ GameObject:
   - component: {fileID: 6938144183618512009}
   - component: {fileID: 6938144183618512010}
   - component: {fileID: 7171892939230196683}
-  - component: {fileID: 57340909}
   - component: {fileID: 86853445}
   - component: {fileID: -3697134277137350725}
   - component: {fileID: 86853446}
+  - component: {fileID: 1003808198887830974}
   m_Layer: 0
-  m_Name: PatrolEnemy
-  m_TagString: Untagged
+  m_Name: PatrolEnemyRectangle
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6938144183618512008
 Transform:
   m_ObjectHideFlags: 0
@@ -123,20 +123,6 @@ MonoBehaviour:
   aStar: {fileID: 0}
   currentGridPosition: {x: 0, y: 0}
   isMoving: 0
---- !u!114 &57340909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6938144183618512011}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 674f8f20ec0810947ae6d52a490a3f7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementScript: {fileID: 7171892939230196683}
-  targetGridPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &86853445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,6 +140,7 @@ MonoBehaviour:
   patrolSpeed: 3
   chaseSpeed: 5
   attackDistance: 1.5
+  attackDistanceMin: -1
   fleeDistance: 8
   PlayerList: []
   StartState: 1
@@ -211,9 +198,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81041dcb6ce78ee4ba82f40db542e3cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {fileID: 0}
+  movement: {fileID: 7171892939230196683}
   gridManager: {fileID: 0}
-  yOffSet: 2
+  yOffSet: -2
   xOffSet: 2
 --- !u!114 &86853446
 MonoBehaviour:
@@ -231,3 +218,17 @@ MonoBehaviour:
   gridManager: {fileID: 0}
   enemyBrain: {fileID: 0}
   tilemap: {fileID: 0}
+--- !u!114 &1003808198887830974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6938144183618512011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b95ac94c905c4f40a924713d213fdab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0

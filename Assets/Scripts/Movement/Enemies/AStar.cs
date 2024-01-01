@@ -164,6 +164,7 @@ public class AStar : MonoBehaviour
         }
 
         return neighbors;
+        
     }
 
     int GetDistance(AStarNode nodeA, AStarNode nodeB)

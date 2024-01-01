@@ -46,7 +46,7 @@ public class EnemyBrain : MonoBehaviour
     [SerializeField] private UnityEvent OnDead;
 
 
-    private void Start()
+    void Start()
     {
         currentState = StartState;
         // Get references to necessary components

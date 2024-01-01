@@ -8,7 +8,7 @@ public class EnemyAIChase : MonoBehaviour
     public EnemyBrain enemyBrain;
     public Tilemap tilemap;
 
-    private void Start()
+    void Start()
     {
         movement = GetComponent<Movement>();
         gridManager = GameObject.Find("Tilemap").GetComponent<GridManager>();
