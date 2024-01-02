@@ -57,5 +57,10 @@ public class EnemyAIChase : MonoBehaviour
             movement.MoveToGrid(tilemap.WorldToCell(closestPlayerPos) + gridDir, enemyBrain.patrolSpeed);
         }
         
+        enemyBrain.CheckForGameObjects(enemyBrain.visibilityRadius);
+        if(enemyBrain.currentState == EnemyState.Attack)
+        {
+            enemyBrain.UpdateState();
+        }
     }
 }

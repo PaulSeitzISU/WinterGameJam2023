@@ -167,7 +167,7 @@ MonoBehaviour:
   chaseSpeed: 5
   attackDistance: 1.5
   attackDistanceMin: -1
-  fleeDistance: 8
+  fleeDistance: 0
   PlayerList: []
   StartState: 1
   OnIdle:

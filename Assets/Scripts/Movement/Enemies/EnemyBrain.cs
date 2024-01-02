@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Tilemaps;
@@ -74,7 +75,7 @@ public class EnemyBrain : MonoBehaviour
         UpdateState();
     }
 
-    private void UpdateState()
+    public void UpdateState()
     {
         switch (currentState)
         {
@@ -106,7 +107,7 @@ public class EnemyBrain : MonoBehaviour
     }
 
     // Transition between states based on certain conditions
-    private void TransitionToState(EnemyState newState)
+    public void TransitionToState(EnemyState newState)
     {
         currentState = newState;
     }
@@ -193,7 +194,7 @@ public class EnemyBrain : MonoBehaviour
     }
 
 
-    private void CheckForGameObjects(int Radius)
+    public void CheckForGameObjects(int Radius)
     {
         objectsInRadius = gridManager.GetObjectsInRadius(movement.currentGridPosition, Radius, gameObject);
 
@@ -217,11 +218,11 @@ public class EnemyBrain : MonoBehaviour
             {
                 if (player != null)
                 {
-                    if (Vector3.Distance(player.transform.position, transform.position) < attackDistanceMin)
+                    if (Mathf.Abs(Vector3.Distance(player.transform.position, transform.position)) <= attackDistanceMin)
                     {
                         TransitionToState(EnemyState.Flee);
                     }
-                    else if (Vector3.Distance(player.transform.position, transform.position) < attackDistance)
+                    else if (Mathf.Abs(Vector3.Distance(player.transform.position, transform.position)) <= attackDistance)
                     {
                         TransitionToState(EnemyState.Attack);
                     }
