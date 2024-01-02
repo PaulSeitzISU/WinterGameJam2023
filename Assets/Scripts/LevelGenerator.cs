@@ -15,6 +15,7 @@ public class LevelGenerator: MonoBehaviour
     public int minRoomSize;
     public float demolishWallChance; // Probability for a wall to be demolished when connecting rooms
     public float largeRoomChance; // Chance of generating a room twice as large
+    public float largeRoomScale;
 
     public Tilemap tilemap;
     public TileBase wallTile;
@@ -22,6 +23,8 @@ public class LevelGenerator: MonoBehaviour
     public TileBase debugTile;
 
     private TileBase[,] map;
+    public TileBase[,] scaledMap;
+    private int scaleFactor = 2;
 
     public class Partition
     {
@@ -36,6 +39,7 @@ public class LevelGenerator: MonoBehaviour
         public Vector2Int pos;
         public Vector2Int size;
         public Type type;
+        public bool largeRoom;
 
         public Partition[] children;
 
@@ -43,6 +47,7 @@ public class LevelGenerator: MonoBehaviour
         {
             this.pos = pos;
             this.size = size;
+            largeRoom = false;
             children = new Partition[2];
             type = Type.None;
         }
@@ -54,12 +59,22 @@ public class LevelGenerator: MonoBehaviour
         GenerateLevel();
     }
 
-    void GenerateLevel()
+    private void Update()
+    {
+/*        if (Input.GetKeyDown(KeyCode.Space))
+            GenerateLevel();*/
+    }
+
+    public void GenerateLevel()
     {
         // Initialize map to all walls
-        map = new Tile[levelSize, levelSize];
+        map = new TileBase[levelSize, levelSize];
         for (int i = 0; i < levelSize; i++) for (int j = 0; j < levelSize; j++)
                 map[i, j] = wallTile;
+        // Do same for tilemap
+        for (int i = -levelSize; i < levelSize * 3; i++)
+            for (int j = -levelSize; j < levelSize * 3; j++)
+                tilemap.SetTile(new Vector3Int(i, j, 0), wallTile);
 
         // Partition the map into a binary tree
         Partition root = new Partition(new Vector2Int(0, 0), new Vector2Int(levelSize, levelSize));
@@ -71,7 +86,7 @@ public class LevelGenerator: MonoBehaviour
             bool largeX = curPartition.size.x > maxRoomSize + 1;
             bool largeY = curPartition.size.y > maxRoomSize + 1;
             // Chance to generate a large room
-            int largeRoomSize = maxRoomSize * 2;
+            int largeRoomSize = (int)(maxRoomSize * largeRoomScale);
             bool generateLargeRoom = Random.value < largeRoomChance
                 && curPartition.size.y < largeRoomSize
                 && curPartition.size.x < largeRoomSize;
@@ -80,6 +95,8 @@ public class LevelGenerator: MonoBehaviour
             {
                 // Mark as room
                 curPartition.type = Partition.Type.Room;
+                curPartition.largeRoom = generateLargeRoom;
+
                 // Generate room in map
                 for (int i = curPartition.pos.x; i < curPartition.pos.x + curPartition.size.x - 1; i++)
                     for (int j = curPartition.pos.y; j < curPartition.pos.y + curPartition.size.y - 1; j++)
@@ -128,9 +145,6 @@ public class LevelGenerator: MonoBehaviour
             }
         }
 
-        // Debug: generate tilemap
-        PopulateTilemap();
-
         // Connect rooms
         Stack<Partition> stack1 = new Stack<Partition>();
         Stack<Partition> stack2 = new Stack<Partition>();
@@ -174,30 +188,55 @@ public class LevelGenerator: MonoBehaviour
                     validChildren.RemoveAt(index);
                     numToConnect--;
                 }
-
             }
-                
         }
 
-        // Generate Tilemap
-        PopulateTilemap();
-    }
+        // Scale up map
+        int scaledMapSize = levelSize * scaleFactor;
+        scaledMap = new TileBase[scaledMapSize, scaledMapSize];
+        for (int i = 0; i < scaledMapSize; i++)
+            for (int j = 0; j < scaledMapSize; j++)
+                scaledMap[i, j] = map[i / scaleFactor, j / scaleFactor];
 
-    private void PopulateTilemap()
-    {
+
+        // Extend horizontal walls downward
+        for (int i = 1; i < scaledMapSize - 1; i++)
+            for (int j = 0; j < scaledMapSize; j++)
+            { 
+                if (scaledMap[i, j] == floorTile && scaledMap[i + 1, j] == wallTile)
+                {
+                    scaledMap[i, j] = wallTile;
+                }
+            }
+
+        // Widen horizontal doors - causes visual issues :(
+        /*for (int i = 1; i < scaledMapSize - 1; i++)
+            for (int j = 0; j < scaledMapSize; j++)
+            {
+                if (scaledMap[i - 1, j] == wallTile && scaledMap[i + 1, j] == wallSideTile)
+                {
+                    scaledMap[i + 1, j] = floorTile;
+                    scaledMap[i + 2, j] = wallTile;
+                }
+            }*/
+
+        // Populate tilemap
         // Add left and bottom walls to level
-        for (int i = -1; i <= levelSize -1; i++)
+        for (int i = -2; i <= scaledMapSize - 1; i++)
         {
             tilemap.SetTile(new Vector3Int(i, -1, 0), wallTile);
+            tilemap.SetTile(new Vector3Int(i, -2, 0), wallTile);
             tilemap.SetTile(new Vector3Int(-1, i, 0), wallTile);
+            tilemap.SetTile(new Vector3Int(-2, i, 0), wallTile);
         }
-        tilemap.SetTilesBlock(new BoundsInt(new Vector3Int(), new Vector3Int(levelSize, levelSize, 1)), map.Cast<TileBase>().ToArray());
+        tilemap.SetTilesBlock(new BoundsInt(new Vector3Int(), new Vector3Int(scaledMapSize, scaledMapSize, 1)), scaledMap.Cast<TileBase>().ToArray());
+
     }
     
     private void ConnectRoom(Partition room, Partition.Type axis, bool positiveDirection)
     {
         // Check if should demolish wall
-        bool demolishWall = Random.value < demolishWallChance;
+        bool demolishWall = Random.value < demolishWallChance && !room.largeRoom;
 
         // Mirror vertical case into horizontal case
         bool horizontal = axis == Partition.Type.Horizontal;
@@ -212,7 +251,7 @@ public class LevelGenerator: MonoBehaviour
         int doorXPosition = roomPos.x + (positiveDirection ? (roomSize.x) : 0) - 1;
 
         var range = Enumerable.Range(roomPos.y, roomSize.y - 1);
-        if (roomSize.y > 2 && !demolishWall)
+        if (roomSize.y > 4 && !demolishWall)
             range = range.Skip(1).Take(range.Count() - 2);
 
         var validYPositions = range.Where(
