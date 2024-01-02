@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c177e4189b83fda46af8bfc55f71d9d0
+guid: f272382b408535142a7c20d05497bbe1
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Enemy_Mage_0
+      name: Enemy_Berserker_0
       rect:
         serializedVersion: 2
         x: 0
@@ -119,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0eab0ae6ec6d60b4b9cf977e94c41bbc
-      internalID: 1435765536
+      spriteID: 0cd7c63a8be67d445b4cf577c0d45314
+      internalID: 1802378053
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Mage_1
+      name: Enemy_Berserker_1
       rect:
         serializedVersion: 2
         x: 16
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3fa38329e51189941834763059e7c4e6
-      internalID: 1911911665
+      spriteID: 8bc97886e087dce4fa9e8a09564696ac
+      internalID: -1664925480
       vertices: []
       indices: 
       edges: []
@@ -157,8 +157,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Enemy_Mage_1: 1911911665
-      Enemy_Mage_0: 1435765536
+      Enemy_Berserker_1: -1664925480
+      Enemy_Berserker_0: 1802378053
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
