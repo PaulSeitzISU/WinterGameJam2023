@@ -8,12 +8,13 @@ using UnityEngine.Tilemaps;
 public class PlayerInputManager : MonoBehaviour
 {
     [SerializeField] GameObject selectionObject;
-    GameObject currentSelection;
     [SerializeField] GameObject indicator;
+    GameObject currentSelection;
     GameObject currentIndicator;
     [SerializeField] float selectionRadius = 1f;
     [SerializeField][Range(0,4)] int currentState; // 0 is movement, 1 is Split, 2 is Spit, 3 is Rush, 4 is Leap
     [SerializeField] GameObject[] abilitySprites = new GameObject[5];
+    bool switching;
     // Start is called before the first frame update
     void Start()
     {
@@ -60,41 +61,58 @@ public class PlayerInputManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) // The mouse left click input
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (currentSelection == null)
-            {
-                Selection(mousePosition);
-                currentSelection.GetComponent<PathSearch>().Search(gameObject,5);
-            }
-            else if (currentState == 0)
+            Selection(mousePosition);
+            currentSelection.GetComponent<PathSearch>().Search(gameObject,5);
+            if (currentState == 0 && !switching)
             {
                 currentSelection.GetComponent<PlayerController>().Move(MousePositionOnGrid(mousePosition));
             }
-            else if (currentState == 1 && currentSelection.GetComponent<PlayerController>().isPlayer()) // this is a player only ability
+            else if (currentState == 1 && currentSelection.GetComponent<PlayerController>().isPlayer() && !switching) // this is a player only ability
             {
                 currentSelection.GetComponent<PlayerController>().Split();
             }
-            else if (currentState == 2 && currentSelection.GetComponent<PlayerController>().isPlayer()) // this is a player only ability
+            else if (currentState == 2 && currentSelection.GetComponent<PlayerController>().isPlayer() && !switching) // this is a player only ability
             {
                 currentSelection.GetComponent<PlayerController>().Spit();
             }
-            else if (currentState == 3)
+            else if (currentState == 3 && !switching)
             {
                 currentSelection.GetComponent<PlayerController>().Rush();
             }
-            else if (currentState == 4 )
+            else if (currentState == 4 && !switching)
             {
                 currentSelection.GetComponent<PlayerController>().Leap();
             }
-            else {Selection(mousePosition);}
         }
-        if (currentSelection != null && currentIndicator == null) { 
-            currentIndicator = Instantiate(indicator,MousePositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition)),Quaternion.identity);
+        ShowIndicator(currentState);
+        switching = false;
+    }
+    void ShowIndicator(int state)
+    {
+        if (currentSelection != null && currentIndicator == null)
+        {
+            if(currentState == 0)
+            {
+                currentIndicator = Instantiate(indicator, MousePositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition)), Quaternion.identity);
+            }
+            else if(currentState == 1) { }
+            else if(currentState == 2) { }   
+            else if(currentState == 3) { } 
+            else if(currentState == 4) { }   
         }
         else
         {
-            if (currentSelection == null) return;
+            if (currentSelection == null) 
+            {
+                ClearIndicator();
+                return; 
+            }
             currentIndicator.transform.position = (Vector3Int)currentSelection.GetComponent<Movement>().GetGridTilePosition(MousePositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
         }
+    }
+    void ClearIndicator()
+    {
+        Destroy(currentIndicator);
     }
     Vector3Int MousePositionOnGrid(Vector3 mousePosition)
     {
@@ -133,6 +151,7 @@ public class PlayerInputManager : MonoBehaviour
         else if (thisSelection == currentSelection) { return currentSelection; }
         else
         {
+            switching = true;
             currentSelection.GetComponent<PlayerController>().DeSelection();
             currentSelection = thisSelection;
             currentSelection.GetComponent<PlayerController>().Selected();
