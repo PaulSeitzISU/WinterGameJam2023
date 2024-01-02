@@ -1942,7 +1942,7 @@ PrefabInstance:
       objectReference: {fileID: 1059129053}
     - target: {fileID: 7286372324287764641, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
       propertyPath: debugMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7286372324287764641, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
       propertyPath: textParent
