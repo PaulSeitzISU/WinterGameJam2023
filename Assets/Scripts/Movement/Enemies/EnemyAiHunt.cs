@@ -21,13 +21,11 @@ public class EnemyAiHunt : MonoBehaviour
         aStar = GameObject.Find("Tilemap").GetComponent<AStar>();
     }
 
-    public void Chase()
+    public void Hunt()
     {
-        if(enemyBrain.PlayerList.Count == 0)
-        {
-            return;
-        }
+        Debug.Log("Hunting" + enemyBrain.CheckForGameObjectsFar());
         Vector3Int closestPlayerPos = tilemap.WorldToCell(enemyBrain.CheckForGameObjectsFar().transform.position);
+        
         
         List<AStar.AStarNode> shortest = aStar.FindPath(aStar.grid[movement.currentGridPosition.x, movement.currentGridPosition.y], aStar.grid[closestPlayerPos.x + 1, closestPlayerPos.y]);
         Vector3Int gridDir = Vector3Int.up;

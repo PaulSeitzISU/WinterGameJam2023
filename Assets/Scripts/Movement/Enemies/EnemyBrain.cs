@@ -159,15 +159,48 @@ public class EnemyBrain : MonoBehaviour
     }
     public GameObject CheckForGameObjectsFar()
     {
-    objectsInRadius = gridManager.GetObjectsInRadius(movement.currentGridPosition, visibilityRadiusFar, gameObject);
+        List<GameObject> objectsInRadiusTemp = gridManager.GetObjectsInRadius(movement.currentGridPosition, visibilityRadiusFar, gameObject);
 
-    if (objectsInRadius.Count > 0)
+        if (objectsInRadiusTemp.Count > 0)
         {
-            List<GameObject> objectsInRadiusTempList = new List<GameObject>();
-            List<GameObject> PlayerListTempList = new List<GameObject>();
+            GameObject closestPlayer = null;
+            float closestDistance = Mathf.Infinity;
 
+            foreach (GameObject obj in objectsInRadiusTemp)
+            {
+                if (obj.tag == "Player")
+                {
+                    // Directly add the player to the list without checking duplicates
+                    // You can remove duplicates later if necessary
+                    Debug.Log("Player detected at corner" + gameObject.name);
+
+                    float distance = Vector3.Distance(transform.position, obj.transform.position);
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        closestPlayer = obj;
+                    }
+                }
+            }
+
+            // Remove duplicates from PlayerListTempList if needed
+            // PlayerListTempList = PlayerListTempList.Distinct().ToList();
+
+            //Debug.Log("Closest player is " + closestPlayer?.name);
+            return closestPlayer;
+        }
+        return null;
+    }
+
+
+    private void CheckForGameObjects(int Radius)
+    {
+        objectsInRadius = gridManager.GetObjectsInRadius(movement.currentGridPosition, Radius, gameObject);
+
+        if (objectsInRadius.Count > 0)
+        {
             //Debug.Log("Objects detected at corner: " + objectsInRadius.Count);
-            foreach (GameObject obj in objectsInRadiusTempList)
+            foreach (GameObject obj in objectsInRadius)
             {
                 if(obj.tag == "Player")
                 {
@@ -180,7 +213,7 @@ public class EnemyBrain : MonoBehaviour
                 }
             }
             //check if the player is next to the enemy
-            foreach(GameObject player in PlayerListTempList)
+            foreach(GameObject player in PlayerList)
             {
                 if (player != null)
                 {
@@ -194,61 +227,8 @@ public class EnemyBrain : MonoBehaviour
                     }
                 }
             }
-                            // Find closest player
-            GameObject closestPlayer = null;
-            float closestDistance = Mathf.Infinity;
-
-            foreach (GameObject player in PlayerListTempList)
-            {
-                float distance = Vector3.Distance(transform.position, player.transform.position);
-                if (distance < closestDistance)
-                {
-                    closestDistance = distance;
-                    closestPlayer = player;
-                }
-            }
-            Debug.Log("Closest player is " + closestPlayer.name);
-            return closestPlayer;
-        }
-        return null;
-    }
-
-    private void CheckForGameObjects(int Radius)
-{
-    objectsInRadius = gridManager.GetObjectsInRadius(movement.currentGridPosition, Radius, gameObject);
-
-    if (objectsInRadius.Count > 0)
-    {
-        //Debug.Log("Objects detected at corner: " + objectsInRadius.Count);
-        foreach (GameObject obj in objectsInRadius)
-        {
-            if(obj.tag == "Player")
-            {
-                if(!PlayerList.Contains(obj))
-                {
-                    PlayerList.Add(obj);
-                }
-                Debug.Log("Player detected at corner" + gameObject.name);
-                TransitionToState(EnemyState.Chase);
-            }
-        }
-        //check if the player is next to the enemy
-        foreach(GameObject player in PlayerList)
-        {
-            if (player != null)
-            {
-                if (Vector3.Distance(player.transform.position, transform.position) < attackDistanceMin)
-                {
-                    TransitionToState(EnemyState.Flee);
-                }
-                else if (Vector3.Distance(player.transform.position, transform.position) < attackDistance)
-                {
-                    TransitionToState(EnemyState.Attack);
-                }
-            }
         }
     }
-}
 
     public GameObject ClosestPlayer()
     {

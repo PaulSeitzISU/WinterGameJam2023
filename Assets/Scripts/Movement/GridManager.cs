@@ -146,36 +146,37 @@ public class GridManager : MonoBehaviour
 
 
     // Function to perform a radius search and return objects within the specified range of a grid position
-    public List<GameObject> GetObjectsInRadius(Vector2Int gridPosition, int radius, GameObject ignoreObject = null)
-    {
-        List<GameObject> objectsInRadius = new List<GameObject>();
+public List<GameObject> GetObjectsInRadius(Vector2Int gridPosition, int radius, GameObject ignoreObject = null)
+{
+    List<GameObject> objectsInRadius = new List<GameObject>();
+    int halfGridSize = gridSize / 2;
 
-        for (int x = -radius; x <= radius; x++)
+    for (int x = -radius; x <= radius; x++)
+    {
+        for (int y = -radius; y <= radius; y++)
         {
-            for (int y = -radius; y <= radius; y++)
+            if (x * x + y * y <= radius * radius) // Circular radius check
             {
                 int checkX = gridPosition.x + x;
                 int checkY = gridPosition.y + y;
-                //Debug.Log("checking grid position" + checkX + " " + checkY );
-            
-                if (IsValidGridPosition(new Vector2Int(checkX + gridSize/2, checkY + gridSize/2)))
-                {
-                    GameObject obj = GetObjectAtGridPosition(new Vector2Int(checkX , checkY));
+                Vector2Int gridCheckPosition = new Vector2Int(checkX + halfGridSize, checkY + halfGridSize);
 
-                    //Debug.Log("object in radius" + obj);
-                    if (obj != null)
+                if (IsValidGridPosition(gridCheckPosition))
+                {
+                    GameObject obj = GetObjectAtGridPosition(new Vector2Int(checkX, checkY));
+
+                    if (obj != null && obj != ignoreObject)
                     {
-                        if (obj != ignoreObject)
-                        {
-                            objectsInRadius.Add(obj);
-                        }
+                        objectsInRadius.Add(obj);
                     }
                 }
             }
         }
-
-        return objectsInRadius;
     }
+
+    return objectsInRadius;
+}
+
 
     public void UpdateGridVisuals()
     {

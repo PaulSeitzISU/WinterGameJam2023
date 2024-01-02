@@ -160,6 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   visibilityRadius: 8
+  visibilityRadiusFar: 20
   objectsInRadius: []
   patrolSpeed: 3
   chaseSpeed: 5
