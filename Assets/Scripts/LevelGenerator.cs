@@ -188,8 +188,8 @@ public class LevelGenerator: MonoBehaviour
         // Add left and bottom walls to level
         for (int i = -1; i <= levelSize -1; i++)
         {
-            tilemap.SetTile(new Vector3Int(i, -1, 1), wallTile);
-            tilemap.SetTile(new Vector3Int(-1, i, 1), wallTile);
+            tilemap.SetTile(new Vector3Int(i, -1, 0), wallTile);
+            tilemap.SetTile(new Vector3Int(-1, i, 0), wallTile);
         }
         tilemap.SetTilesBlock(new BoundsInt(new Vector3Int(), new Vector3Int(levelSize, levelSize, 1)), map.Cast<TileBase>().ToArray());
     }
