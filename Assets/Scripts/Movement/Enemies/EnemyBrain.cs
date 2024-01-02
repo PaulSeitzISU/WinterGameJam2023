@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Tilemaps;
@@ -24,11 +25,12 @@ public class EnemyBrain : MonoBehaviour
     private GridManager gridManager;
     private Tilemap tilemap;
     public int visibilityRadius;
+    public int visibilityRadiusFar;
     public List<GameObject> objectsInRadius;
 
     // Other variables necessary for the enemy's behavior
-    public float patrolSpeed = 3.0f;
-    public float chaseSpeed = 5.0f;
+    public int patrolSpeed = 3;
+    public int chaseSpeed = 5;
     public float attackDistance = 1.5f;
     public float attackDistanceMin = -1f;
 
@@ -69,11 +71,11 @@ public class EnemyBrain : MonoBehaviour
         {
             return;
         }
-        CheckForGameObjects();
+        CheckForGameObjects(visibilityRadius);
         UpdateState();
     }
 
-    private void UpdateState()
+    public void UpdateState()
     {
         switch (currentState)
         {
@@ -105,7 +107,7 @@ public class EnemyBrain : MonoBehaviour
     }
 
     // Transition between states based on certain conditions
-    private void TransitionToState(EnemyState newState)
+    public void TransitionToState(EnemyState newState)
     {
         currentState = newState;
     }
@@ -156,43 +158,78 @@ public class EnemyBrain : MonoBehaviour
 
         OnDead.Invoke();
     }
-
-    private void CheckForGameObjects()
-{
-    objectsInRadius = gridManager.GetObjectsInRadius(movement.currentGridPosition, visibilityRadius, gameObject);
-
-    if (objectsInRadius.Count > 0)
+    public GameObject CheckForGameObjectsFar()
     {
-        //Debug.Log("Objects detected at corner: " + objectsInRadius.Count);
-        foreach (GameObject obj in objectsInRadius)
+        List<GameObject> objectsInRadiusTemp = gridManager.GetObjectsInRadius(movement.currentGridPosition, visibilityRadiusFar, gameObject);
+
+        if (objectsInRadiusTemp.Count > 0)
         {
-            if(obj.tag == "Player")
+            GameObject closestPlayer = null;
+            float closestDistance = Mathf.Infinity;
+
+            foreach (GameObject obj in objectsInRadiusTemp)
             {
-                if(!PlayerList.Contains(obj))
+                if (obj.tag == "Player")
                 {
-                    PlayerList.Add(obj);
+                    // Directly add the player to the list without checking duplicates
+                    // You can remove duplicates later if necessary
+                    Debug.Log("Player detected at corner" + gameObject.name);
+
+                    float distance = Vector3.Distance(transform.position, obj.transform.position);
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        closestPlayer = obj;
+                    }
                 }
-                Debug.Log("Player detected at corner" + gameObject.name);
-                TransitionToState(EnemyState.Chase);
             }
+
+            // Remove duplicates from PlayerListTempList if needed
+            // PlayerListTempList = PlayerListTempList.Distinct().ToList();
+
+            //Debug.Log("Closest player is " + closestPlayer?.name);
+            return closestPlayer;
         }
-        //check if the player is next to the enemy
-        foreach(GameObject player in PlayerList)
+        return null;
+    }
+
+
+    public void CheckForGameObjects(int Radius)
+    {
+        objectsInRadius = gridManager.GetObjectsInRadius(movement.currentGridPosition, Radius, gameObject);
+
+        if (objectsInRadius.Count > 0)
         {
-            if (player != null)
+            //Debug.Log("Objects detected at corner: " + objectsInRadius.Count);
+            foreach (GameObject obj in objectsInRadius)
             {
-                if (Vector3.Distance(player.transform.position, transform.position) < attackDistanceMin)
+                if(obj.tag == "Player")
                 {
-                    TransitionToState(EnemyState.Flee);
+                    if(!PlayerList.Contains(obj))
+                    {
+                        PlayerList.Add(obj);
+                    }
+                    Debug.Log("Player detected at corner" + gameObject.name);
+                    TransitionToState(EnemyState.Chase);
                 }
-                else if (Vector3.Distance(player.transform.position, transform.position) < attackDistance)
+            }
+            //check if the player is next to the enemy
+            foreach(GameObject player in PlayerList)
+            {
+                if (player != null)
                 {
-                    TransitionToState(EnemyState.Attack);
+                    if (Mathf.Abs(Vector3.Distance(player.transform.position, transform.position)) <= attackDistanceMin)
+                    {
+                        TransitionToState(EnemyState.Flee);
+                    }
+                    else if (Mathf.Abs(Vector3.Distance(player.transform.position, transform.position)) <= attackDistance)
+                    {
+                        TransitionToState(EnemyState.Attack);
+                    }
                 }
             }
         }
     }
-}
 
     public GameObject ClosestPlayer()
     {
@@ -209,7 +246,7 @@ public class EnemyBrain : MonoBehaviour
                 closestPlayer = player;
             }
         }
-        Debug.Log("Closest player is " + closestPlayer.name);
+        //Debug.Log("Closest player is " + closestPlayer.name);
         return closestPlayer;
     }
     //check if dead

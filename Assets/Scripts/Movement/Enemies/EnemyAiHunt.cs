@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class EnemyAIChase : MonoBehaviour
+public class EnemyAiHunt : MonoBehaviour
 {
+
     public Movement movement;
     public GridManager gridManager;
     public EnemyBrain enemyBrain;
@@ -20,13 +21,11 @@ public class EnemyAIChase : MonoBehaviour
         aStar = GameObject.Find("Tilemap").GetComponent<AStar>();
     }
 
-    public void Chase()
+    public void Hunt()
     {
-        if(enemyBrain.PlayerList.Count == 0)
-        {
-            return;
-        }
-        Vector3Int closestPlayerPos = tilemap.WorldToCell(enemyBrain.ClosestPlayer().transform.position);
+        Debug.Log("Hunting" + enemyBrain.CheckForGameObjectsFar());
+        Vector3Int closestPlayerPos = tilemap.WorldToCell(enemyBrain.CheckForGameObjectsFar().transform.position);
+        
         
         List<AStar.AStarNode> shortest = aStar.FindPath(aStar.grid[movement.currentGridPosition.x, movement.currentGridPosition.y], aStar.grid[closestPlayerPos.x + 1, closestPlayerPos.y]);
         Vector3Int gridDir = Vector3Int.up;
@@ -57,10 +56,7 @@ public class EnemyAIChase : MonoBehaviour
             movement.MoveToGrid(tilemap.WorldToCell(closestPlayerPos) + gridDir, enemyBrain.patrolSpeed);
         }
         
-        enemyBrain.CheckForGameObjects(enemyBrain.visibilityRadius);
-        if(enemyBrain.currentState == EnemyState.Attack)
-        {
-            enemyBrain.UpdateState();
-        }
     }
 }
+
+
