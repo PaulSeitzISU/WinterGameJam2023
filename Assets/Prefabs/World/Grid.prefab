@@ -234,7 +234,7 @@ MonoBehaviour:
   occupiedTile: {fileID: 11400000, guid: 754d592a15ed4e946bfacdaf20744568, type: 2}
   aStar: {fileID: 0}
   debugMode: 0
-  debugGridNum: 1
+  debugGridNum: 0
   textPrefab: {fileID: 5097751888872551631, guid: 2b98c1629d79b56469d51a8a84d59236, type: 3}
   textParent: {fileID: 0}
   cam: {fileID: 0}
@@ -253,7 +253,8 @@ MonoBehaviour:
   tilemap: {fileID: 7286372324287764642}
   gridManager: {fileID: 7286372324287764641}
   propTiles:
-  - {fileID: 11400000, guid: d79021ad165210646893f71c1a563f72, type: 2}
+  - {fileID: 11400000, guid: f8a0b8d446b481a419a229a34136c323, type: 2}
+  - {fileID: 11400000, guid: cd933bb52b9644944a13a1ad1022af66, type: 2}
 --- !u!114 &7286372324287764647
 MonoBehaviour:
   m_ObjectHideFlags: 0
