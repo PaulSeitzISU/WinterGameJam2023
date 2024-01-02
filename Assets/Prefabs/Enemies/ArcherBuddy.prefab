@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 8965596756007105363}
   - component: {fileID: 835047256247814790}
   - component: {fileID: -3397928738346582598}
+  - component: {fileID: 8502882294535159480}
   m_Layer: 0
   m_Name: ArcherBuddy
   m_TagString: Enemy
@@ -191,8 +192,8 @@ MonoBehaviour:
   OnChase:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4433475108905770941}
-        m_TargetAssemblyTypeName: EnemyAIChase, Assembly-CSharp
+      - m_Target: {fileID: 8502882294535159480}
+        m_TargetAssemblyTypeName: EnemyAiLongChase, Assembly-CSharp
         m_MethodName: Chase
         m_Mode: 1
         m_Arguments:
@@ -329,3 +330,19 @@ MonoBehaviour:
   enemyBrain: {fileID: 0}
   movement: {fileID: 0}
   chaceScan: []
+--- !u!114 &8502882294535159480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6759871701228862576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d274da678e057d44995412823b2a40b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movement: {fileID: 0}
+  gridManager: {fileID: 0}
+  enemyBrain: {fileID: 0}
+  tilemap: {fileID: 0}
