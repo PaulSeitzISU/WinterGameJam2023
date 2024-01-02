@@ -62,11 +62,11 @@ public class LevelGenerator: MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            GenerateLevel();
+/*        if (Input.GetKeyDown(KeyCode.Space))
+            GenerateLevel();*/
     }
 
-    void GenerateLevel()
+    public void GenerateLevel()
     {
         // Initialize map to all walls
         map = new TileBase[levelSize, levelSize];
