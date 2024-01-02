@@ -94,6 +94,12 @@ public class Movement : MonoBehaviour
             return false;
         }
 
+        if (path != null && depth == 0)
+        {
+            StartCoroutine(FollowPath(path,  path.Count -1));
+            return true;
+        }
+
         if (path != null && path.Count > 0)
         {
             StartCoroutine(FollowPath(path, depth));

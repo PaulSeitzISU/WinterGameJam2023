@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 4270572974942025243}
   - component: {fileID: 4270572976188571553}
   - component: {fileID: 4270572976188571578}
+  - component: {fileID: -383100780030027019}
+  - component: {fileID: -8262857990692871392}
   m_Layer: 0
   m_Name: KnightRandom
   m_TagString: Enemy
@@ -156,7 +158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c260023afe9b9bf4bad67816687d10d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visibilityRadius: 5
+  currentState: 0
+  visibilityRadius: 8
   objectsInRadius: []
   patrolSpeed: 3
   chaseSpeed: 5
@@ -200,7 +203,19 @@ MonoBehaviour:
         m_CallState: 2
   OnAttack:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -383100780030027019}
+        m_TargetAssemblyTypeName: SwordSwing, Assembly-CSharp
+        m_MethodName: Swing
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnFlee:
     m_PersistentCalls:
       m_Calls: []
@@ -252,3 +267,34 @@ MonoBehaviour:
   movement: {fileID: 6396151470388052630}
   gridManager: {fileID: 0}
   walkingRange: 5
+--- !u!114 &-383100780030027019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6560937746723378646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b601f1ff99ce43447a895c0a9efb04b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+--- !u!114 &-8262857990692871392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6560937746723378646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5114a9b5c2083bc4a84cbfe6075f1779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  searchmap: {fileID: 0}
+  gridManager: {fileID: 0}
+  walkTile: {fileID: 11400000, guid: 9c7c2e8e0776cc04d8032a4b8439c587, type: 2}
+  AttackTile: {fileID: 11400000, guid: 754d592a15ed4e946bfacdaf20744568, type: 2}
+  masterScan: []
+  chaceScan: []
