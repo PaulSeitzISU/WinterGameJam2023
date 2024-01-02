@@ -16,7 +16,7 @@ public enum EnemyState
 
 public class EnemyBrain : MonoBehaviour
 {
-    public EnemyState currentState { get; private set; }
+     [SerializeField] public EnemyState currentState;
 
     // Reference to movement script, grid manager, and other necessary components
     private Health health;
@@ -46,7 +46,7 @@ public class EnemyBrain : MonoBehaviour
     [SerializeField] private UnityEvent OnDead;
 
 
-    private void Start()
+    void Start()
     {
         currentState = StartState;
         // Get references to necessary components
@@ -64,6 +64,11 @@ public class EnemyBrain : MonoBehaviour
 
     public void TakeTurn()
     {
+        CheckIfDead();
+        if (currentState == EnemyState.Dead)
+        {
+            return;
+        }
         CheckForGameObjects();
         UpdateState();
     }
@@ -167,7 +172,7 @@ public class EnemyBrain : MonoBehaviour
                 {
                     PlayerList.Add(obj);
                 }
-                //Debug.Log("Player detected at corner");
+                Debug.Log("Player detected at corner" + gameObject.name);
                 TransitionToState(EnemyState.Chase);
             }
         }
@@ -176,7 +181,7 @@ public class EnemyBrain : MonoBehaviour
         {
             if (player != null)
             {
-                if (Vector3.Distance(player.transform.position, transform.position) > attackDistanceMin)
+                if (Vector3.Distance(player.transform.position, transform.position) < attackDistanceMin)
                 {
                     TransitionToState(EnemyState.Flee);
                 }
@@ -188,5 +193,33 @@ public class EnemyBrain : MonoBehaviour
         }
     }
 }
+
+    public GameObject ClosestPlayer()
+    {
+                // Find closest player
+        GameObject closestPlayer = null;
+        float closestDistance = Mathf.Infinity;
+
+        foreach (GameObject player in PlayerList)
+        {
+            float distance = Vector3.Distance(transform.position, player.transform.position);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestPlayer = player;
+            }
+        }
+        Debug.Log("Closest player is " + closestPlayer.name);
+        return closestPlayer;
+    }
+    //check if dead
+    public void CheckIfDead()
+    {
+        if (health.currentHealth <= 0)
+        {
+            Debug.Log("Player is dead");
+            TransitionToState(EnemyState.Dead);
+        }
+    }
 
 }

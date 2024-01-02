@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -7,45 +9,43 @@ public class EnemyAIChase : MonoBehaviour
     public GridManager gridManager;
     public EnemyBrain enemyBrain;
     public Tilemap tilemap;
+    AStar aStar;
 
-    private void Start()
+    void Start()
     {
         movement = GetComponent<Movement>();
         gridManager = GameObject.Find("Tilemap").GetComponent<GridManager>();
         tilemap = GameObject.Find("Tilemap").GetComponent<Tilemap>();
         enemyBrain = GetComponent<EnemyBrain>();
+        aStar = GameObject.Find("Tilemap").GetComponent<AStar>();
     }
 
     public void Chase()
     {
-        // Find closest player
-        GameObject closestPlayer = null;
-        float closestDistance = Mathf.Infinity;
 
-        foreach (GameObject player in enemyBrain.PlayerList)
+        Vector3Int closestPlayerPos = tilemap.WorldToCell(enemyBrain.ClosestPlayer().transform.position);
+        
+        List<AStar.AStarNode> shortest = aStar.FindPath(aStar.grid[movement.currentGridPosition.x, movement.currentGridPosition.y], aStar.grid[closestPlayerPos.x + 1, closestPlayerPos.y]);
+        Vector3Int gridDir = Vector3Int.up;
+        List<AStar.AStarNode> tempList = aStar.FindPath(aStar.grid[movement.currentGridPosition.x, movement.currentGridPosition.y], aStar.grid[closestPlayerPos.x, closestPlayerPos.y]);
+        if(tempList != null && tempList.Count < shortest.Count)
         {
-            float distance = Vector3.Distance(transform.position, player.transform.position);
-            if (distance < closestDistance)
-            {
-                closestDistance = distance;
-                closestPlayer = player;
-            }
+                shortest = tempList;
+                gridDir = Vector3Int.down;
+        }
+        tempList = aStar.FindPath(aStar.grid[movement.currentGridPosition.x, movement.currentGridPosition.y], aStar.grid[closestPlayerPos.x, closestPlayerPos.y + 1]);
+        if(tempList != null && tempList.Count < shortest.Count)
+        {
+                shortest = tempList;
+                gridDir = Vector3Int.left;
+        }
+        tempList = aStar.FindPath(aStar.grid[movement.currentGridPosition.x, movement.currentGridPosition.y], aStar.grid[closestPlayerPos.x, closestPlayerPos.y - 1]);
+        if(tempList != null && tempList.Count < shortest.Count)
+        {
+                shortest = tempList;
+                gridDir = Vector3Int.right;
         }
 
-        if (closestPlayer != null)
-        {
-            Vector3Int playerGridPos = tilemap.WorldToCell(closestPlayer.transform.position);
-            Vector3Int currentGridPos = tilemap.WorldToCell(transform.position);
-
-            Vector3Int direction = new Vector3Int(
-                Mathf.RoundToInt(Mathf.Sign(playerGridPos.x - currentGridPos.x)),
-                Mathf.RoundToInt(Mathf.Sign(playerGridPos.y - currentGridPos.y)),
-                0);
-
-            Vector3Int targetGridPos = currentGridPos + direction;
-            Vector3 targetWorldPos = tilemap.GetCellCenterWorld(targetGridPos);
-
-            movement.MoveToGrid(targetGridPos);
-        }
+        movement.MoveToGrid(tilemap.WorldToCell(closestPlayerPos) + gridDir);  
     }
 }

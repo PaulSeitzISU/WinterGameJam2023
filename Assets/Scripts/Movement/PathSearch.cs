@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -27,7 +28,7 @@ public class PathSearch : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Search(gameObject, 3);
+            Search(gameObject, 5);
         }
     }
 
@@ -38,12 +39,19 @@ public class PathSearch : MonoBehaviour
         Vector3Int gridPosition = searchmap.WorldToCell(obj.transform.position) + new Vector3Int((gridManager.gridSize/2), (gridManager.gridSize/2), 0);
         //Vector2Int gridPosition = new Vector2Int((int)obj.transform.position.x + (gridManager.gridSize/2), (int)obj.transform.position.y + (gridManager.gridSize/2));
 
+        HashSet<Vector2Int> scanSet = new HashSet<Vector2Int>();
+
         for (int x = -depthRadius; x < depthRadius + 1; x++)
         {
             for (int y =  -depthRadius ; y < depthRadius + 1; y++)
             {
                 Debug.Log("Searching at " + x + " " + y + " from " + gridPosition.x + " " + gridPosition.y +  "   " + (x + gridPosition.x) + " " + (y + gridPosition.y) + " " + aStar.grid[gridPosition.x, gridPosition.y] + " " + aStar.grid[x + gridPosition.x, y + gridPosition.y]);
                 
+                if(scanSet.Contains(new Vector2Int(x + gridPosition.x, y + gridPosition.y)))
+                {
+                    continue;
+                }
+
                 List<AStar.AStarNode> scans = aStar.FindPath(aStar.grid[gridPosition.x, gridPosition.y], aStar.grid[x + gridPosition.x, y + gridPosition.y]);
 
                 if (scans == null)
@@ -54,6 +62,7 @@ public class PathSearch : MonoBehaviour
 
                 chaceScan.Clear();
                 chaceScan = scans.ConvertAll(item => new Vector2Int(item.x, item.y));
+                chaceScan = chaceScan.Take(depthRadius).ToList();
                 //list chace scan
 
                 foreach (Vector2Int scanPos in chaceScan)
@@ -63,6 +72,7 @@ public class PathSearch : MonoBehaviour
                     if (!masterScan.Contains(scanPos)) 
                     {
                         masterScan.Add(scanPos);
+                        scanSet.Add(scanPos);
                     } else
                     {
                         //Debug.Log("Already contains " + scanPos.x + " " + scanPos.y);
@@ -78,7 +88,7 @@ public class PathSearch : MonoBehaviour
         ClearDisplay();
         foreach (Vector2Int scan in masterScan)
         {
-            Debug.Log("Displaying at " + scan.x + " " + scan.y);
+            //Debug.Log("Displaying at " + scan.x + " " + scan.y);
             searchmap.SetTile(new Vector3Int(scan.x - (gridManager.gridSize/2), scan.y  - (gridManager.gridSize/2), 0), walkTile);
         }
 

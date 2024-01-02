@@ -25,7 +25,7 @@ public class TilemapScanner : MonoBehaviour
         ScanTilemap();
     }
 
-    private void ScanTilemap()
+    public void ScanTilemap()
     {
         BoundsInt bounds = tilemap.cellBounds;
 

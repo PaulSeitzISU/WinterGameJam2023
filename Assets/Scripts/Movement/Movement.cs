@@ -12,8 +12,7 @@ public class Movement : MonoBehaviour
     public Vector2Int currentGridPosition;
     public bool isMoving = false;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         tilemap = GameObject.Find("Tilemap").GetComponent<Tilemap>(); // Get the Tilemap component
 
@@ -38,6 +37,12 @@ public class Movement : MonoBehaviour
             Debug.LogError("No AStar script found in the scene.");
             return;
         }
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
 
         // Register the object in the GridManager at the current position
         currentGridPosition = GetGridTilePosition(transform.position);
@@ -74,20 +79,33 @@ public class Movement : MonoBehaviour
         return new Vector2Int(cellPosition.x, cellPosition.y);
     }
 
-    public void MoveToGrid(Vector3Int targetGridPosition)
+    public bool MoveToGrid(Vector3Int targetGridPosition, int depth = -1)
     {
         //Debug.Log("Moving to grid position: " + targetGridPosition);
         if (isMoving)
         {
             Debug.LogWarning("Already moving.");
-            return;
+            return false;
         }
         List<Vector3Int> path = CalculatePath(GetGridTilePosition(transform.position), new Vector2Int(targetGridPosition.x, targetGridPosition.y));
 
+        if (path == null && path.Count < 0)
+        {
+            return false;
+        }
+
+        if (path != null && depth == 0)
+        {
+            StartCoroutine(FollowPath(path,  path.Count -1));
+            return true;
+        }
+
         if (path != null && path.Count > 0)
         {
-            StartCoroutine(FollowPath(path));
+            StartCoroutine(FollowPath(path, depth));
+            return true;
         }
+        return false;
     }
 
     // List<Vector3Int> CalculatePath(Vector2Int start, Vector2Int end)
@@ -126,6 +144,11 @@ public class Movement : MonoBehaviour
   
         List<Vector3Int> convertPath = new List<Vector3Int>();
 
+        if (tempPath == null)
+        {
+            Debug.Log("No path found.");
+            return convertPath;
+        }
         foreach (AStar.AStarNode node in tempPath)
         {
             convertPath.Add(new Vector3Int(node.x - ( gridManager.gridSize/2 ), node.y - ( gridManager.gridSize/2 ), 0));

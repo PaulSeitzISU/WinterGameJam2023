@@ -6,7 +6,13 @@ public class EnemyManager : MonoBehaviour
 {
     public GameObject[] PlayerList;
     public GameObject[] EnemyList;
+    TilemapScanner tilemapScanner;
 
+    private bool finishedTurn = false;
+    public bool isTurn = false;
+
+    // Time delay between enemy turns
+    public float turnDelay = 1.0f; // Adjust this value as needed
 
     // Start is called before the first frame update
     void Start()
@@ -15,32 +21,43 @@ public class EnemyManager : MonoBehaviour
 
         //find all enemies
         EnemyList = GameObject.FindGameObjectsWithTag("Enemy");
-
+        tilemapScanner = GameObject.Find("Tilemap").GetComponent<TilemapScanner>();
     }
 
     // Update is called once per frame
     void Update()
     {
         //take turn on q
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && !finishedTurn)
         {
-            EnemyTurn();
+            StartCoroutine(ExecuteEnemyTurns());
+        }
+        if(isTurn && !finishedTurn)
+        {
+            isTurn = false;
+            StartCoroutine(ExecuteEnemyTurns());
         }
     }
 
-    public void EnemyTurn()
+    IEnumerator ExecuteEnemyTurns()
     {
-        //for each enemy
+        finishedTurn = true;
+
+
         foreach (GameObject enemy in EnemyList)
         {
-            //get enemy script
+            tilemapScanner.ScanTilemap();
+
+
             EnemyBrain enemyBrain = enemy.GetComponent<EnemyBrain>();
-            //if enemy is alive
+
             if (enemyBrain.currentState != EnemyState.Dead)
             {
-                //do enemy turn
                 enemyBrain.TakeTurn();
+                yield return new WaitForSeconds(turnDelay); // Introduce delay between enemy turns
             }
         }
+
+        finishedTurn = false;
     }
 }

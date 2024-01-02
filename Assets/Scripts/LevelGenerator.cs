@@ -19,7 +19,6 @@ public class LevelGenerator: MonoBehaviour
 
     public Tilemap tilemap;
     public TileBase wallTile;
-    public TileBase wallSideTile;
     public TileBase floorTile;
     public TileBase debugTile;
 
@@ -72,6 +71,10 @@ public class LevelGenerator: MonoBehaviour
         map = new TileBase[levelSize, levelSize];
         for (int i = 0; i < levelSize; i++) for (int j = 0; j < levelSize; j++)
                 map[i, j] = wallTile;
+        // Do same for tilemap
+        for (int i = -levelSize; i < levelSize * 3; i++)
+            for (int j = -levelSize; j < levelSize * 3; j++)
+                tilemap.SetTile(new Vector3Int(i, j, 0), wallTile);
 
         // Partition the map into a binary tree
         Partition root = new Partition(new Vector2Int(0, 0), new Vector2Int(levelSize, levelSize));
@@ -196,13 +199,13 @@ public class LevelGenerator: MonoBehaviour
                 scaledMap[i, j] = map[i / scaleFactor, j / scaleFactor];
 
 
-        // Add side walls
+        // Extend horizontal walls downward
         for (int i = 1; i < scaledMapSize - 1; i++)
             for (int j = 0; j < scaledMapSize; j++)
             { 
                 if (scaledMap[i, j] == floorTile && scaledMap[i + 1, j] == wallTile)
                 {
-                    scaledMap[i, j] = wallSideTile;
+                    scaledMap[i, j] = wallTile;
                 }
             }
 
@@ -213,7 +216,7 @@ public class LevelGenerator: MonoBehaviour
                 if (scaledMap[i - 1, j] == wallTile && scaledMap[i + 1, j] == wallSideTile)
                 {
                     scaledMap[i + 1, j] = floorTile;
-                    scaledMap[i + 2, j] = wallSideTile;
+                    scaledMap[i + 2, j] = wallTile;
                 }
             }*/
 

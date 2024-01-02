@@ -7,7 +7,7 @@ public class EnemyAIPatrolRandom : MonoBehaviour
     public Movement movement; // Reference to the Movement script
     public GridManager gridManager; // Reference to the GridManager script
 
-    public int range = 5;
+    public int walkingRange = 5;
 
     private bool isMovingRandomly = false;
 
@@ -33,6 +33,7 @@ public class EnemyAIPatrolRandom : MonoBehaviour
             if (!movement.isMoving)
             {
                 isMovingRandomly = false;
+                Patrol();
             }
         }
     }
@@ -41,14 +42,20 @@ public class EnemyAIPatrolRandom : MonoBehaviour
     {
         isMovingRandomly = true;
 
-        Vector2Int randomDirection = new Vector2Int(Random.Range(-range, range), Random.Range(-range, range));
+        Vector2Int randomDirection = new Vector2Int(Random.Range(-walkingRange, walkingRange), Random.Range(-walkingRange, walkingRange));
         targetGridPosition = startGridPosition + randomDirection;
 
         // Ensure the target position stays within grid bounds
         targetGridPosition.x = Mathf.Clamp(targetGridPosition.x, -(gridManager.gridSize/2) + 1, (gridManager.gridSize/2) - 1);
         targetGridPosition.y = Mathf.Clamp(targetGridPosition.y, -(gridManager.gridSize/2) + 1, (gridManager.gridSize/2) - 1);
 
-        movement.MoveToGrid(new Vector3Int(targetGridPosition.x, targetGridPosition.y, 0));
-
+        bool moved = movement.MoveToGrid(new Vector3Int(targetGridPosition.x, targetGridPosition.y, 0), walkingRange);
+        
+        //Debug.Log("Enemy moving to " + targetGridPosition + ". Moved: " + moved);
+        if(!moved)
+        {
+            //Debug.Log("Enemy cannot move to " + targetGridPosition + ". Trying again.");
+            MoveRandomly();
+        }
     }
 }

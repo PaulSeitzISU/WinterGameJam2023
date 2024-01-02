@@ -7,7 +7,7 @@ public class GridManager : MonoBehaviour
 {
     [SerializeField]
     public GameObject[,] gridObjects; // 2D array to store game objects on the grid
-    public int gridSize = 100; // Define grid size along the X-axis
+    public int gridSize = 20; // Define grid size along the X-axis
 
     public Tilemap tilemap; // Reference to the Tilemap component
     public TileBase emptyTile; // Tile to represent an empty grid cell
@@ -25,6 +25,7 @@ public class GridManager : MonoBehaviour
 
     private void Awake()
     {
+        gridSize = (FindObjectOfType<LevelGenerator>().levelSize * 2) + gridSize;
         // Initialize the grid with the specified size using arrays
         gridObjects = new GameObject[gridSize, gridSize];
 
@@ -65,7 +66,8 @@ public class GridManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Grid cell is already occupied.");
+                //Debug.Log("Grid cell is already occupied." + gridObjects[x, y].name);
+                gridObjects[x, y] = obj;
             }
         }
         else
