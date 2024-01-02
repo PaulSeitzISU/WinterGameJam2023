@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class EnemyAIChase : MonoBehaviour
+public class EnemyAiHunt : MonoBehaviour
 {
+
     public Movement movement;
     public GridManager gridManager;
     public EnemyBrain enemyBrain;
@@ -26,7 +27,7 @@ public class EnemyAIChase : MonoBehaviour
         {
             return;
         }
-        Vector3Int closestPlayerPos = tilemap.WorldToCell(enemyBrain.ClosestPlayer().transform.position);
+        Vector3Int closestPlayerPos = tilemap.WorldToCell(enemyBrain.CheckForGameObjectsFar().transform.position);
         
         List<AStar.AStarNode> shortest = aStar.FindPath(aStar.grid[movement.currentGridPosition.x, movement.currentGridPosition.y], aStar.grid[closestPlayerPos.x + 1, closestPlayerPos.y]);
         Vector3Int gridDir = Vector3Int.up;
@@ -59,3 +60,5 @@ public class EnemyAIChase : MonoBehaviour
         
     }
 }
+
+
