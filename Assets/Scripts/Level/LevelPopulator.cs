@@ -70,6 +70,6 @@ public class LevelPopulator : MonoBehaviour
         } while (occupied.Contains(spawnPosition));
         occupied.Add(spawnPosition);
         
-        return GameObject.Instantiate(prefab, new Vector3(spawnPosition.y + 0.5f, spawnPosition.x + 0.5f, zPos), Quaternion.identity);
+        return GameObject.Instantiate(prefab, new Vector3(spawnPosition.y, spawnPosition.x, zPos), Quaternion.identity);
     }
 }
