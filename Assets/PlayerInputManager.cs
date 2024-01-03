@@ -96,7 +96,7 @@ public class PlayerInputManager : MonoBehaviour
                 //currentSelection.GetComponent<PathSearch>().Search(gameObject,5);
                 if (currentState == 0 && !switching)
                 {
-                    currentSelection.GetComponent<PlayerController>().Move(MousePositionOnGrid(mousePosition));
+                    currentSelection.GetComponent<PlayerController>().Move(PositionOnGrid(mousePosition));
                 }
                 else if (currentState == 1 && currentSelection.GetComponent<PlayerController>().isPlayer() && !switching) // this is a player only ability
                 {
@@ -110,7 +110,21 @@ public class PlayerInputManager : MonoBehaviour
                 }
                 else if (currentState == 2 && currentSelection.GetComponent<PlayerController>().isPlayer() && !switching) // this is a player only ability
                 {
-                    currentSelection.GetComponent<PlayerController>().Spit();
+                    if (directionFacing == 0)
+                    {
+                        currentSelection.GetComponent<PlayerController>().Spit(Vector2.up,Mathf.RoundToInt(Vector3.Distance(PositionOnGrid(currentSelection.transform.position),PositionOnGrid(primaryIndicator.transform.position))));
+                    }else if (directionFacing == 1)
+                    {
+                        currentSelection.GetComponent<PlayerController>().Spit(Vector2.right, Mathf.RoundToInt(Vector3.Distance(PositionOnGrid(currentSelection.transform.position), PositionOnGrid(primaryIndicator.transform.position))));
+                    }
+                    else if (directionFacing == 2)
+                    {
+                        currentSelection.GetComponent<PlayerController>().Spit(Vector2.down, Mathf.RoundToInt(Vector3.Distance(PositionOnGrid(currentSelection.transform.position), PositionOnGrid(primaryIndicator.transform.position))));
+                    }
+                    else if (directionFacing == 3)
+                    {
+                        currentSelection.GetComponent<PlayerController>().Spit(Vector2.left, Mathf.RoundToInt(Vector3.Distance(PositionOnGrid(currentSelection.transform.position), PositionOnGrid(primaryIndicator.transform.position))));
+                    }
                 }
                 else if (currentState == 3 && !switching)
                 {
@@ -130,17 +144,20 @@ public class PlayerInputManager : MonoBehaviour
     {
         if (currentSelection != null && currentIndicator == null)
         {
-            if(currentState == 0)
+            if (currentState == 0)
             {
-                currentIndicator = Instantiate(indicator, MousePositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition)), Quaternion.identity);
+                currentIndicator = Instantiate(indicator, PositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition)), Quaternion.identity);
             }
-            else if(currentState == 1) {
-                primaryIndicator = Instantiate(indicator, currentSelection.transform.position+directionFacingVectors[directionFacing], Quaternion.identity);
-                secondaryIndicator = Instantiate(indicator, currentSelection.transform.position + (-1*directionFacingVectors[directionFacing]), Quaternion.identity);
+            else if (currentState == 1)
+            {
+                primaryIndicator = Instantiate(indicator, currentSelection.transform.position + directionFacingVectors[directionFacing], Quaternion.identity);
+                secondaryIndicator = Instantiate(indicator, currentSelection.transform.position + (-1 * directionFacingVectors[directionFacing]), Quaternion.identity);
             }
-            else if(currentState == 2) { }   
-            else if(currentState == 3) { } 
-            else if(currentState == 4) { }   
+            else if (currentState == 2) {
+                primaryIndicator = Instantiate(indicator, PositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition)), Quaternion.identity);
+            }
+            else if (currentState == 3) { }
+            else if (currentState == 4) { }   
         }
         else
         {
@@ -149,7 +166,7 @@ public class PlayerInputManager : MonoBehaviour
                 ClearIndicator();
                 return; 
             }
-            currentIndicator.transform.position = (Vector3Int)currentSelection.GetComponent<Movement>().GetGridTilePosition(MousePositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
+            currentIndicator.transform.position = (Vector3Int)currentSelection.GetComponent<Movement>().GetGridTilePosition(PositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
             if(currentState == 1)
             {
                 if (primaryIndicator != null)
@@ -170,9 +187,35 @@ public class PlayerInputManager : MonoBehaviour
                 }
             }
             else if(currentState == 2) 
-            { 
-            
-            }else if (currentState == 3)
+            {
+                if (primaryIndicator != null)
+                {
+                    Vector2 selectionVector = currentSelection.GetComponent<Movement>().GetGridTilePosition(PositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
+                    if (directionFacing == 0)
+                    {
+                        primaryIndicator.transform.position = selectionVector*(Vector2.zero+Vector2.up);
+                    }
+                    else if (directionFacing == 1)
+                    {
+                        primaryIndicator.transform.position = selectionVector * (Vector2.zero + Vector2.right);
+                    }
+                    else if (directionFacing == 2)
+                    {
+                        primaryIndicator.transform.position = selectionVector * (Vector2.zero + Vector2.down);
+                    }
+                    else if (directionFacing == 3)
+                    {
+                        primaryIndicator.transform.position = selectionVector * (Vector2.zero + Vector2.left);
+                    }
+
+                }
+                else
+                {
+                    primaryIndicator = Instantiate(indicator, currentSelection.transform.position, Quaternion.identity);
+                }
+
+            }
+            else if (currentState == 3)
             {
 
             }
@@ -181,10 +224,11 @@ public class PlayerInputManager : MonoBehaviour
     }
     void ClearIndicator()
     {
-        if(currentIndicator != null)Destroy(currentIndicator);
-        if(secondaryIndicator != null) Destroy(secondaryIndicator);
+        if (currentIndicator != null)Destroy(currentIndicator);
+        if (primaryIndicator != null) Destroy(primaryIndicator);
+        if (secondaryIndicator != null) Destroy(secondaryIndicator);
     }
-    Vector3Int MousePositionOnGrid(Vector3 mousePosition)
+    Vector3Int PositionOnGrid(Vector3 mousePosition)
     {
         Vector3Int gridPosition = new Vector3Int(Mathf.RoundToInt(mousePosition.x), Mathf.RoundToInt(mousePosition.y),0);
         
@@ -242,6 +286,6 @@ public class PlayerInputManager : MonoBehaviour
         {
             currentState = 4;
         }
-        selectionObject.transform.position = abilitySprites[currentState].transform.position;
+        //selectionObject.transform.position = abilitySprites[currentState].transform.position;
     }
 }

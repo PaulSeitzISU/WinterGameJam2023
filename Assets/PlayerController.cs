@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] GameObject selectionRing;
     [SerializeField] GameObject playerlet;
+    [SerializeField] GameObject projectile;
     bool selected;
 
     [SerializeField] bool isPlayerlet;
@@ -58,9 +59,10 @@ public class PlayerController : MonoBehaviour
             Instantiate(playerlet, transform.position + Vector3.down, Quaternion.identity);
         }
     }
-    public void Spit()
+    public void Spit(Vector2 direction,int unitDistanceFromIndicator)
     {
         Debug.Log("Spitting!");
+        GameObject fired = Instantiate(projectile, (Vector2)transform.position + direction, Quaternion.identity, null);
     }
     public void Rush()
     {
