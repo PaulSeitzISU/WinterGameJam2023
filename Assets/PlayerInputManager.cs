@@ -2,6 +2,7 @@ using Mono.Cecil;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor.PackageManager;
 using UnityEngine;
@@ -92,10 +93,17 @@ public class PlayerInputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if(currentSelection != null)
         {
             cam.GetComponent<CameraFollow>().target = currentSelection.transform;
 
+        } else if (currentSelection == null && trackTurn.Count > 0)
+        {
+            cam.GetComponent<CameraFollow>().target = trackTurn.Keys.GetEnumerator().Current.transform;
+        } else if (currentSelection == null && trackTurn.Count == 0)
+        {
+            cam.GetComponent<CameraFollow>().target = trackTurn.ToArray()[0].Key.transform;
         }
         
         if(!isTurn)
