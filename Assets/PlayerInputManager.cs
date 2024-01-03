@@ -70,11 +70,6 @@ public class PlayerInputManager : MonoBehaviour
         cam.transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, cam.transform.position.z);
     }
 
-/*    private void FixedUpdate()
-    {
-        UpdatePlayerList();
-    }
-*/
     public void UpdatePlayerList()
     {
         trackTurn.Clear();
