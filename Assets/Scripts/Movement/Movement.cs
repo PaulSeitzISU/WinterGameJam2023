@@ -157,7 +157,7 @@ public class Movement : MonoBehaviour
     //     return path;
     // }
 
-    List<Vector3Int> CalculatePath(Vector2Int start, Vector2Int end)
+    public List<Vector3Int> CalculatePath(Vector2Int start, Vector2Int end)
     {
         //Debug.Log("start" + start.x + " " + start.y + "end" + end.x + " " + end.y );
         //Debug.Log(aStar.FindPath(aStar.grid[start.x, start.y], aStar.grid[end.x, end.y]));

@@ -16,7 +16,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int startingSlime;
     [SerializeField] int totalSlime;
     [SerializeField] int damage;
-    [SerializeField] int splitCost;  
+    [SerializeField] int splitCost;
+    [SerializeField] public int moveDistance;
 
 
     Projectile projectile;
@@ -65,7 +66,7 @@ public class PlayerController : MonoBehaviour
     public void Move(Vector3Int gridPosition)
     {
         Debug.Log("Moving!");
-        GetComponent<Movement>().MoveToGrid(gridPosition);
+        GetComponent<Movement>().MoveToGrid(gridPosition, moveDistance);
     }
     public void Split(bool horizontal)
     {

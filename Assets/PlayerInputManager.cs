@@ -176,9 +176,9 @@ public class PlayerInputManager : MonoBehaviour
 
             GameObject target = gridManager.GetObjectAtGridPosition(new Vector2Int(tempVec.x, tempVec.y ));
 
-            if(currentState == 2)
+            if (currentState == 2)
             {
-                if(target != null && target.tag == "Enemy")
+                if (target != null && target.tag == "Enemy")
                 {
                     //turn currentSelection sprite green 
                     currentIndicator.gameObject.GetComponent<SpriteRenderer>().color = Color.green;
@@ -192,9 +192,20 @@ public class PlayerInputManager : MonoBehaviour
                     targetCurrent = null;
                 }
             }
+            else if (currentState == 0)
+            {
+                if (CanMoveToSelector())
+                {
+                    currentIndicator.gameObject.GetComponent<SpriteRenderer>().color = Color.cyan;
+                }
+                else
+                {
+                    currentIndicator.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+                }
+            }
             else
             {
-                //turn currentSelection sprite red
+                //turn currentSelection sprite cyan
                 currentIndicator.gameObject.GetComponent<SpriteRenderer>().color = Color.cyan;
                 //Debug.Log("Not targeting enemy");
 
@@ -274,7 +285,7 @@ public class PlayerInputManager : MonoBehaviour
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if(currentSelection != null) { 
                 //currentSelection.GetComponent<PathSearch>().Search(gameObject,5);
-                if (currentState == 0 && !switching && trackTurn[currentSelection].hasMoved == false)
+                if (currentState == 0 && !switching && trackTurn[currentSelection].hasMoved == false && CanMoveToSelector())
                 {
                     currentSelection.GetComponent<PlayerController>().Move(PositionOnGrid(mousePosition));
                     trackTurn[currentSelection].hasMoved = true;
@@ -309,8 +320,15 @@ public class PlayerInputManager : MonoBehaviour
                     currentSelection.GetComponent<PlayerController>().Leap();
                     trackTurn[currentSelection].hasAttacked = true;
                 }
+                else
+                {
+                    Selection(mousePosition);
+                }
             }
-            Selection(mousePosition);
+            else
+            {
+                Selection(mousePosition);
+            }
         }
 
         #endregion
@@ -497,14 +515,14 @@ public class PlayerInputManager : MonoBehaviour
         ClearIndicator();
         //Debug.Log("Current State: " + currentState);
         //selectionObject.transform.position = abilitySprites[currentState].transform.position;
-    }
-    
-    public void CheckMoves()
+    }    
+
+    private bool CanMoveToSelector()
     {
-        if (trackTurn[currentSelection].hasMoved == false)
-        {
-            currentSelection.GetComponent<PlayerController>().Move(PositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
-        }
+        Movement movement = currentSelection.GetComponent<Movement>();
+        return movement.CalculatePath(
+            movement.GetGridTilePosition(currentSelection.transform.position),
+            movement.GetGridTilePosition(currentIndicator.transform.position)
+        ).Count <= currentSelection.GetComponent<PlayerController>().moveDistance;
     }
-    
 }
