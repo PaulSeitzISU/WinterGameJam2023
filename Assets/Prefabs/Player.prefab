@@ -158,6 +158,7 @@ MonoBehaviour:
   startingSlime: 50
   totalSlime: 0
   damage: 30
+  splitCost: 10
 --- !u!114 &9008527375254509527
 MonoBehaviour:
   m_ObjectHideFlags: 0
