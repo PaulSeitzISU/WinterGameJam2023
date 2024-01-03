@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 726803916843850790}
   - component: {fileID: 726803916843850791}
+  - component: {fileID: 1552154169}
   m_Layer: 0
   m_Name: SoundBank
   m_TagString: Untagged
@@ -108,3 +109,23 @@ MonoBehaviour:
     maxPitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: BGMusic
+    clip: {fileID: 8300000, guid: 252ca4934549f6c46b7531d39a8ce372, type: 3}
+    volume: 0.206
+    minPitch: 1
+    maxPitch: 1
+    loop: 1
+    source: {fileID: 0}
+--- !u!114 &1552154169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726803916843850788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e9cbd052b7892c4483da08043cf67cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnStart: 1

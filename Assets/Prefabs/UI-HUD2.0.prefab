@@ -529,6 +529,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2007703766015881232}
     m_Modifications:
+    - target: {fileID: 2253143110048830797, guid: 4d7c85da34ac5d14aa9addb586425033, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -50.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2253143110048830799, guid: 4d7c85da34ac5d14aa9addb586425033, type: 3}
+      propertyPath: m_text
+      value: Move
+      objectReference: {fileID: 0}
     - target: {fileID: 2253143110706591276, guid: 4d7c85da34ac5d14aa9addb586425033, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -616,6 +624,44 @@ PrefabInstance:
     - target: {fileID: 2253143110706591279, guid: 4d7c85da34ac5d14aa9addb586425033, type: 3}
       propertyPath: m_Name
       value: AbilityHotbar
+      objectReference: {fileID: 0}
+    - target: {fileID: 2253143110739320097, guid: 4d7c85da34ac5d14aa9addb586425033, type: 3}
+      propertyPath: m_text
+      value: Spit
+      objectReference: {fileID: 0}
+    - target: {fileID: 2253143110739320103, guid: 4d7c85da34ac5d14aa9addb586425033, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2253143110835351500, guid: 4d7c85da34ac5d14aa9addb586425033, type: 3}
+      propertyPath: m_text
+      value: 'Leap
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2253143110835351506, guid: 4d7c85da34ac5d14aa9addb586425033, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2253143110844980305, guid: 4d7c85da34ac5d14aa9addb586425033, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 23.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2253143110844980307, guid: 4d7c85da34ac5d14aa9addb586425033, type: 3}
+      propertyPath: m_text
+      value: 'Slam
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2253143110918768020, guid: 4d7c85da34ac5d14aa9addb586425033, type: 3}
+      propertyPath: m_text
+      value: 'Split
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2253143110918768026, guid: 4d7c85da34ac5d14aa9addb586425033, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -24.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d7c85da34ac5d14aa9addb586425033, type: 3}
