@@ -31,14 +31,19 @@ public class PlayerInputManager : MonoBehaviour
     {
         ChangeState();
     }
+
+
     // Update is called once per frame
     void Update()
     {
-        if (currentIndicator != null && currentSelection != null) {
+        if (currentSelection != null) {
             //Debug.Log(currentIndicator.transform.position);
             //Debug.Log(currentSelection.transform.position);
             //float angle = Vector2.SignedAngle(, );
-            float angle = Mathf.Rad2Deg * (Mathf.Atan2(currentIndicator.transform.position.y - currentSelection.transform.position.y, currentIndicator.transform.position.x - currentSelection.transform.position.x));
+
+            //Debug.Log(Input.mousePosition + " " + currentSelection.transform.position);
+            Vector3 mousePositionTemp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            float angle = Mathf.Rad2Deg * (Mathf.Atan2(mousePositionTemp.y - currentSelection.transform.position.y, mousePositionTemp.x - currentSelection.transform.position.x));
             if(angle > 45 && angle <= 135)
             {
                 directionFacing = 0;
@@ -58,6 +63,9 @@ public class PlayerInputManager : MonoBehaviour
             //Debug.Log(angle);
             //Debug.Log(directionFacing);
         }
+
+        #region Inputs
+
         if (Input.mouseScrollDelta != Vector2.zero)
         {
             if (Input.mouseScrollDelta.y > 0)
@@ -137,91 +145,88 @@ public class PlayerInputManager : MonoBehaviour
             }
             Selection(mousePosition);
         }
+
+        #endregion
+
         ShowIndicator(currentState);
         switching = false;
     }
-    void ShowIndicator(int state)
+   void ShowIndicator(int state)
+{
+    if (currentSelection != null && currentIndicator == null)
     {
-        if (currentSelection != null && currentIndicator == null)
+        if (currentState == 0)
         {
-            if (currentState == 0)
-            {
-                currentIndicator = Instantiate(indicator, PositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition)), Quaternion.identity);
-            }
-            else if (currentState == 1)
+            currentIndicator = Instantiate(indicator, PositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition)), Quaternion.identity);
+        }
+        else if (currentState == 1)
+        {
+            if (primaryIndicator == null)
             {
                 primaryIndicator = Instantiate(indicator, currentSelection.transform.position + directionFacingVectors[directionFacing], Quaternion.identity);
+                //Debug.Log("Primary Indicator Created" + primaryIndicator.transform.position + " " + currentSelection.transform.position + " " + directionFacingVectors[directionFacing]);
+            }
+            else
+            {
+                primaryIndicator.transform.position = currentSelection.transform.position + directionFacingVectors[directionFacing];
+                //Debug.Log("Primary Indicator Moved" + primaryIndicator.transform.position + " " + currentSelection.transform.position + " " + directionFacingVectors[directionFacing]);
+            }
+
+            if (secondaryIndicator == null)
+            {
                 secondaryIndicator = Instantiate(indicator, currentSelection.transform.position + (-1 * directionFacingVectors[directionFacing]), Quaternion.identity);
             }
-            else if (currentState == 2) {
+            else
+            {
+                secondaryIndicator.transform.position = currentSelection.transform.position + (-1 * directionFacingVectors[directionFacing]);
+            }
+        }
+        else if (currentState == 2)
+        {
+            if (primaryIndicator == null)
+            {
                 primaryIndicator = Instantiate(indicator, PositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition)), Quaternion.identity);
             }
-            else if (currentState == 3) { }
-            else if (currentState == 4) { }   
+            else
+            {
+                primaryIndicator.transform.position = PositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            }
         }
-        else
-        {
-            if (currentSelection == null) 
-            {
-                ClearIndicator();
-                return; 
-            }
-            currentIndicator.transform.position = (Vector3Int)currentSelection.GetComponent<Movement>().GetGridTilePosition(PositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
-            if(currentState == 1)
-            {
-                if (primaryIndicator != null)
-                {
-                    primaryIndicator.transform.position = currentSelection.transform.position + directionFacingVectors[directionFacing];
-                }
-                else
-                {
-                    primaryIndicator = Instantiate(indicator, currentSelection.transform.position + directionFacingVectors[directionFacing], Quaternion.identity);
-                }
-                if (secondaryIndicator != null)
-                {
-                    secondaryIndicator.transform.position = currentSelection.transform.position + (-1 * directionFacingVectors[directionFacing]);
-                }
-                else
-                {
-                    secondaryIndicator = Instantiate(indicator, currentSelection.transform.position + (-1 * directionFacingVectors[directionFacing]), Quaternion.identity);
-                }
-            }
-            else if(currentState == 2) 
-            {
-                if (primaryIndicator != null)
-                {
-                    Vector2 selectionVector = currentSelection.GetComponent<Movement>().GetGridTilePosition(PositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
-                    if (directionFacing == 0)
-                    {
-                        primaryIndicator.transform.position = selectionVector*(Vector2.zero+Vector2.up);
-                    }
-                    else if (directionFacing == 1)
-                    {
-                        primaryIndicator.transform.position = selectionVector * (Vector2.zero + Vector2.right);
-                    }
-                    else if (directionFacing == 2)
-                    {
-                        primaryIndicator.transform.position = selectionVector * (Vector2.zero + Vector2.down);
-                    }
-                    else if (directionFacing == 3)
-                    {
-                        primaryIndicator.transform.position = selectionVector * (Vector2.zero + Vector2.left);
-                    }
-
-                }
-                else
-                {
-                    primaryIndicator = Instantiate(indicator, currentSelection.transform.position, Quaternion.identity);
-                }
-
-            }
-            else if (currentState == 3)
-            {
-
-            }
-
-        }
+        else if (currentState == 3) { }
+        else if (currentState == 4) { }
     }
+    else
+    {
+        // Existing indicators, move them to the updated position
+        if (currentSelection == null)
+        {
+            ClearIndicator();
+            return;
+        }
+        currentIndicator.transform.position = (Vector3Int)currentSelection.GetComponent<Movement>().GetGridTilePosition(PositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
+        if (currentState == 1)
+        {
+            if (primaryIndicator != null)
+            {
+                primaryIndicator.transform.position = currentSelection.transform.position + directionFacingVectors[directionFacing];
+            }
+            if (secondaryIndicator != null)
+            {
+                secondaryIndicator.transform.position = currentSelection.transform.position + (-1 * directionFacingVectors[directionFacing]);
+            }
+        }
+        else if (currentState == 2)
+        {
+            if (primaryIndicator != null)
+            {
+                primaryIndicator.transform.position = PositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            }
+        }
+        else if (currentState == 3) { }
+        else if (currentState == 4) { }
+    }
+}
+
     void ClearIndicator()
     {
         if (currentIndicator != null)Destroy(currentIndicator);
@@ -243,12 +248,12 @@ public class PlayerInputManager : MonoBehaviour
         {
             thisSelection = Physics2D.CircleCast(mousePosition, selectionRadius, Vector3.zero, 0).collider.gameObject; // does a circle cast around the mouse click to select the first collider found
         }
-        catch (System.Exception e)
+        catch (System.Exception)
         {
-            Debug.Log(e);
             Debug.Log("No selected object");
         }
-        if (thisSelection == null)
+
+        if (thisSelection == null || (thisSelection != null && thisSelection.tag != "Player"))
         {
             if (currentSelection != null)
             {
@@ -286,6 +291,8 @@ public class PlayerInputManager : MonoBehaviour
         {
             currentState = 4;
         }
+        ClearIndicator();
+        //Debug.Log("Current State: " + currentState);
         //selectionObject.transform.position = abilitySprites[currentState].transform.position;
     }
 }
