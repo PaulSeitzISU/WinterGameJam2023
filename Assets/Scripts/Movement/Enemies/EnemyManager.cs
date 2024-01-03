@@ -57,17 +57,15 @@ public class EnemyManager : MonoBehaviour
         }
 
     }
-    void FixedUpdate()
-    {
-        if(EnemyList.Length == 0)
-        {
-            SceneManager.LoadScene("WinScene");
-        }
-    }
 
     IEnumerator ExecuteEnemyTurns()
     {
         finishedTurn = true;
+
+        if (EnemyList.Length == 0)
+        {
+            SceneManager.LoadScene("WinScene");
+        }
 
 
         foreach (GameObject enemy in EnemyList)
