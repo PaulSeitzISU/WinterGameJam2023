@@ -145,11 +145,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612f336d37bcb514abf38d12c290d78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemap: {fileID: 0}
-  gridManager: {fileID: 0}
   aStar: {fileID: 0}
   currentGridPosition: {x: 0, y: 0}
   isMoving: 0
+  makeSound: 1
+  isPlayer: 0
 --- !u!114 &4270572974942025240
 MonoBehaviour:
   m_ObjectHideFlags: 0

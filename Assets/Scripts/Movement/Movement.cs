@@ -6,11 +6,14 @@ using UnityEngine.Tilemaps;
 
 public class Movement : MonoBehaviour
 {
-    public Tilemap tilemap; // Reference to your Tilemap component
-    public GridManager gridManager; // Reference to the GridManager
+    Tilemap tilemap; // Reference to your Tilemap component
+    GridManager gridManager; // Reference to the GridManager
+    SoundPlayer soundPlayer;
     public AStar aStar; // Reference to the AStar script
     public Vector2Int currentGridPosition;
     public bool isMoving = false;
+    public bool makeSound = false;
+    public bool isPlayer = false;
 
     void Awake()
     {
@@ -47,11 +50,29 @@ public class Movement : MonoBehaviour
         // Register the object in the GridManager at the current position
         currentGridPosition = GetGridTilePosition(transform.position);
         gridManager.PlaceObject(gameObject, currentGridPosition);
+        soundPlayer = GetComponent<SoundPlayer>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(makeSound)
+        {
+            if(isMoving && !isPlayer)
+            {
+                isPlayer = true;
+                Debug.Log("Playing sound");
+                soundPlayer.PlaySoundFromBank("Walking");
+            }
+            else if(!isMoving && isPlayer)
+            {
+                isPlayer = false;
+                Debug.Log("Stopping sound");
+                soundPlayer.StopSoundFromBank("Walking");
+            }
+      
+        }
+        
         if (tilemap == null)
         {
             tilemap = GameObject.Find("Tilemap").GetComponent<Tilemap>(); // Get the Tilemap component
@@ -167,6 +188,7 @@ public class Movement : MonoBehaviour
         {
             if (depth == 0)
             {
+                StopWalkingSound();
                 isMoving = false;
                 yield break;
             }
@@ -181,6 +203,7 @@ public class Movement : MonoBehaviour
             if (gridManager.IsGridPositionOccupied(new Vector2Int(gridPos.x, gridPos.y)) && currentGridPosition != new Vector2Int(gridPos.x, gridPos.y))
             {
                 Debug.LogWarning("Target tile is occupied. Stopping movement.");
+                StopWalkingSound();
                 isMoving = false; // Stop movement
                 yield break; // Exit the coroutine
             }
@@ -195,8 +218,18 @@ public class Movement : MonoBehaviour
                 yield return null;
             }
         }
-
+        StopWalkingSound();
         isMoving = false;
     }
 
+    public void StopWalkingSound()
+        {
+            if(!isMoving && isPlayer)
+                {
+                isPlayer = false;
+                Debug.Log("Stopping sound");
+                soundPlayer.StopSoundFromBank("Walking");
+                }
+    }
+            
 }

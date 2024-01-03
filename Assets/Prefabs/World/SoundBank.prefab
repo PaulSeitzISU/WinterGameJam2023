@@ -46,21 +46,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: Walking
-    clip: {fileID: 8300000, guid: df75cd0d294b541459904d7fc8d8ee94, type: 3}
+    clip: {fileID: 8300000, guid: a53f311cb99988a47a42f57808f94e0e, type: 3}
     volume: 1
     minPitch: 1
     maxPitch: 1
     loop: 1
     source: {fileID: 0}
   - name: Bow
-    clip: {fileID: 8300000, guid: df75cd0d294b541459904d7fc8d8ee94, type: 3}
+    clip: {fileID: 8300000, guid: bcd8ecebe96fd7540a934cdcfd82b1e2, type: 3}
     volume: 1
     minPitch: 1
     maxPitch: 1
     loop: 0
     source: {fileID: 0}
   - name: ArrowHit
-    clip: {fileID: 8300000, guid: df75cd0d294b541459904d7fc8d8ee94, type: 3}
+    clip: {fileID: 8300000, guid: 3a7c6c58710520e41a4d15951746e9df, type: 3}
     volume: 1
     minPitch: 1
     maxPitch: 1
@@ -88,7 +88,7 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: AxeHit
-    clip: {fileID: 8300000, guid: df75cd0d294b541459904d7fc8d8ee94, type: 3}
+    clip: {fileID: 8300000, guid: 34771ab72a1bba747a2921b516a28158, type: 3}
     volume: 1
     minPitch: 1
     maxPitch: 1

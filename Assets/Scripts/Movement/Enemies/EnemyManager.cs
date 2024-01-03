@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -29,6 +30,14 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(EnemyList.Length == 0)
+        {
+            //SceneManager.LoadScene("Win");
+        }
+        {
+
+        }
+        
         maxTime = maxTime + EnemyList.Length ;
         //take turn on q
         if (Input.GetKeyDown(KeyCode.Q) && !finishedTurn)

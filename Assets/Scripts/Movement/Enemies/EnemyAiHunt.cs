@@ -23,8 +23,20 @@ public class EnemyAiHunt : MonoBehaviour
 
     public void Hunt()
     {
-        Debug.Log("Hunting" + enemyBrain.CheckForGameObjectsFar());
-        Vector3Int closestPlayerPos = tilemap.WorldToCell(enemyBrain.CheckForGameObjectsFar().transform.position);
+        //Debug.Log("Hunting" + enemyBrain.CheckForGameObjectsFar());
+
+        if(tilemap == null && enemyBrain == null && enemyBrain.CheckForGameObjectsFar() == null)
+        {
+            return;
+        }
+        //Debug.Log("Hunting" + enemyBrain.CheckForGameObjectsFar());
+        Vector3Int closestPlayerPos = tilemap.WorldToCell(transform.position);
+
+
+        if(enemyBrain.CheckForGameObjectsFar() != null)
+        {
+            closestPlayerPos = tilemap.WorldToCell(enemyBrain.CheckForGameObjectsFar().transform.position);
+        }
         
         
         List<AStar.AStarNode> shortest = aStar.FindPath(aStar.grid[movement.currentGridPosition.x, movement.currentGridPosition.y], aStar.grid[closestPlayerPos.x + 1, closestPlayerPos.y]);
