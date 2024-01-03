@@ -1221,38 +1221,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 875017967, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
-      propertyPath: playerPrefab
-      value: 
-      objectReference: {fileID: 9008527375254509534, guid: 92db7e2736f01b9458a68038db85eaa6, type: 3}
-    - target: {fileID: 875017967, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
-      propertyPath: enemyPrefabs.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 875017967, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
-      propertyPath: enemyPrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 6759871701228862576, guid: cad81c998c74730478a54d37185d9dd2, type: 3}
-    - target: {fileID: 875017967, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
-      propertyPath: enemyPrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 6464715999296485261, guid: b7c2d7ba58e980643b0f101394fc61b0, type: 3}
-    - target: {fileID: 875017967, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
-      propertyPath: enemyPrefabs.Array.data[2]
-      value: 
-      objectReference: {fileID: 6560937746723378646, guid: 49b24bfdfa1211e468b5132867ae6f9c, type: 3}
-    - target: {fileID: 875017967, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
-      propertyPath: enemyPrefabs.Array.data[3]
-      value: 
-      objectReference: {fileID: 1047129810356012320, guid: b260b4c6997e01c4b94ee6f7ca70973c, type: 3}
-    - target: {fileID: 7286372324287764640, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
-      propertyPath: propTiles.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7286372324287764640, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
-      propertyPath: propTiles.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: cd933bb52b9644944a13a1ad1022af66, type: 2}
     - target: {fileID: 7286372324287764641, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
       propertyPath: cam
       value: 
@@ -1262,25 +1230,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1059129053}
     - target: {fileID: 7286372324287764641, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
-      propertyPath: debugMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7286372324287764641, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
       propertyPath: textParent
       value: 
       objectReference: {fileID: 295073161}
-    - target: {fileID: 7286372324287764641, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
-      propertyPath: debugGridNum
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7286372324287764646, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
-      propertyPath: turnDelay
-      value: 0.001
-      objectReference: {fileID: 0}
-    - target: {fileID: 7286372324287764646, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
-      propertyPath: maxTimeStart
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 7286372325324444512, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
       propertyPath: m_RootOrder
       value: 6

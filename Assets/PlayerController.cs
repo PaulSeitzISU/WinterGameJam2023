@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
         totalSlime = startingSlime;
         projectile = GetComponent<Projectile>();
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -94,5 +95,14 @@ public class PlayerController : MonoBehaviour
     public void Leap()
     {
         Debug.Log("Leaping!");
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.CompareTag("Health Pickup"))
+        {
+            health.Heal(health.maxHealth / 3);
+            Destroy(collider.gameObject);
+        }
     }
 }
