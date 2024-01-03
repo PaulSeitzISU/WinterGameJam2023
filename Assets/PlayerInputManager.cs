@@ -18,6 +18,8 @@ public class PlayerInputManager : MonoBehaviour
 
     [SerializeField] float selectionRadius = 1f;
     [SerializeField][Range(0,4)] int currentState; // 0 is movement, 1 is Split, 2 is Spit, 3 is Rush, 4 is Leap
+
+    public GameObject selectionSelection;
     [SerializeField] GameObject[] abilitySprites = new GameObject[5];
     bool switching;
     [Range(0, 3)] int directionFacing; //0 is up, 1 is right, 2 is down, 3 is left
@@ -26,6 +28,7 @@ public class PlayerInputManager : MonoBehaviour
     void Start()
     {
         ChangeState();
+
     }
     void StartTurn()
     {
@@ -291,6 +294,22 @@ public class PlayerInputManager : MonoBehaviour
         {
             currentState = 4;
         }
+        
+        // Assuming 'selectionSelection' is the GameObject containing a RectTransform of the element you want to move,
+        // and 'abilitySprites' is an array of GameObjects, each containing a RectTransform representing the abilities.
+
+        // Get the RectTransform component from the 'selectionSelection' GameObject
+        RectTransform selectionSelectionRectTransform = selectionSelection.GetComponent<RectTransform>();
+
+        // Get the RectTransform of the current ability sprite based on 'currentState'
+        RectTransform currentAbilityRect = abilitySprites[currentState].GetComponent<RectTransform>();
+
+        // Set the anchored position of 'selectionSelection' to be centered at the position of 'currentAbilityRect'
+        selectionSelectionRectTransform.anchoredPosition = currentAbilityRect.anchoredPosition - new Vector2(0.8f,1f);
+
+
+
+
         ClearIndicator();
         //Debug.Log("Current State: " + currentState);
         //selectionObject.transform.position = abilitySprites[currentState].transform.position;

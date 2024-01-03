@@ -288,6 +288,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &480057120 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2007703766948023662, guid: 9d25c0b4ae49f7245a89d0ab1c896c3e, type: 3}
+  m_PrefabInstance: {fileID: 1224563329}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &481571286
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -686,6 +691,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49b24bfdfa1211e468b5132867ae6f9c, type: 3}
+--- !u!1 &1195117630 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2007703767064544891, guid: 9d25c0b4ae49f7245a89d0ab1c896c3e, type: 3}
+  m_PrefabInstance: {fileID: 1224563329}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1224563329
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -787,6 +797,30 @@ PrefabInstance:
       propertyPath: selectionObject
       value: 
       objectReference: {fileID: 1951280882}
+    - target: {fileID: 3636728050156151966, guid: 3b4127c9ef5f15a4a8ad7a26ba85747f, type: 3}
+      propertyPath: selectionSelection
+      value: 
+      objectReference: {fileID: 480057120}
+    - target: {fileID: 3636728050156151966, guid: 3b4127c9ef5f15a4a8ad7a26ba85747f, type: 3}
+      propertyPath: abilitySprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 1494032214}
+    - target: {fileID: 3636728050156151966, guid: 3b4127c9ef5f15a4a8ad7a26ba85747f, type: 3}
+      propertyPath: abilitySprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 1195117630}
+    - target: {fileID: 3636728050156151966, guid: 3b4127c9ef5f15a4a8ad7a26ba85747f, type: 3}
+      propertyPath: abilitySprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 2133076154}
+    - target: {fileID: 3636728050156151966, guid: 3b4127c9ef5f15a4a8ad7a26ba85747f, type: 3}
+      propertyPath: abilitySprites.Array.data[3]
+      value: 
+      objectReference: {fileID: 1830666796}
+    - target: {fileID: 3636728050156151966, guid: 3b4127c9ef5f15a4a8ad7a26ba85747f, type: 3}
+      propertyPath: abilitySprites.Array.data[4]
+      value: 
+      objectReference: {fileID: 1859223374}
     - target: {fileID: 3636728050156151967, guid: 3b4127c9ef5f15a4a8ad7a26ba85747f, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -1016,10 +1050,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1494032214 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2007703767574649256, guid: 9d25c0b4ae49f7245a89d0ab1c896c3e, type: 3}
+  m_PrefabInstance: {fileID: 1224563329}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1830666796 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2007703766471079265, guid: 9d25c0b4ae49f7245a89d0ab1c896c3e, type: 3}
+  m_PrefabInstance: {fileID: 1224563329}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1859223374 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2007703767007477034, guid: 9d25c0b4ae49f7245a89d0ab1c896c3e, type: 3}
+  m_PrefabInstance: {fileID: 1224563329}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1951280882 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9008527375134126013, guid: 92db7e2736f01b9458a68038db85eaa6, type: 3}
   m_PrefabInstance: {fileID: 481571286}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2133076154 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2007703766189101752, guid: 9d25c0b4ae49f7245a89d0ab1c896c3e, type: 3}
+  m_PrefabInstance: {fileID: 1224563329}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &726803916447202949
 PrefabInstance:
