@@ -446,4 +446,12 @@ public class PlayerInputManager : MonoBehaviour
         //Debug.Log("Current State: " + currentState);
         //selectionObject.transform.position = abilitySprites[currentState].transform.position;
     }
+    public void CheckMoves()
+    {
+        if (trackTurn[currentSelection].hasMoved == false)
+        {
+            currentSelection.GetComponent<PlayerController>().Move(PositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
+        }
+    }
+    
 }
