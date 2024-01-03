@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6938144183618512008}
   - component: {fileID: 6938144183618512009}
   m_Layer: 0
-  m_Name: TestSpawnIndicator
+  m_Name: TestSlimePickupSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,8 +73,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -144435923, guid: 307dec942dabfa94d80aac41bf8ef564, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 433191629, guid: 307dec942dabfa94d80aac41bf8ef564, type: 3}
+  m_Color: {r: 0.58268595, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
