@@ -8,6 +8,7 @@ using UnityEngine.Tilemaps;
 public class LevelGenerator: MonoBehaviour
 {
     // For other classes to access rooms
+    public LevelPopulator levelPopulator;
     public List<Partition> rooms = new List<Partition>();
 
     public int levelSize;
@@ -26,43 +27,21 @@ public class LevelGenerator: MonoBehaviour
     public TileBase[,] scaledMap;
     private int scaleFactor = 2;
 
-    public class Partition
-    {
-        public enum Type
-        {
-            None,
-            Horizontal,
-            Vertical,
-            Room
-        }
-
-        public Vector2Int pos;
-        public Vector2Int size;
-        public Type type;
-        public bool largeRoom;
-
-        public Partition[] children;
-
-        public Partition(Vector2Int pos, Vector2Int size)
-        {
-            this.pos = pos;
-            this.size = size;
-            largeRoom = false;
-            children = new Partition[2];
-            type = Type.None;
-        }
-    }
-
     // Start is called before the first frame update
     void Start()
     {
         GenerateLevel();
+        levelPopulator.PopulateLevel(scaleFactor, rooms);
     }
 
     private void Update()
     {
 /*        if (Input.GetKeyDown(KeyCode.Space))
-            GenerateLevel();*/
+        {
+            Destroy(levelPopulator.player);
+            levelPopulator.debugTilemap.ClearAllTiles();
+            Start();
+        }*/
     }
 
     public void GenerateLevel()
