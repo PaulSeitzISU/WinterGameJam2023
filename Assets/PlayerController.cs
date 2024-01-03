@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -35,6 +36,16 @@ public class PlayerController : MonoBehaviour
     {
         totalSlime  = health.currentHealth;
     }
+
+    void FixedUpdate()
+    {
+        if (health.currentHealth <= 0)
+        {
+            //go to lose screen
+            SceneManager.LoadScene("LoseScene");
+        }
+    }
+
     public void AddSlime(int slimeNow)
     {
         totalSlime = slimeNow;
