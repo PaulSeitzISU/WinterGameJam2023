@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6759871701228862576
+--- !u!1 &1047129810356012320
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,50 +8,50 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6759871701228862579}
-  - component: {fileID: 6759871701228862578}
-  - component: {fileID: 7488674365938837844}
-  - component: {fileID: 6759871701228862577}
-  - component: {fileID: 6773819278002137904}
-  - component: {fileID: 4433475108905770942}
-  - component: {fileID: 4433475108905770941}
-  - component: {fileID: 4433475109747561991}
-  - component: {fileID: 1668003639766978777}
-  - component: {fileID: 4433475109747562012}
-  - component: {fileID: 8965596756007105363}
-  - component: {fileID: 835047256247814790}
-  - component: {fileID: -3397928738346582598}
-  - component: {fileID: 8502882294535159480}
-  - component: {fileID: 8862603586028237819}
+  - component: {fileID: 1047129810356012323}
+  - component: {fileID: 1047129810356012322}
+  - component: {fileID: 3795085141396918276}
+  - component: {fileID: 1047129810356012321}
+  - component: {fileID: 956650720257020512}
+  - component: {fileID: 7980689030265530094}
+  - component: {fileID: 7980689030265530093}
+  - component: {fileID: 7980689030939553623}
+  - component: {fileID: 4927558141015927177}
+  - component: {fileID: 7980689030939553612}
+  - component: {fileID: 3399081665391921667}
+  - component: {fileID: 6400014685698585558}
+  - component: {fileID: 261179831646586090}
+  - component: {fileID: 2686267542757033960}
+  - component: {fileID: 3006591997295774379}
   m_Layer: 0
-  m_Name: ArcherBuddy
+  m_Name: WizardSlow
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6759871701228862579
+--- !u!4 &1047129810356012323
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6759871701228862576}
+  m_GameObject: {fileID: 1047129810356012320}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.8841252, y: 2.489839, z: 0}
+  m_LocalPosition: {x: 13.632969, y: 22.588137, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &6759871701228862578
+--- !u!212 &1047129810356012322
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6759871701228862576}
+  m_GameObject: {fileID: 1047129810356012320}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -939694535, guid: d6d28d03fda909943ac8a513aec4e20c, type: 3}
+  m_Sprite: {fileID: 1435765536, guid: c177e4189b83fda46af8bfc55f71d9d0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,17 +97,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &7488674365938837844
+--- !u!95 &3795085141396918276
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6759871701228862576}
+  m_GameObject: {fileID: 1047129810356012320}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ab7d9923b10faad458e5ab9eeff96c01, type: 2}
+  m_Controller: {fileID: 9100000, guid: 89acc4c49807fb04292408b06ce7b887, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -117,13 +117,13 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!58 &6759871701228862577
+--- !u!58 &1047129810356012321
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6759871701228862576}
+  m_GameObject: {fileID: 1047129810356012320}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -133,13 +133,13 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.46646547
---- !u!114 &6773819278002137904
+--- !u!114 &956650720257020512
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6759871701228862576}
+  m_GameObject: {fileID: 1047129810356012320}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 612f336d37bcb514abf38d12c290d78f, type: 3}
@@ -150,13 +150,13 @@ MonoBehaviour:
   aStar: {fileID: 0}
   currentGridPosition: {x: 0, y: 0}
   isMoving: 0
---- !u!114 &4433475108905770942
+--- !u!114 &7980689030265530094
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6759871701228862576}
+  m_GameObject: {fileID: 1047129810356012320}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c260023afe9b9bf4bad67816687d10d8, type: 3}
@@ -168,7 +168,7 @@ MonoBehaviour:
   objectsInRadius: []
   patrolSpeed: 1
   chaseSpeed: 5
-  attackDistance: 1
+  attackDistance: 3
   attackDistanceMin: 2
   fleeDistance: 1
   PlayerList: []
@@ -179,7 +179,7 @@ MonoBehaviour:
   OnPatrol:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4433475109747562012}
+      - m_Target: {fileID: 7980689030939553612}
         m_TargetAssemblyTypeName: EnemyAIPatrolRandom, Assembly-CSharp
         m_MethodName: Patrol
         m_Mode: 1
@@ -194,7 +194,7 @@ MonoBehaviour:
   OnChase:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8502882294535159480}
+      - m_Target: {fileID: 2686267542757033960}
         m_TargetAssemblyTypeName: EnemyAiLongChase, Assembly-CSharp
         m_MethodName: Chase
         m_Mode: 1
@@ -209,9 +209,9 @@ MonoBehaviour:
   OnAttack:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8965596756007105363}
+      - m_Target: {fileID: 3399081665391921667}
         m_TargetAssemblyTypeName: EnemyAiAttack, Assembly-CSharp
-        m_MethodName: Swing
+        m_MethodName: SwingAll
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -224,7 +224,7 @@ MonoBehaviour:
   OnFlee:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -3397928738346582598}
+      - m_Target: {fileID: 261179831646586090}
         m_TargetAssemblyTypeName: EnemyAiFlee, Assembly-CSharp
         m_MethodName: Flee
         m_Mode: 1
@@ -239,13 +239,13 @@ MonoBehaviour:
   OnDead:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4433475108905770941
+--- !u!114 &7980689030265530093
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6759871701228862576}
+  m_GameObject: {fileID: 1047129810356012320}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0a2face3dbb2bc49835a725ac7f17e8, type: 3}
@@ -255,13 +255,13 @@ MonoBehaviour:
   gridManager: {fileID: 0}
   enemyBrain: {fileID: 0}
   tilemap: {fileID: 0}
---- !u!114 &4433475109747561991
+--- !u!114 &7980689030939553623
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6759871701228862576}
+  m_GameObject: {fileID: 1047129810356012320}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b95ac94c905c4f40a924713d213fdab, type: 3}
@@ -272,7 +272,7 @@ MonoBehaviour:
   AnimationEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1668003639766978777}
+      - m_Target: {fileID: 4927558141015927177}
         m_TargetAssemblyTypeName: HurtAnimation, Assembly-CSharp
         m_MethodName: Blink
         m_Mode: 1
@@ -284,13 +284,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1668003639766978777
+--- !u!114 &4927558141015927177
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6759871701228862576}
+  m_GameObject: {fileID: 1047129810356012320}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4dfa092ccc15d14d93fce4bdeb557a9, type: 3}
@@ -299,41 +299,41 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   blinkDuration: 2
   blinkInterval: 0.3
---- !u!114 &4433475109747562012
+--- !u!114 &7980689030939553612
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6759871701228862576}
+  m_GameObject: {fileID: 1047129810356012320}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2647d48918a3c5488a3d1cd5223a233, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {fileID: 6773819278002137904}
+  movement: {fileID: 956650720257020512}
   gridManager: {fileID: 0}
   walkingRange: 5
---- !u!114 &8965596756007105363
+--- !u!114 &3399081665391921667
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6759871701228862576}
+  m_GameObject: {fileID: 1047129810356012320}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b601f1ff99ce43447a895c0a9efb04b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
---- !u!114 &835047256247814790
+--- !u!114 &6400014685698585558
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6759871701228862576}
+  m_GameObject: {fileID: 1047129810356012320}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5114a9b5c2083bc4a84cbfe6075f1779, type: 3}
@@ -345,13 +345,13 @@ MonoBehaviour:
   AttackTile: {fileID: 11400000, guid: 754d592a15ed4e946bfacdaf20744568, type: 2}
   masterScan: []
   chaceScan: []
---- !u!114 &-3397928738346582598
+--- !u!114 &261179831646586090
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6759871701228862576}
+  m_GameObject: {fileID: 1047129810356012320}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0eef97cb8dcfeef4f900bab2eec5a22b, type: 3}
@@ -362,13 +362,13 @@ MonoBehaviour:
   enemyBrain: {fileID: 0}
   movement: {fileID: 0}
   chaceScan: []
---- !u!114 &8502882294535159480
+--- !u!114 &2686267542757033960
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6759871701228862576}
+  m_GameObject: {fileID: 1047129810356012320}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d274da678e057d44995412823b2a40b2, type: 3}
@@ -378,18 +378,18 @@ MonoBehaviour:
   gridManager: {fileID: 0}
   enemyBrain: {fileID: 0}
   tilemap: {fileID: 0}
---- !u!114 &8862603586028237819
+--- !u!114 &3006591997295774379
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6759871701228862576}
+  m_GameObject: {fileID: 1047129810356012320}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67f3915c341bcdb40a7dee6cfdbdab8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToSpawn: {fileID: 5503304104018072807, guid: e5281d57a07270848a3857d6706cb440, type: 3}
+  objectToSpawn: {fileID: 7408380582871726009, guid: db577581400c0c340a5945d70037257f, type: 3}
   moveDuration: 1
   destroyDelay: 1

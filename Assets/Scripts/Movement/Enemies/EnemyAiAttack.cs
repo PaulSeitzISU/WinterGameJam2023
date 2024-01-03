@@ -14,6 +14,17 @@ public class EnemyAiAttack : MonoBehaviour
         projectile = GetComponent<Projectile>();
         
     }
+    public void SwingAll()
+    {
+        if(projectile != null)
+        {
+            foreach(GameObject player in enemyBrain.PlayerList)
+            {
+                projectile.FireProjectile(player, damage);
+                Debug.Log("Shoot");
+            }
+        }
+    }
 
     public void Swing()
     {
