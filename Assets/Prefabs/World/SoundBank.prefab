@@ -81,7 +81,7 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: SwordHit
-    clip: {fileID: 8300000, guid: df75cd0d294b541459904d7fc8d8ee94, type: 3}
+    clip: {fileID: 8300000, guid: c4299b3d5a251b84e967961c8d3e11b8, type: 3}
     volume: 1
     minPitch: 1
     maxPitch: 1
@@ -95,7 +95,7 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: EnemyTakeDamage
-    clip: {fileID: 8300000, guid: df75cd0d294b541459904d7fc8d8ee94, type: 3}
+    clip: {fileID: 8300000, guid: 195c7d37a923e1846bc489ab4f2d6a72, type: 3}
     volume: 1
     minPitch: 1
     maxPitch: 1
