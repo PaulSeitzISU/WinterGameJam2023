@@ -15,7 +15,7 @@ public class SoundPlayer : MonoBehaviour
         if (playOnStart)
         {
 
-            //PlaySoundFromBank("Walking");
+            PlaySoundFromBank("BGMusic");
         }
     }
 

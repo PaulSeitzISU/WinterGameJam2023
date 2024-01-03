@@ -53,7 +53,7 @@ public class SoundBank : MonoBehaviour
         Sound soundToPlay = sounds.Find(sound => sound.name == soundName);
         if (soundToPlay != null)
         {
-            Debug.Log("Playing sound: " + soundName);
+            //Debug.Log("Playing sound: " + soundName);
 
             soundToPlay.source.pitch = UnityEngine.Random.Range(soundToPlay.minPitch, soundToPlay.maxPitch);
             soundToPlay.source.Play();

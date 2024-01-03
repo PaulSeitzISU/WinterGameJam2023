@@ -61,13 +61,13 @@ public class Movement : MonoBehaviour
             if(isMoving && !isPlayer)
             {
                 isPlayer = true;
-                Debug.Log("Playing sound");
+                //Debug.Log("Playing sound");
                 soundPlayer.PlaySoundFromBank("Walking");
             }
             else if(!isMoving && isPlayer)
             {
                 isPlayer = false;
-                Debug.Log("Stopping sound");
+                //ebug.Log("Stopping sound");
                 soundPlayer.StopSoundFromBank("Walking");
             }
       

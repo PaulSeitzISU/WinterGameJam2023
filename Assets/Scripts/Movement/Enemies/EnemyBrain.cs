@@ -23,6 +23,8 @@ public class EnemyBrain : MonoBehaviour
     private Health health;
     private Movement movement;
     private GridManager gridManager;
+    private PlayerInputManager playerManager;
+    private float actDistance = 30f;
     private Tilemap tilemap;
     public int visibilityRadius;
     public int visibilityRadiusFar;
@@ -56,6 +58,7 @@ public class EnemyBrain : MonoBehaviour
         health = GetComponent<Health>();
         gridManager = GameObject.Find("Tilemap").GetComponent<GridManager>(); // Find the GridManager in the scene
         tilemap = GameObject.Find("Tilemap").GetComponent<Tilemap>(); // Get the Tilemap component
+        playerManager = GameObject.Find("InputManager").GetComponent<PlayerInputManager>();
     }
 
     private void Update()
@@ -66,6 +69,22 @@ public class EnemyBrain : MonoBehaviour
 
     public void TakeTurn()
     {
+        //check if there is a player near by
+
+        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            if (player != null)
+            {
+                if (Mathf.Abs(Vector3.Distance(player.transform.position, transform.position)) >= actDistance)
+                {
+                    return;
+                } else
+                {
+                    //Debug.Log("enemyMoving");
+                }
+            }
+        }
+
         GetComponent<Health>().CheckIfDead();
         CheckIfDead();
         if (currentState == EnemyState.Dead)

@@ -40,6 +40,7 @@ public class Projectile : MonoBehaviour
         // Deal damage to the target object
         if (targetObj.TryGetComponent(out Health targetHealth))
         {
+            Debug.Log("Dealing damage to target");
             targetHealth.TakeDamageAndCheckIfDead(damage);
         }
 

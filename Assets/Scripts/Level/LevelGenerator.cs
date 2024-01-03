@@ -8,6 +8,7 @@ using UnityEngine.Tilemaps;
 public class LevelGenerator: MonoBehaviour
 {
     // For other classes to access rooms
+    public LevelPopulator levelPopulator;
     public List<Partition> rooms = new List<Partition>();
 
     public int levelSize;
@@ -26,43 +27,21 @@ public class LevelGenerator: MonoBehaviour
     public TileBase[,] scaledMap;
     private int scaleFactor = 2;
 
-    public class Partition
-    {
-        public enum Type
-        {
-            None,
-            Horizontal,
-            Vertical,
-            Room
-        }
-
-        public Vector2Int pos;
-        public Vector2Int size;
-        public Type type;
-        public bool largeRoom;
-
-        public Partition[] children;
-
-        public Partition(Vector2Int pos, Vector2Int size)
-        {
-            this.pos = pos;
-            this.size = size;
-            largeRoom = false;
-            children = new Partition[2];
-            type = Type.None;
-        }
-    }
-
     // Start is called before the first frame update
     void Start()
     {
         GenerateLevel();
+        levelPopulator.PopulateLevel(scaleFactor, rooms);
     }
 
     private void Update()
     {
 /*        if (Input.GetKeyDown(KeyCode.Space))
-            GenerateLevel();*/
+        {
+            Destroy(levelPopulator.player);
+            levelPopulator.debugTilemap.ClearAllTiles();
+            Start();
+        }*/
     }
 
     public void GenerateLevel()
@@ -179,8 +158,9 @@ public class LevelGenerator: MonoBehaviour
             {
                 List<Partition> validChildren = GetBorderRooms(cur);
                 // Connect more rooms if partition is large
-                int numToConnect = Mathf.Min((cur.type == Partition.Type.Horizontal ? cur.size.y : cur.size.y) / maxRoomSize, validChildren.Count());
-                
+                int numToConnect = Mathf.Max(1, Mathf.Min(Mathf.FloorToInt((float)(cur.type == Partition.Type.Horizontal ? cur.size.y : cur.size.y) / maxRoomSize), validChildren.Count));
+                //Debug.Log(validChildren.Count + ", " + numToConnect);
+
                 while (numToConnect > 0)
                 {
                     int index = Random.Range(0, validChildren.Count() - 1);
@@ -208,17 +188,6 @@ public class LevelGenerator: MonoBehaviour
                     scaledMap[i, j] = wallTile;
                 }
             }
-
-        // Widen horizontal doors - causes visual issues :(
-        /*for (int i = 1; i < scaledMapSize - 1; i++)
-            for (int j = 0; j < scaledMapSize; j++)
-            {
-                if (scaledMap[i - 1, j] == wallTile && scaledMap[i + 1, j] == wallSideTile)
-                {
-                    scaledMap[i + 1, j] = floorTile;
-                    scaledMap[i + 2, j] = wallTile;
-                }
-            }*/
 
         // Populate tilemap
         // Add left and bottom walls to level

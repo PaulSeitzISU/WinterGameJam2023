@@ -365,6 +365,10 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 945417320501651272, guid: 7ef38e2e859638943be3f3b2b79a6d1b, type: 3}
+      propertyPath: levelPopulator
+      value: 
+      objectReference: {fileID: 875017967}
+    - target: {fileID: 945417320501651272, guid: 7ef38e2e859638943be3f3b2b79a6d1b, type: 3}
       propertyPath: largeRoomChance
       value: 0.15
       objectReference: {fileID: 0}
@@ -427,3 +431,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 945417320501651279, guid: 7ef38e2e859638943be3f3b2b79a6d1b, type: 3}
   m_PrefabInstance: {fileID: 2489554704867861318}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3427908760525177871 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 945417320501651273, guid: 7ef38e2e859638943be3f3b2b79a6d1b, type: 3}
+  m_PrefabInstance: {fileID: 2489554704867861318}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &875017967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3427908760525177871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2502ba5d667b3f4289345c703a0a0db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugTilemap: {fileID: 0}
+  debugTile: {fileID: 0}
+  playerPrefab: {fileID: 6938144183618512011, guid: 663625236794b9b40a0fd70ff8c46ef7, type: 3}
+  slimePickupPrefab: {fileID: 6938144183618512011, guid: 59c5ed0c8a7e8e4489d8eb0bcf372914, type: 3}
+  enemyPrefabs:
+  - {fileID: 6938144183618512011, guid: 56b741ce425620d489b75ccaf66a2cf2, type: 3}
+  maxEnemiesPerRoom: 3
+  slimePickupChance: 0.25
+  enemyManager: {fileID: 7286372324287764646}
