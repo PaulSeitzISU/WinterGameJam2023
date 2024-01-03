@@ -14,6 +14,8 @@ public class EnemyManager : MonoBehaviour
 
     // Time delay between enemy turns
     public float turnDelay = 1.0f; // Adjust this value as needed
+    public float maxTimeStart = 2.0f;
+
     public float maxTime = 2.0f;
     public float currentTime = 0.0f;
 
@@ -38,7 +40,7 @@ public class EnemyManager : MonoBehaviour
 
         }
         
-        maxTime = maxTime + EnemyList.Length ;
+        maxTime = maxTimeStart + EnemyList.Length ;
         //take turn on q
         if (Input.GetKeyDown(KeyCode.Q) && !finishedTurn)
         {

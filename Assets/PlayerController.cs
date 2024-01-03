@@ -6,17 +6,22 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] GameObject selectionRing;
     [SerializeField] GameObject playerlet;
-    [SerializeField] GameObject projectile;
+    //[SerializeField] GameObject projectile;
     bool selected;
 
     [SerializeField] bool isPlayerlet;
     [SerializeField] int startingSlime;
     [SerializeField] int totalSlime;
+    [SerializeField] int damage;
+
+
+    Projectile projectile;
 
     // Start is called before the first frame update
     void Start()
     {
         SetSlime(startingSlime);
+        projectile = GetComponent<Projectile>();
     }
     // Update is called once per frame
     void Update()
@@ -59,10 +64,10 @@ public class PlayerController : MonoBehaviour
             Instantiate(playerlet, transform.position + Vector3.down, Quaternion.identity);
         }
     }
-    public void Spit(Vector2 direction,int unitDistanceFromIndicator)
+    public void Spit(GameObject target)
     {
         Debug.Log("Spitting!");
-        GameObject fired = Instantiate(projectile, (Vector2)transform.position + direction, Quaternion.identity, null);
+        projectile.FireProjectile(target, damage);
     }
     public void Rush()
     {
