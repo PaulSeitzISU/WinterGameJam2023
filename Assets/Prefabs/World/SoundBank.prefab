@@ -45,43 +45,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: Walking
-    clip: {fileID: 8300000, guid: a53f311cb99988a47a42f57808f94e0e, type: 3}
-    volume: 1
-    minPitch: 1
-    maxPitch: 1
-    loop: 1
-    source: {fileID: 0}
   - name: Bow
     clip: {fileID: 8300000, guid: bcd8ecebe96fd7540a934cdcfd82b1e2, type: 3}
     volume: 1
     minPitch: 1
-    maxPitch: 1
+    maxPitch: 1.1
     loop: 0
+    source: {fileID: 0}
+  - name: Walking
+    clip: {fileID: 8300000, guid: a53f311cb99988a47a42f57808f94e0e, type: 3}
+    volume: 1
+    minPitch: 1
+    maxPitch: 1.1
+    loop: 1
     source: {fileID: 0}
   - name: ArrowHit
     clip: {fileID: 8300000, guid: 3a7c6c58710520e41a4d15951746e9df, type: 3}
     volume: 1
     minPitch: 1
-    maxPitch: 1
+    maxPitch: 1.1
     loop: 0
     source: {fileID: 0}
   - name: FireCast
-    clip: {fileID: 8300000, guid: df75cd0d294b541459904d7fc8d8ee94, type: 3}
+    clip: {fileID: 8300000, guid: 98cbab1e64e89ec4bb3d7ebac813b374, type: 3}
     volume: 1
     minPitch: 1
-    maxPitch: 1
+    maxPitch: 1.1
     loop: 0
     source: {fileID: 0}
   - name: FireHit
     clip: {fileID: 8300000, guid: df75cd0d294b541459904d7fc8d8ee94, type: 3}
     volume: 1
     minPitch: 1
-    maxPitch: 1
+    maxPitch: 1.1
     loop: 0
     source: {fileID: 0}
   - name: SwordHit
-    clip: {fileID: 8300000, guid: df75cd0d294b541459904d7fc8d8ee94, type: 3}
+    clip: {fileID: 8300000, guid: c4299b3d5a251b84e967961c8d3e11b8, type: 3}
     volume: 1
     minPitch: 1
     maxPitch: 1
@@ -95,7 +95,7 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: EnemyTakeDamage
-    clip: {fileID: 8300000, guid: df75cd0d294b541459904d7fc8d8ee94, type: 3}
+    clip: {fileID: 8300000, guid: 195c7d37a923e1846bc489ab4f2d6a72, type: 3}
     volume: 1
     minPitch: 1
     maxPitch: 1

@@ -26,10 +26,10 @@ public class PathSearch : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Search(gameObject, 5);
-        }
+        // if (Input.GetKeyDown(KeyCode.E))
+        // {
+        //     Search(gameObject, 5);
+        // }
     }
 
     public void Search(GameObject obj, int depthRadius)
