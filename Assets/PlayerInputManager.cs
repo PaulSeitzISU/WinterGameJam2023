@@ -176,7 +176,7 @@ public class PlayerInputManager : MonoBehaviour
 
             GameObject target = gridManager.GetObjectAtGridPosition(new Vector2Int(tempVec.x, tempVec.y ));
 
-            if(currentState == 2 || currentState == 3)
+            if(currentState == 2)
             {
                 if(target != null && target.tag == "Enemy")
                 {
@@ -199,8 +199,40 @@ public class PlayerInputManager : MonoBehaviour
                 //Debug.Log("Not targeting enemy");
 
             }
-        } 
 
+
+            
+        } 
+        if(primaryIndicator != null)
+            {
+                 //Debug.Log("Checking for target    " + currentState + " state");
+            Vector3Int tempVec = tilemap.WorldToCell(primaryIndicator.transform.position);
+
+            GameObject target = gridManager.GetObjectAtGridPosition(new Vector2Int(tempVec.x, tempVec.y ));
+                if(currentState == 3)
+                {
+                    if(target != null && target.tag == "Enemy")
+                    {
+                        //turn currentSelection sprite green 
+                        primaryIndicator.gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+                        //Debug.Log("Targeting enemy");
+                        targetCurrent = target;
+                    }
+                    else
+                    {
+                        //turn currentSelection sprite red
+                        primaryIndicator.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+                        targetCurrent = null;
+                    }
+                }
+                else
+                {
+                    //turn currentSelection sprite red
+                    primaryIndicator.gameObject.GetComponent<SpriteRenderer>().color = Color.cyan;
+                    //Debug.Log("Not targeting enemy");
+
+                }
+            }
 
 
 
@@ -373,7 +405,12 @@ public class PlayerInputManager : MonoBehaviour
                 primaryIndicator.transform.position = PositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             }
         }
-        else if (currentState == 3) { }
+        else if (currentState == 3) {
+            if (primaryIndicator != null)
+            {
+                primaryIndicator.transform.position = currentSelection.transform.position + directionFacingVectors[directionFacing];
+            }
+         }
         else if (currentState == 4) { }
     }
 }
@@ -461,6 +498,7 @@ public class PlayerInputManager : MonoBehaviour
         //Debug.Log("Current State: " + currentState);
         //selectionObject.transform.position = abilitySprites[currentState].transform.position;
     }
+    
     public void CheckMoves()
     {
         if (trackTurn[currentSelection].hasMoved == false)

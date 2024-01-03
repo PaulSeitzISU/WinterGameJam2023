@@ -19,22 +19,22 @@ public class GreyAbilityHotbar : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if(playerManager.currentSelection != null && playerManager.trackTurn[playerManager.currentSelection] != null)
-        {
-            DicTurn dicTurn = playerManager.trackTurn[playerManager.currentSelection];
-            if(dicTurn.hasAttacked)
-            {
-                foreach(GameObject ability in attacjAbilityList)
-                {
-                    //ability.GetComponent<Image>().color = Color.grey;
-                }
-            }
-            else
-            {
-            }
-        }
+    // void Update()
+    // {
+    //     if(playerManager.currentSelection != null && playerManager.trackTurn[playerManager.currentSelection] != null)
+    //     {
+    //         DicTurn dicTurn = playerManager.trackTurn[playerManager.currentSelection];
+    //         if(dicTurn.hasAttacked)
+    //         {
+    //             foreach(GameObject ability in attacjAbilityList)
+    //             {
+    //                 //ability.GetComponent<Image>().color = Color.grey;
+    //             }
+    //         }
+    //         else
+    //         {
+    //         }
+    //     }
         
-    }
+    // }
 }
