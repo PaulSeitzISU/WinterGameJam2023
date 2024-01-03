@@ -32,7 +32,7 @@ public class PlayerInputManager : MonoBehaviour
 {
     [SerializeField] GameObject selectionObject;
     [SerializeField] GameObject indicator;
-    GameObject currentSelection;
+    public GameObject currentSelection;
     Vector3 indcatorOffset = new Vector3(0.5f, 0.5f, 0);
     GameObject currentIndicator;
 
@@ -100,6 +100,16 @@ public class PlayerInputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        foreach (KeyValuePair<GameObject, DicTurn> entry in trackTurn)
+        {
+            if (entry.Value.Done)
+            {
+                entry.Key.GetComponentInChildren<SpriteRenderer>().color = Color.gray;
+            } else
+            {
+                entry.Key.GetComponentInChildren<SpriteRenderer>().color = Color.white;
+            }
+        }
 
         if(currentSelection != null)
         {
@@ -436,4 +446,12 @@ public class PlayerInputManager : MonoBehaviour
         //Debug.Log("Current State: " + currentState);
         //selectionObject.transform.position = abilitySprites[currentState].transform.position;
     }
+    public void CheckMoves()
+    {
+        if (trackTurn[currentSelection].hasMoved == false)
+        {
+            currentSelection.GetComponent<PlayerController>().Move(PositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
+        }
+    }
+    
 }

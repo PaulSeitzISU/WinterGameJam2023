@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9008527375254509528}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9008527375134126015
 SpriteRenderer:
@@ -99,6 +99,8 @@ GameObject:
   - component: {fileID: 9008527375254509524}
   - component: {fileID: 9008527375254509525}
   - component: {fileID: 271260103}
+  - component: {fileID: 6367841374076969652}
+  - component: {fileID: 6930089877576549171}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -118,8 +120,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 9008527375134126012}
   - {fileID: 9008527376305539245}
+  - {fileID: 9008527375134126012}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -229,6 +231,53 @@ MonoBehaviour:
   objectToSpawn: {fileID: 433353129928318573, guid: ee621d0a63af8fe4ea857a66c7a41f6f, type: 3}
   moveDuration: 1
   destroyDelay: 1
+--- !u!114 &6367841374076969652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9008527375254509534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b95ac94c905c4f40a924713d213fdab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
+  AnimationEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6930089877576549171}
+        m_TargetAssemblyTypeName: HurtAnimation, Assembly-CSharp
+        m_MethodName: Blink
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  AnimationEventDead:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6930089877576549171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9008527375254509534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4dfa092ccc15d14d93fce4bdeb557a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 9008527376305539244}
+  blinkDuration: 2
+  blinkInterval: 0.3
 --- !u!1 &9008527376305539154
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +309,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9008527375254509528}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9008527376305539244
 SpriteRenderer:
