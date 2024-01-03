@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4270572974942025240}
   - component: {fileID: 4270572974942025243}
   - component: {fileID: 4270572976188571553}
+  - component: {fileID: 7180168139191298563}
   - component: {fileID: 4270572976188571578}
   - component: {fileID: -383100780030027019}
   - component: {fileID: -8262857990692871392}
@@ -253,6 +254,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
+  AnimationEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7180168139191298563}
+        m_TargetAssemblyTypeName: HurtAnimation, Assembly-CSharp
+        m_MethodName: Blink
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7180168139191298563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6560937746723378646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4dfa092ccc15d14d93fce4bdeb557a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
+  blinkDuration: 2
+  blinkInterval: 0.3
 --- !u!114 &4270572976188571578
 MonoBehaviour:
   m_ObjectHideFlags: 0

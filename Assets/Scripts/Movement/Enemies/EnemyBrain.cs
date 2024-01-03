@@ -209,7 +209,7 @@ public class EnemyBrain : MonoBehaviour
                     {
                         PlayerList.Add(obj);
                     }
-                    Debug.Log("Player detected at corner" + gameObject.name);
+                    //Debug.Log("Player detected at corner" + gameObject.name);
                     TransitionToState(EnemyState.Chase);
                 }
             }

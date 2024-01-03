@@ -974,6 +974,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4433475108905770942, guid: cad81c998c74730478a54d37185d9dd2, type: 3}
+      propertyPath: attackDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6759871701228862576, guid: cad81c998c74730478a54d37185d9dd2, type: 3}
       propertyPath: m_Name
       value: ArcherBuddy
@@ -2074,6 +2078,10 @@ PrefabInstance:
       propertyPath: tilemap
       value: 
       objectReference: {fileID: 1059129053}
+    - target: {fileID: 7286372324287764641, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
+      propertyPath: debugMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7286372324287764641, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
       propertyPath: textParent
       value: 

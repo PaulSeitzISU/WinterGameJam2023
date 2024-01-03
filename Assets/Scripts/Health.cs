@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
     public int maxHealth = 100;
     public int currentHealth;
+    [SerializeField] private UnityEvent AnimationEvent;
+
 
     // This method initializes the health to its maximum value
     void Start()
@@ -15,6 +18,7 @@ public class Health : MonoBehaviour
     public bool TakeDamageAndCheckIfDead(int damageAmount)
     {
         currentHealth -= damageAmount;
+        AnimationEvent.Invoke();
 
         if (currentHealth <= 0)
         {
