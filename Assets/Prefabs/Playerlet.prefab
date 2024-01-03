@@ -161,6 +161,7 @@ MonoBehaviour:
   totalSlime: 0
   damage: 10
   splitCost: 0
+  moveDistance: 7
 --- !u!58 &8195723326435020497
 CircleCollider2D:
   m_ObjectHideFlags: 0
