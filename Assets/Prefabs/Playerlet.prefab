@@ -98,6 +98,8 @@ GameObject:
   - component: {fileID: 8195723326435020497}
   - component: {fileID: 8195723326435020496}
   - component: {fileID: 3168147341304460243}
+  - component: {fileID: 1544545020303450827}
+  - component: {fileID: -1850483140625455224}
   m_Layer: 0
   m_Name: Playerlet
   m_TagString: Player
@@ -209,6 +211,50 @@ MonoBehaviour:
   objectToSpawn: {fileID: 433353129928318573, guid: ee621d0a63af8fe4ea857a66c7a41f6f, type: 3}
   moveDuration: 1
   destroyDelay: 1
+--- !u!114 &1544545020303450827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8195723326435020499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b95ac94c905c4f40a924713d213fdab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
+  AnimationEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -1850483140625455224}
+        m_TargetAssemblyTypeName: HurtAnimation, Assembly-CSharp
+        m_MethodName: Blink
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &-1850483140625455224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8195723326435020499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4dfa092ccc15d14d93fce4bdeb557a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 8195723327262495805}
+  blinkDuration: 2
+  blinkInterval: 0.3
 --- !u!1 &8195723327262495807
 GameObject:
   m_ObjectHideFlags: 0

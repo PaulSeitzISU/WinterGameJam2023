@@ -257,6 +257,7 @@ public class PlayerInputManager : MonoBehaviour
 {
     if (currentSelection != null && currentIndicator == null)
     {
+        if(trackTurn == null) return;
         if (currentState == 0 && trackTurn[currentSelection].hasMoved == false)  
         {
             currentIndicator = Instantiate(indicator, PositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition)) + indcatorOffset, Quaternion.identity);
@@ -283,7 +284,7 @@ public class PlayerInputManager : MonoBehaviour
                 secondaryIndicator.transform.position = currentSelection.transform.position + (-1 * directionFacingVectors[directionFacing]);
             }
         }
-        else if (currentState == 2 && trackTurn[currentSelection].hasAttacked == false)
+        else if (currentState == 2 && trackTurn[currentSelection].hasAttacked == false && currentSelection.GetComponent<PlayerController>().isPlayer())
         {
             if (currentIndicator == null)
             {

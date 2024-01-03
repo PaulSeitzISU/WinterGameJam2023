@@ -159,7 +159,7 @@ public class LevelGenerator: MonoBehaviour
                 List<Partition> validChildren = GetBorderRooms(cur);
                 // Connect more rooms if partition is large
                 int numToConnect = Mathf.Max(1, Mathf.Min(Mathf.FloorToInt((float)(cur.type == Partition.Type.Horizontal ? cur.size.y : cur.size.y) / maxRoomSize), validChildren.Count));
-                Debug.Log(validChildren.Count + ", " + numToConnect);
+                //Debug.Log(validChildren.Count + ", " + numToConnect);
 
                 while (numToConnect > 0)
                 {
