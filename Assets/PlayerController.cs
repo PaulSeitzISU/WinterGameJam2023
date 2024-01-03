@@ -5,10 +5,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] GameObject selectionRing;
+    [SerializeField] GameObject playerlet;
     bool selected;
+
     [SerializeField] bool isPlayerlet;
     [SerializeField] int startingSlime;
     [SerializeField] int totalSlime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,9 +43,20 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Moving!");
         GetComponent<Movement>().MoveToGrid(gridPosition);
     }
-    public void Split()
+    public void Split(bool horizontal)
     {
         Debug.Log("Splitting!");
+        if (horizontal)
+        {
+            Instantiate(playerlet, transform.position + Vector3.left, Quaternion.identity);
+
+            Instantiate(playerlet, transform.position + Vector3.right, Quaternion.identity);
+        }else if (!horizontal)
+        {
+            Instantiate(playerlet, transform.position + Vector3.up, Quaternion.identity);
+
+            Instantiate(playerlet, transform.position + Vector3.down, Quaternion.identity);
+        }
     }
     public void Spit()
     {
