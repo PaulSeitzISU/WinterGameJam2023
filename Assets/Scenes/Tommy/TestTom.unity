@@ -268,6 +268,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
+--- !u!114 &666506009 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7286372324287764646, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
+  m_PrefabInstance: {fileID: 666506008}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ea0db1648d1a51419ede7d46324bd84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &875017964 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3427908760525177871, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
@@ -285,8 +296,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2502ba5d667b3f4289345c703a0a0db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugTilemap: {fileID: 0}
+  debugTile: {fileID: 0}
   playerPrefab: {fileID: 6938144183618512011, guid: 663625236794b9b40a0fd70ff8c46ef7, type: 3}
   slimePickupPrefab: {fileID: 0}
-  enemies: {fileID: 0}
-  enemyManager: {fileID: 0}
-  player: {fileID: 0}
+  enemyPrefabs:
+  - {fileID: 6938144183618512011, guid: 56b741ce425620d489b75ccaf66a2cf2, type: 3}
+  enemyManager: {fileID: 666506009}
