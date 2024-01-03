@@ -53,7 +53,7 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: Walking
-    clip: {fileID: 8300000, guid: a53f311cb99988a47a42f57808f94e0e, type: 3}
+    clip: {fileID: 0}
     volume: 1
     minPitch: 1
     maxPitch: 1.1

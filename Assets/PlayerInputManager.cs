@@ -150,7 +150,7 @@ public class PlayerInputManager : MonoBehaviour
                 {
                     //turn currentSelection sprite green 
                     currentIndicator.gameObject.GetComponent<SpriteRenderer>().color = Color.green;
-                    Debug.Log("Targeting enemy");
+                    //Debug.Log("Targeting enemy");
                     targetCurrent = target;
                 }
                 else
@@ -164,7 +164,7 @@ public class PlayerInputManager : MonoBehaviour
             {
                 //turn currentSelection sprite red
                 currentIndicator.gameObject.GetComponent<SpriteRenderer>().color = Color.cyan;
-                Debug.Log("Not targeting enemy");
+                //Debug.Log("Not targeting enemy");
 
             }
         } 

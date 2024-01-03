@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 8195723326435020502}
   - component: {fileID: 8195723326435020497}
   - component: {fileID: 8195723326435020496}
+  - component: {fileID: 3168147341304460243}
   m_Layer: 0
   m_Name: Playerlet
   m_TagString: Player
@@ -133,11 +134,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612f336d37bcb514abf38d12c290d78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemap: {fileID: 0}
-  gridManager: {fileID: 0}
   aStar: {fileID: 0}
   currentGridPosition: {x: 0, y: 0}
   isMoving: 0
+  makeSound: 0
+  isPlayer: 0
 --- !u!114 &8195723326435020502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,7 +152,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectionRing: {fileID: 8195723325228096897}
+  playerlet: {fileID: 0}
   isPlayerlet: 1
+  startingSlime: 0
+  totalSlime: 0
+  damage: 0
 --- !u!58 &8195723326435020497
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -189,6 +194,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &3168147341304460243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8195723326435020499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67f3915c341bcdb40a7dee6cfdbdab8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToSpawn: {fileID: 433353129928318573, guid: ee621d0a63af8fe4ea857a66c7a41f6f, type: 3}
+  moveDuration: 1
+  destroyDelay: 1
 --- !u!1 &8195723327262495807
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,6 +219,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8195723327262495804}
   - component: {fileID: 8195723327262495805}
+  - component: {fileID: 9076376345921046493}
   m_Layer: 0
   m_Name: PlayerSprite
   m_TagString: Untagged
@@ -262,7 +283,7 @@ SpriteRenderer:
   m_SortingLayerID: 1779881147
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_Sprite: {fileID: 1500004347, guid: 5ea0b95919223d94b89d3f79e7ad6839, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -273,3 +294,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &9076376345921046493
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8195723327262495807}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3434ce7d2f794d34886247f62ae82f92, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
