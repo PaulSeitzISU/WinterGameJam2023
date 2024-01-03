@@ -46,7 +46,7 @@ public class PlayerInputManager : MonoBehaviour
     [SerializeField] GameObject[] abilitySprites = new GameObject[5];
     bool switching;
     [Range(0, 3)] int directionFacing; //0 is up, 1 is right, 2 is down, 3 is left
-    Vector3[] directionFacingVectors = new Vector3[4] { new Vector3(1, 0), new Vector3(0, 1), new Vector3(-1, 0), new Vector3(0, -1) };
+    Vector3[] directionFacingVectors = new Vector3[4] { new Vector3(0, 1), new Vector3(1, 0), new Vector3(0, -1), new Vector3(-1, 0) };
 
     GridManager gridManager;
     Tilemap tilemap; // Reference to your Tilemap component
@@ -176,7 +176,7 @@ public class PlayerInputManager : MonoBehaviour
 
             GameObject target = gridManager.GetObjectAtGridPosition(new Vector2Int(tempVec.x, tempVec.y ));
 
-            if(currentState == 2)
+            if(currentState == 2 || currentState == 3)
             {
                 if(target != null && target.tag == "Enemy")
                 {
@@ -268,7 +268,8 @@ public class PlayerInputManager : MonoBehaviour
                 }
                 else if (currentState == 3 && !switching && trackTurn[currentSelection].hasAttacked == false)
                 {
-                    currentSelection.GetComponent<PlayerController>().Rush();
+
+                    currentSelection.GetComponent<PlayerController>().Rush(targetCurrent);
                     trackTurn[currentSelection].hasAttacked = true;
                 }
                 else if (currentState == 4 && !switching && trackTurn[currentSelection].hasAttacked == false)
@@ -327,8 +328,23 @@ public class PlayerInputManager : MonoBehaviour
                 currentIndicator.transform.position = PositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition))  + indcatorOffset;
             }
         }
-        else if (currentState == 3 && trackTurn[currentSelection].hasAttacked == false) { }
-        else if (currentState == 4 && trackTurn[currentSelection].hasAttacked == false) { }
+        else if (currentState == 3 && trackTurn[currentSelection].hasAttacked == false) 
+        { 
+            if (primaryIndicator == null)
+            {
+                primaryIndicator = Instantiate(indicator, currentSelection.transform.position + directionFacingVectors[directionFacing], Quaternion.identity);
+                //Debug.Log("Primary Indicator Created" + primaryIndicator.transform.position + " " + currentSelection.transform.position + " " + directionFacingVectors[directionFacing]);
+            }
+            else
+            {
+                primaryIndicator.transform.position = currentSelection.transform.position + directionFacingVectors[directionFacing];
+                //Debug.Log("Primary Indicator Moved" + primaryIndicator.transform.position + " " + currentSelection.transform.position + " " + directionFacingVectors[directionFacing]);
+            }
+        }
+        else if (currentState == 4 && trackTurn[currentSelection].hasAttacked == false) 
+        {
+
+         }
     }
     else
     {
@@ -438,7 +454,6 @@ public class PlayerInputManager : MonoBehaviour
 
         // Set the anchored position of 'selectionSelection' to be centered at the position of 'currentAbilityRect'
         selectionSelectionRectTransform.anchoredPosition = currentAbilityRect.anchoredPosition - new Vector2(0.8f,1f);
-
 
 
 
