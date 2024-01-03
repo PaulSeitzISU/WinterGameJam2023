@@ -81,7 +81,7 @@ public class PlayerInputManager : MonoBehaviour
         }
     }
 
-    void StartTurn()
+    public void StartTurn()
     {
         ChangeState();
     }

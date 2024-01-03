@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
             buttonEndTurn.SetActive(true);
             playerManager.UpdatePlayerList();
             isPlayerTurn = false;
+            playerManager.StartTurn();
             playerManager.isTurn = true;
             Debug.Log("Player turn");
         }
