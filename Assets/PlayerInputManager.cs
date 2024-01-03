@@ -104,7 +104,7 @@ public class PlayerInputManager : MonoBehaviour
         {
             if (entry.Value.Done)
             {
-                entry.Key.GetComponent<SpriteRenderer>().color = Color.gray;
+                entry.Key.GetComponentInChildren<SpriteRenderer>().color = Color.gray;
             } else
             {
                 entry.Key.GetComponentInChildren<SpriteRenderer>().color = Color.white;
