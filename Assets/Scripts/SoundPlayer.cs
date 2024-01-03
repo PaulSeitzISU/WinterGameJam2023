@@ -34,4 +34,24 @@ public class SoundPlayer : MonoBehaviour
             Debug.LogWarning("SoundBank script not found in the scene. Make sure it's attached to an object.");
         }
     }
+
+    //stop sound
+
+    public void StopSoundFromBank(String soundName)
+    {
+        if (string.IsNullOrEmpty(soundName))
+        {
+            Debug.LogWarning("Sound name is empty. Please assign a sound name.");
+            return;
+        }
+
+        if (soundBank != null)
+        {
+            soundBank.StopSound(soundName);
+        }
+        else
+        {
+            Debug.LogWarning("SoundBank script not found in the scene. Make sure it's attached to an object.");
+        }
+    }
 }
