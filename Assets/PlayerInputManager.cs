@@ -58,16 +58,23 @@ public class PlayerInputManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       UpdatePlayerList();
-
+        UpdatePlayerList();
 
         gridManager = GameObject.Find("Tilemap").GetComponent<GridManager>(); // Find the GridManager in the scene
         tilemap = GameObject.Find("Tilemap").GetComponent<Tilemap>(); // Get the Tilemap component
         ChangeState();
         cam = Camera.main;
 
+        Transform playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        cam.GetComponent<CameraFollow>().target = playerTransform;
+        cam.transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, cam.transform.position.z);
     }
 
+/*    private void FixedUpdate()
+    {
+        UpdatePlayerList();
+    }
+*/
     public void UpdatePlayerList()
     {
         trackTurn.Clear();
