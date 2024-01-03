@@ -98,7 +98,7 @@ public class PlayerInputManager : MonoBehaviour
         {
             cam.GetComponent<CameraFollow>().target = currentSelection.transform;
 
-        } else if (currentSelection == null && trackTurn.Count > 0)
+        } else if (currentSelection == null && trackTurn.Count > 0 && cam.GetComponent<CameraFollow>().target == null)
         {
             cam.GetComponent<CameraFollow>().target = trackTurn.Keys.GetEnumerator().Current.transform;
         } else if (currentSelection == null && trackTurn.Count == 0)

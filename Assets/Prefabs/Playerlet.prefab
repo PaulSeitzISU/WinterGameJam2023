@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 3168147341304460243}
   - component: {fileID: 1544545020303450827}
   - component: {fileID: -1850483140625455224}
+  - component: {fileID: 5500962313511131147}
   m_Layer: 0
   m_Name: Playerlet
   m_TagString: Player
@@ -159,6 +160,7 @@ MonoBehaviour:
   startingSlime: 15
   totalSlime: 0
   damage: 10
+  splitCost: 0
 --- !u!58 &8195723326435020497
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -240,6 +242,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  AnimationEventDead:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5500962313511131147}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &-1850483140625455224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,6 +267,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4dfa092ccc15d14d93fce4bdeb557a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 8195723327262495805}
+  blinkDuration: 2
+  blinkInterval: 0.3
+--- !u!114 &5500962313511131147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8195723326435020499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04277949a8194c2418861f55f0201472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 8195723327262495805}
