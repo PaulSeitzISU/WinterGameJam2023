@@ -3,10 +3,11 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Unity.VisualScripting;
 using JetBrains.Annotations;
+using TMPro;
 
-public class HealthBarController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class HealthBarControllerPlayer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public GameObject healthBarImage;
+    public Image healthBarImage;
     public Sprite[] healthSprites;
 
     public Health healthScript;
@@ -37,8 +38,8 @@ public class HealthBarController : MonoBehaviour, IPointerEnterHandler, IPointer
     {
         float healthPercentage = (float)healthScript.currentHealth / healthScript.maxHealth;
         int spriteIndex = Mathf.Max(0, Mathf.RoundToInt((1 - healthPercentage) * (healthSprites.Length - 1)));
-        //Debug.Log(spriteIndex);
-        healthBarImage.GetComponent<SpriteRenderer>().sprite = healthSprites[spriteIndex];
+        Debug.Log(spriteIndex);
+        healthBarImage.sprite = healthSprites[spriteIndex];
     }
 
     // Toggle health bar visibility on hover
