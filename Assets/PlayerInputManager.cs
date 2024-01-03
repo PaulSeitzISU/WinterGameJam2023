@@ -51,6 +51,7 @@ public class PlayerInputManager : MonoBehaviour
     Tilemap tilemap; // Reference to your Tilemap component
     GameObject targetCurrent;
     public bool isTurn = true;
+    Camera cam;
 
     public Dictionary<GameObject, DicTurn> trackTurn = new Dictionary<GameObject, DicTurn>();
 
@@ -63,6 +64,7 @@ public class PlayerInputManager : MonoBehaviour
         gridManager = GameObject.Find("Tilemap").GetComponent<GridManager>(); // Find the GridManager in the scene
         tilemap = GameObject.Find("Tilemap").GetComponent<Tilemap>(); // Get the Tilemap component
         ChangeState();
+        cam = Camera.main;
 
     }
 
@@ -90,6 +92,11 @@ public class PlayerInputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(currentSelection != null)
+        {
+            cam.GetComponent<CameraFollow>().target = currentSelection.transform;
+
+        }
         
         if(!isTurn)
         {

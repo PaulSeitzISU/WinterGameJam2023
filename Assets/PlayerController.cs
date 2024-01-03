@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int startingSlime;
     [SerializeField] int totalSlime;
     [SerializeField] int damage;
+    [SerializeField] int splitCost;  
 
 
     Projectile projectile;
@@ -31,7 +32,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        health.currentHealth = totalSlime;
+        totalSlime  = health.currentHealth;
     }
     public void AddSlime(int slimeNow)
     {
@@ -56,6 +57,15 @@ public class PlayerController : MonoBehaviour
     }
     public void Split(bool horizontal)
     {
+        if(health.currentHealth > splitCost)
+        {
+            health.currentHealth -= splitCost;
+        }
+        else
+        {
+            return;
+        }
+        
         Debug.Log("Splitting!");
         if (horizontal)
         {
@@ -71,6 +81,7 @@ public class PlayerController : MonoBehaviour
     }
     public void Spit(GameObject target)
     {
+        
         Debug.Log("Spitting!");
         projectile.FireProjectile(target, damage);
     }
