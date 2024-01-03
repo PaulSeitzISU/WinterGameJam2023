@@ -87,8 +87,10 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Spitting!");
         projectile.FireProjectile(target, damage);
     }
-    public void Rush()
+    public void Rush(GameObject target)
     {
+        projectile.FireProjectile(target, damage * 2);
+
         Debug.Log("Rushing!");
     }
     public void Leap()
