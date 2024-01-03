@@ -78,6 +78,7 @@ public class PlayerInputManager : MonoBehaviour
 */
     public void UpdatePlayerList()
     {
+
         trackTurn.Clear();
         //find all players
         GameObject[] PlayerList = GameObject.FindGameObjectsWithTag("Player");
@@ -100,6 +101,8 @@ public class PlayerInputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // TODO: Indicate when it is enemy's turn
+
         foreach (KeyValuePair<GameObject, DicTurn> entry in trackTurn)
         {
             if (entry.Value.Done)
@@ -178,12 +181,11 @@ public class PlayerInputManager : MonoBehaviour
 
             if (currentState == 2)
             {
-                if (target != null && target.tag == "Enemy")
+                if (GetTargetAtSelector())
                 {
                     //turn currentSelection sprite green 
                     currentIndicator.gameObject.GetComponent<SpriteRenderer>().color = Color.green;
                     //Debug.Log("Targeting enemy");
-                    targetCurrent = target;
                 }
                 else
                 {
@@ -283,7 +285,7 @@ public class PlayerInputManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) // The mouse left click input
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if(currentSelection != null) { 
+            if (currentSelection != null) { 
                 //currentSelection.GetComponent<PathSearch>().Search(gameObject,5);
                 if (currentState == 0 && !switching && trackTurn[currentSelection].hasMoved == false && CanMoveToSelector())
                 {
@@ -301,12 +303,9 @@ public class PlayerInputManager : MonoBehaviour
                     }
                     trackTurn[currentSelection].hasAttacked = true;
                 }
-                else if (currentState == 2 && currentSelection.GetComponent<PlayerController>().isPlayer() && !switching && trackTurn[currentSelection].hasAttacked == false) // this is a player only ability
+                else if (currentState == 2 && currentSelection.GetComponent<PlayerController>().isPlayer() && !switching && trackTurn[currentSelection].hasAttacked == false && targetCurrent != null) // this is a player only ability
                 {
-                    if (targetCurrent != null)
-                    {
-                        currentSelection.GetComponent<PlayerController>().Spit(targetCurrent);
-                    }
+                    currentSelection.GetComponent<PlayerController>().Spit(targetCurrent);
                     trackTurn[currentSelection].hasAttacked = true;
                 }
                 else if (currentState == 3 && !switching && trackTurn[currentSelection].hasAttacked == false)
@@ -329,6 +328,7 @@ public class PlayerInputManager : MonoBehaviour
             {
                 Selection(mousePosition);
             }
+            ClearIndicator();
         }
 
         #endregion
@@ -520,9 +520,23 @@ public class PlayerInputManager : MonoBehaviour
     private bool CanMoveToSelector()
     {
         Movement movement = currentSelection.GetComponent<Movement>();
-        return movement.CalculatePath(
+        var paths = movement.CalculatePath(
             movement.GetGridTilePosition(currentSelection.transform.position),
             movement.GetGridTilePosition(currentIndicator.transform.position)
-        ).Count <= currentSelection.GetComponent<PlayerController>().moveDistance;
+        );
+        return paths.Count <= currentSelection.GetComponent<PlayerController>().moveDistance;
+    }
+
+    private bool GetTargetAtSelector()
+    {
+        Vector3Int tempVec = tilemap.WorldToCell(currentIndicator.transform.position);
+
+        GameObject target = gridManager.GetObjectAtGridPosition(new Vector2Int(tempVec.x, tempVec.y));
+
+        bool validTarget = target != null && target.tag == "Enemy";
+        if (validTarget)
+            targetCurrent = target;
+
+        return validTarget;
     }
 }
