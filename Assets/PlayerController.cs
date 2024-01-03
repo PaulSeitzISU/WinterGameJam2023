@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] GameObject selectionRing;
     [SerializeField] GameObject playerlet;
+
+    Health health;
     //[SerializeField] GameObject projectile;
     bool selected;
 
@@ -20,15 +22,18 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetSlime(startingSlime);
+        health = GetComponent<Health>();
+        health.maxHealth = startingSlime;
+        health.currentHealth = startingSlime;
+        totalSlime = startingSlime;
         projectile = GetComponent<Projectile>();
     }
     // Update is called once per frame
     void Update()
     {
-        
+        health.currentHealth = totalSlime;
     }
-    void SetSlime(int slimeNow)
+    public void AddSlime(int slimeNow)
     {
         totalSlime = slimeNow;
     }

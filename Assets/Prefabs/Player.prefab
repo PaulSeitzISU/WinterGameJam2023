@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 0.077782035, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.077782035, g: 1, b: 0, a: 0.46666667}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -157,7 +157,7 @@ MonoBehaviour:
   isPlayerlet: 0
   startingSlime: 50
   totalSlime: 0
-  damage: 10
+  damage: 30
 --- !u!114 &9008527375254509527
 MonoBehaviour:
   m_ObjectHideFlags: 0

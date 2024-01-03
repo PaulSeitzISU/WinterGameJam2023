@@ -17,7 +17,7 @@ public class HealthBarControllerPlayer : MonoBehaviour, IPointerEnterHandler, IP
     {
         if(healthScript == null)
         {
-            healthScript = GetComponentInParent<Health>();
+            healthScript = GetComponent<Health>();
         }
         if (healthScript == null)
         {
@@ -36,9 +36,14 @@ public class HealthBarControllerPlayer : MonoBehaviour, IPointerEnterHandler, IP
     // Update health bar UI
     void UpdateHealthBar()
     {
+        if(healthScript == null)
+        {
+            healthScript = GetComponentInParent<Health>();
+            return;
+        }
         float healthPercentage = (float)healthScript.currentHealth / healthScript.maxHealth;
         int spriteIndex = Mathf.Max(0, Mathf.RoundToInt((1 - healthPercentage) * (healthSprites.Length - 1)));
-        Debug.Log(spriteIndex);
+        //Debug.Log(spriteIndex);
         healthBarImage.sprite = healthSprites[spriteIndex];
     }
 
