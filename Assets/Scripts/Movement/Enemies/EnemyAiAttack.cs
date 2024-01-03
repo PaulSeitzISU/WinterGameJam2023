@@ -21,7 +21,7 @@ public class EnemyAiAttack : MonoBehaviour
             foreach(GameObject player in enemyBrain.PlayerList)
             {
                 projectile.FireProjectile(player, damage);
-                Debug.Log("Shoot");
+                //Debug.Log("Shoot");
             }
         }
     }
@@ -31,7 +31,7 @@ public class EnemyAiAttack : MonoBehaviour
         if(projectile != null)
         {
             projectile.FireProjectile(enemyBrain.ClosestPlayer(), damage);
-            Debug.Log("Shoot");
+            //Debug.Log("Shoot");
         }
         else
         {

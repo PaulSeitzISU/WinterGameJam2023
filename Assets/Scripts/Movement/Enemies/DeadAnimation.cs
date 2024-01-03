@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class HurtAnimation : MonoBehaviour
+public class DeadAnimation : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer; // Reference to the SpriteRenderer component
     public float blinkDuration = 2.0f; // Duration in seconds for the sprite to blink
@@ -33,7 +33,7 @@ public class HurtAnimation : MonoBehaviour
         int blinkCount = Mathf.FloorToInt(blinkDuration / blinkInterval);
 
         // Calculate the color change step
-        Color redColor = Color.red;
+        Color redColor = Color.black;
         float step = 1.0f / blinkCount;
 
         // Change the sprite color to red over time and revert back to the original color
@@ -47,5 +47,7 @@ public class HurtAnimation : MonoBehaviour
 
         // Ensure the sprite color is reverted back to the original color
         spriteRenderer.color = originalColor;
+        
+        Destroy(gameObject);
     }
 }

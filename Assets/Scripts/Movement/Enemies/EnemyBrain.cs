@@ -66,6 +66,7 @@ public class EnemyBrain : MonoBehaviour
 
     public void TakeTurn()
     {
+        GetComponent<Health>().CheckIfDead();
         CheckIfDead();
         if (currentState == EnemyState.Dead)
         {

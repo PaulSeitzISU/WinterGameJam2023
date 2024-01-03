@@ -23,6 +23,9 @@ GameObject:
   - component: {fileID: -3397928738346582598}
   - component: {fileID: 8502882294535159480}
   - component: {fileID: 8862603586028237819}
+  - component: {fileID: -8814728679886115576}
+  - component: {fileID: -5994806091533796639}
+  - component: {fileID: -3604984938212163965}
   m_Layer: 0
   m_Name: ArcherBuddy
   m_TagString: Enemy
@@ -168,7 +171,7 @@ MonoBehaviour:
   objectsInRadius: []
   patrolSpeed: 1
   chaseSpeed: 5
-  attackDistance: 1
+  attackDistance: 3
   attackDistanceMin: 2
   fleeDistance: 1
   PlayerList: []
@@ -221,6 +224,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: -5994806091533796639}
+        m_TargetAssemblyTypeName: UnityEngine.MonoBehaviour, UnityEngine
+        m_MethodName: StopCoroutine
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnFlee:
     m_PersistentCalls:
       m_Calls:
@@ -238,7 +253,19 @@ MonoBehaviour:
         m_CallState: 2
   OnDead:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -8814728679886115576}
+        m_TargetAssemblyTypeName: DeadAnimation, Assembly-CSharp
+        m_MethodName: Blink
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4433475108905770941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,3 +420,43 @@ MonoBehaviour:
   objectToSpawn: {fileID: 5503304104018072807, guid: e5281d57a07270848a3857d6706cb440, type: 3}
   moveDuration: 1
   destroyDelay: 1
+--- !u!114 &-8814728679886115576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6759871701228862576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04277949a8194c2418861f55f0201472, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
+  blinkDuration: 3
+  blinkInterval: 0.5
+--- !u!114 &-5994806091533796639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6759871701228862576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e9cbd052b7892c4483da08043cf67cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnStart: 0
+--- !u!114 &-3604984938212163965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6759871701228862576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8946f45dad92d0e489c3d26a145e2be6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

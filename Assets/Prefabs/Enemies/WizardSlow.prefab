@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 261179831646586090}
   - component: {fileID: 2686267542757033960}
   - component: {fileID: 3006591997295774379}
+  - component: {fileID: -282531968227326681}
+  - component: {fileID: -7714081849525239023}
   m_Layer: 0
   m_Name: WizardSlow
   m_TagString: Enemy
@@ -238,7 +240,19 @@ MonoBehaviour:
         m_CallState: 2
   OnDead:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -282531968227326681}
+        m_TargetAssemblyTypeName: DeadAnimation, Assembly-CSharp
+        m_MethodName: Blink
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7980689030265530093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,3 +407,31 @@ MonoBehaviour:
   objectToSpawn: {fileID: 7408380582871726009, guid: db577581400c0c340a5945d70037257f, type: 3}
   moveDuration: 1
   destroyDelay: 1
+--- !u!114 &-282531968227326681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047129810356012320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04277949a8194c2418861f55f0201472, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
+  blinkDuration: 3
+  blinkInterval: 0.5
+--- !u!114 &-7714081849525239023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047129810356012320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e9cbd052b7892c4483da08043cf67cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnStart: 0
