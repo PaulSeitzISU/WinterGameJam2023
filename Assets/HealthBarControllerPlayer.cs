@@ -21,11 +21,20 @@ public class HealthBarControllerPlayer : MonoBehaviour, IPointerEnterHandler, IP
         }
         if (healthScript == null)
         {
+            //find players
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject player in players)
+            {
+                if (player.GetComponent<PlayerController>().isPlayer())
+                {
+                    healthScript = player.GetComponent<Health>();
+                }
+            }
             Debug.LogError("Health script not found in parent object!");
             return;
         }
 
-        SetHealthBarActive(false); // Initially, hide the health bar
+       //SetHealthBarActive(false); // Initially, hide the health bar
     }
 
     void FixedUpdate()
