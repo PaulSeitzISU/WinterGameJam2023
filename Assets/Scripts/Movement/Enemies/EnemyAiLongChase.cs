@@ -37,5 +37,10 @@ public class EnemyAiLongChase : MonoBehaviour
         movement.MoveToGrid(tilemap.WorldToCell(closestPlayerPos), enemyBrain.chaseSpeed);
 
         
+        //enemyBrain.CheckForGameObjects(enemyBrain.visibilityRadius);
+        // if(enemyBrain.currentState == EnemyState.Attack)
+        // {
+        //     enemyBrain.UpdateState();
+        // }
     }
 }

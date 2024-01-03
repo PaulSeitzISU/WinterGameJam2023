@@ -13,6 +13,8 @@ public class EnemyAIPatrolRandom : MonoBehaviour
 
     private Vector2Int startGridPosition;
     private Vector2Int targetGridPosition;
+    private int moveAttempts = 0;
+    private int maxMoveAttempts = 10;
 
     private void Start()
     {
@@ -25,6 +27,7 @@ public class EnemyAIPatrolRandom : MonoBehaviour
     {
         if (!isMovingRandomly)
         {
+            moveAttempts = 0;
             MoveRandomly();
         }
         else
@@ -52,8 +55,9 @@ public class EnemyAIPatrolRandom : MonoBehaviour
         bool moved = movement.MoveToGrid(new Vector3Int(targetGridPosition.x, targetGridPosition.y, 0), walkingRange);
         
         //Debug.Log("Enemy moving to " + targetGridPosition + ". Moved: " + moved);
-        if(!moved)
+        if(!moved && moveAttempts < maxMoveAttempts)
         {
+            moveAttempts++;
             //Debug.Log("Enemy cannot move to " + targetGridPosition + ". Trying again.");
             MoveRandomly();
         }

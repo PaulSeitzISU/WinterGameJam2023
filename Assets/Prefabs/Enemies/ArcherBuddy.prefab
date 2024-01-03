@@ -208,7 +208,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8965596756007105363}
-        m_TargetAssemblyTypeName: SwordSwing, Assembly-CSharp
+        m_TargetAssemblyTypeName: EnemyAiAttack, Assembly-CSharp
         m_MethodName: Swing
         m_Mode: 1
         m_Arguments:

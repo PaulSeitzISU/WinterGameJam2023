@@ -25,7 +25,8 @@ public class GridManager : MonoBehaviour
 
     private void Awake()
     {
-        gridSize = (FindObjectOfType<LevelGenerator>().levelSize * 2) + gridSize;
+        LevelGenerator levelGenerator = FindObjectOfType<LevelGenerator>();
+        gridSize = (levelGenerator.levelSize * 8) + gridSize;
         // Initialize the grid with the specified size using arrays
         gridObjects = new GameObject[gridSize, gridSize];
 
