@@ -761,30 +761,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 871575073}
-    - target: {fileID: 933199900, guid: 9d25c0b4ae49f7245a89d0ab1c896c3e, type: 3}
-      propertyPath: healthScript
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 933199900, guid: 9d25c0b4ae49f7245a89d0ab1c896c3e, type: 3}
-      propertyPath: healthSprites.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 933199900, guid: 9d25c0b4ae49f7245a89d0ab1c896c3e, type: 3}
-      propertyPath: healthSprites.Array.data[0]
-      value: 
-      objectReference: {fileID: 1886214907, guid: 0a52d2bca396e014ca54888c74797c74, type: 3}
-    - target: {fileID: 933199900, guid: 9d25c0b4ae49f7245a89d0ab1c896c3e, type: 3}
-      propertyPath: healthSprites.Array.data[1]
-      value: 
-      objectReference: {fileID: -1500546107, guid: 0a52d2bca396e014ca54888c74797c74, type: 3}
-    - target: {fileID: 933199900, guid: 9d25c0b4ae49f7245a89d0ab1c896c3e, type: 3}
-      propertyPath: healthSprites.Array.data[2]
-      value: 
-      objectReference: {fileID: 164315772, guid: 0a52d2bca396e014ca54888c74797c74, type: 3}
-    - target: {fileID: 933199900, guid: 9d25c0b4ae49f7245a89d0ab1c896c3e, type: 3}
-      propertyPath: healthSprites.Array.data[3]
-      value: 
-      objectReference: {fileID: -1781880944, guid: 0a52d2bca396e014ca54888c74797c74, type: 3}
     - target: {fileID: 2007703767687831522, guid: 9d25c0b4ae49f7245a89d0ab1c896c3e, type: 3}
       propertyPath: m_Name
       value: UI-HUD2.0
