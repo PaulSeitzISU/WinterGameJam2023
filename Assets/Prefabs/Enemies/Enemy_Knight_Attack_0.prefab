@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 433353129928318482}
   - component: {fileID: 433353129928318483}
   - component: {fileID: 433353129928318572}
+  - component: {fileID: -3919628214780505578}
   m_Layer: 0
   m_Name: Enemy_Knight_Attack_0
   m_TagString: Untagged
@@ -105,3 +106,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &-3919628214780505578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433353129928318573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb0f52c705334e54fa6432af74225e36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
