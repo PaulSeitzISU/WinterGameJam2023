@@ -800,9 +800,37 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 5984307158979846706, guid: 61ae8a2109ca4db4f9622e69948a2f41, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 146.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984307158979846707, guid: 61ae8a2109ca4db4f9622e69948a2f41, type: 3}
+      propertyPath: m_text
+      value: '1. Click on a Slime
+
+
+        2. Press Number Key to select an ability
+        (1 Ability and 1 Move Action can be used a turn)
+
+
+        3. Click on a
+        tile where you want to aim the ability
+
+
+        4. Press End Turn, starting
+        the enemies turn'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984307158979846707, guid: 61ae8a2109ca4db4f9622e69948a2f41, type: 3}
+      propertyPath: m_fontSize
+      value: 26
+      objectReference: {fileID: 0}
     - target: {fileID: 5984307158979846707, guid: 61ae8a2109ca4db4f9622e69948a2f41, type: 3}
       propertyPath: m_fontStyle
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984307158979846707, guid: 61ae8a2109ca4db4f9622e69948a2f41, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 5984307159267800760, guid: 61ae8a2109ca4db4f9622e69948a2f41, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1371,24 +1399,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2007703767574649256, guid: 9d25c0b4ae49f7245a89d0ab1c896c3e, type: 3}
   m_PrefabInstance: {fileID: 1224563329}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1552154166 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 726803916843850788, guid: 11561165bb2a23e4aa7f06cad81d7c4e, type: 3}
-  m_PrefabInstance: {fileID: 726803916447202949}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1552154169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1552154166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e9cbd052b7892c4483da08043cf67cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playOnStart: 1
 --- !u!1 &1585079803 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2007703767687831522, guid: 9d25c0b4ae49f7245a89d0ab1c896c3e, type: 3}
@@ -1600,32 +1610,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 726803916843850791, guid: 11561165bb2a23e4aa7f06cad81d7c4e, type: 3}
-      propertyPath: sounds.Array.size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 726803916843850791, guid: 11561165bb2a23e4aa7f06cad81d7c4e, type: 3}
-      propertyPath: sounds.Array.data[9].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 252ca4934549f6c46b7531d39a8ce372, type: 3}
-    - target: {fileID: 726803916843850791, guid: 11561165bb2a23e4aa7f06cad81d7c4e, type: 3}
-      propertyPath: sounds.Array.data[9].loop
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 726803916843850791, guid: 11561165bb2a23e4aa7f06cad81d7c4e, type: 3}
-      propertyPath: sounds.Array.data[9].name
-      value: BGMusic
-      objectReference: {fileID: 0}
-    - target: {fileID: 726803916843850791, guid: 11561165bb2a23e4aa7f06cad81d7c4e, type: 3}
       propertyPath: sounds.Array.data[9].volume
-      value: 0.472
-      objectReference: {fileID: 0}
-    - target: {fileID: 726803916843850791, guid: 11561165bb2a23e4aa7f06cad81d7c4e, type: 3}
-      propertyPath: sounds.Array.data[9].maxPitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 726803916843850791, guid: 11561165bb2a23e4aa7f06cad81d7c4e, type: 3}
-      propertyPath: sounds.Array.data[9].minPitch
-      value: 1
+      value: 0.102
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11561165bb2a23e4aa7f06cad81d7c4e, type: 3}
