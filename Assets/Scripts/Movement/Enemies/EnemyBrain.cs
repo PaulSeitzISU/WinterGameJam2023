@@ -66,6 +66,7 @@ public class EnemyBrain : MonoBehaviour
 
     public void TakeTurn()
     {
+        GetComponent<Health>().CheckIfDead();
         CheckIfDead();
         if (currentState == EnemyState.Dead)
         {
@@ -209,7 +210,7 @@ public class EnemyBrain : MonoBehaviour
                     {
                         PlayerList.Add(obj);
                     }
-                    Debug.Log("Player detected at corner" + gameObject.name);
+                    //Debug.Log("Player detected at corner" + gameObject.name);
                     TransitionToState(EnemyState.Chase);
                 }
             }

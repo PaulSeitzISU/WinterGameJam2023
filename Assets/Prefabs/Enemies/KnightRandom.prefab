@@ -16,9 +16,13 @@ GameObject:
   - component: {fileID: 4270572974942025240}
   - component: {fileID: 4270572974942025243}
   - component: {fileID: 4270572976188571553}
+  - component: {fileID: 7180168139191298563}
   - component: {fileID: 4270572976188571578}
   - component: {fileID: -383100780030027019}
   - component: {fileID: -8262857990692871392}
+  - component: {fileID: 3823616251577535254}
+  - component: {fileID: -1923073462555437910}
+  - component: {fileID: -2816553879122726594}
   m_Layer: 0
   m_Name: KnightRandom
   m_TagString: Enemy
@@ -141,11 +145,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612f336d37bcb514abf38d12c290d78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemap: {fileID: 0}
-  gridManager: {fileID: 0}
   aStar: {fileID: 0}
   currentGridPosition: {x: 0, y: 0}
   isMoving: 0
+  makeSound: 1
+  isPlayer: 0
 --- !u!114 &4270572974942025240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,7 +226,19 @@ MonoBehaviour:
       m_Calls: []
   OnDead:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -1923073462555437910}
+        m_TargetAssemblyTypeName: DeadAnimation, Assembly-CSharp
+        m_MethodName: Blink
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4270572974942025243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,6 +269,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
+  AnimationEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7180168139191298563}
+        m_TargetAssemblyTypeName: HurtAnimation, Assembly-CSharp
+        m_MethodName: Blink
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7180168139191298563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6560937746723378646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4dfa092ccc15d14d93fce4bdeb557a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
+  blinkDuration: 2
+  blinkInterval: 0.3
 --- !u!114 &4270572976188571578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,3 +345,46 @@ MonoBehaviour:
   AttackTile: {fileID: 11400000, guid: 754d592a15ed4e946bfacdaf20744568, type: 2}
   masterScan: []
   chaceScan: []
+--- !u!114 &3823616251577535254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6560937746723378646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67f3915c341bcdb40a7dee6cfdbdab8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToSpawn: {fileID: 433353129928318573, guid: ee621d0a63af8fe4ea857a66c7a41f6f, type: 3}
+  moveDuration: 0.1
+  destroyDelay: 0.5
+--- !u!114 &-1923073462555437910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6560937746723378646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04277949a8194c2418861f55f0201472, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
+  blinkDuration: 3
+  blinkInterval: 0.5
+--- !u!114 &-2816553879122726594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6560937746723378646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e9cbd052b7892c4483da08043cf67cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnStart: 0

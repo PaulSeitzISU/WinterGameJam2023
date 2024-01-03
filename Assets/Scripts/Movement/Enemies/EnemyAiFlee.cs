@@ -95,8 +95,8 @@ public class EnemyAiFlee : MonoBehaviour
                 Vector2Int playerPos = movement.GetGridTilePosition(enemyBrain.ClosestPlayer().transform.position) + new Vector2Int((gridManager.gridSize/2), (gridManager.gridSize/2));
                 
 
-                Debug.Log(chaceScan[chaceScan.Count - 1].x + "  " + chaceScan[chaceScan.Count - 1].y + "    " + playerPos.x + "  " + playerPos.y);
-                Debug.Log(aStar.grid[72, 83] + "  " + aStar.grid[playerPos.x,playerPos.y]);
+                //Debug.Log(chaceScan[chaceScan.Count - 1].x + "  " + chaceScan[chaceScan.Count - 1].y + "    " + playerPos.x + "  " + playerPos.y);
+                //Debug.Log(aStar.grid[72, 83] + "  " + aStar.grid[playerPos.x,playerPos.y]);
                 List<AStar.AStarNode> scanCheck = aStar.FindPath(aStar.grid[playerPos.x,playerPos.y], aStar.grid[chaceScan[chaceScan.Count - 1].x, chaceScan[chaceScan.Count - 1].y]);
                 Debug.Log(scanCheck);
                 if(scanCheck != null && scanCheck.Count > fartherest)

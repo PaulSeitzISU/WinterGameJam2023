@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class EnemyManager : MonoBehaviour
 
     // Time delay between enemy turns
     public float turnDelay = 1.0f; // Adjust this value as needed
+    public float maxTime = 2.0f;
+    public float currentTime = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +30,15 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(EnemyList.Length == 0)
+        {
+            //SceneManager.LoadScene("Win");
+        }
+        {
+
+        }
+        
+        maxTime = maxTime + EnemyList.Length ;
         //take turn on q
         if (Input.GetKeyDown(KeyCode.Q) && !finishedTurn)
         {
@@ -37,6 +49,17 @@ public class EnemyManager : MonoBehaviour
             isTurn = false;
             StartCoroutine(ExecuteEnemyTurns());
         }
+
+        //fail safe
+        if (isTurn && currentTime > maxTime)
+        {
+            currentTime = 0.0f;
+            isTurn = false;
+        } else if (isTurn)
+        {
+            currentTime += Time.deltaTime;
+        }
+
     }
 
     IEnumerator ExecuteEnemyTurns()
@@ -47,7 +70,14 @@ public class EnemyManager : MonoBehaviour
         foreach (GameObject enemy in EnemyList)
         {
             tilemapScanner.ScanTilemap();
+            
+            //see if enemy gameobject is null if so remove from list
 
+            if (enemy == null || enemy.GetComponent<EnemyBrain>().currentState == EnemyState.Dead)
+            {
+                EnemyList = GameObject.FindGameObjectsWithTag("Enemy");
+                continue;
+            }
 
             EnemyBrain enemyBrain = enemy.GetComponent<EnemyBrain>();
 
