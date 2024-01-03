@@ -100,6 +100,16 @@ public class PlayerInputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        foreach (KeyValuePair<GameObject, DicTurn> entry in trackTurn)
+        {
+            if (entry.Value.Done)
+            {
+                entry.Key.GetComponent<SpriteRenderer>().color = Color.gray;
+            } else
+            {
+                entry.Key.GetComponentInChildren<SpriteRenderer>().color = Color.white;
+            }
+        }
 
         if(currentSelection != null)
         {
