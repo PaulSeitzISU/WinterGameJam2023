@@ -6,6 +6,8 @@ public class Health : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     [SerializeField] private UnityEvent AnimationEvent;
+    [SerializeField] private UnityEvent AnimationEventDead;
+
 
     EnemyBrain enemyBrain;
 
@@ -34,6 +36,7 @@ public class Health : MonoBehaviour
             {
                 enemyBrain.currentState = EnemyState.Dead;
                 enemyBrain.UpdateState();
+                AnimationEventDead.Invoke();
             }
             return true;
         }
