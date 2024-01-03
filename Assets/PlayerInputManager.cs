@@ -278,10 +278,10 @@ public class PlayerInputManager : MonoBehaviour
         {
             ChangeState(3);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            ChangeState(4);
-        }
+        // else if (Input.GetKeyDown(KeyCode.Alpha5))
+        // {
+        //     ChangeState(4);
+        // }
         if (Input.GetMouseButtonDown(0)) // The mouse left click input
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -345,7 +345,7 @@ public class PlayerInputManager : MonoBehaviour
         {
             currentIndicator = Instantiate(indicator, PositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition)) + indcatorOffset, Quaternion.identity);
         }
-        else if (currentState == 1 && trackTurn[currentSelection].hasAttacked == false)
+        else if (currentState == 1 && trackTurn[currentSelection].hasAttacked == false && currentSelection.GetComponent<PlayerController>().isPlayer())
         {
             if (primaryIndicator == null)
             {
