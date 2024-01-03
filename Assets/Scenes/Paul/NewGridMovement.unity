@@ -546,7 +546,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerManager: {fileID: 139581568}
   enemyManager: {fileID: 810239721}
-  isPlayerTurn: 1
+  isPlayerTurn: 0
   buttonEndTurn: {fileID: 370653276}
 --- !u!4 &871575074
 Transform:
@@ -1584,6 +1584,14 @@ PrefabInstance:
     - target: {fileID: 7286372324287764641, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
       propertyPath: debugGridNum
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7286372324287764646, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
+      propertyPath: turnDelay
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7286372324287764646, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
+      propertyPath: maxTimeStart
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7286372325324444512, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
       propertyPath: m_RootOrder

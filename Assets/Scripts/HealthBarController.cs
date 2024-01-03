@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Unity.VisualScripting;
 
 public class HealthBarController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public Image healthBarImage;
+    public GameObject healthBarImage;
     public Sprite[] healthSprites;
 
     private Health healthScript;
@@ -12,7 +13,7 @@ public class HealthBarController : MonoBehaviour, IPointerEnterHandler, IPointer
 
     void Start()
     {
-        healthScript = GetComponentInParent<Health>();
+        healthScript = GetComponent<Health>();
         if (healthScript == null)
         {
             Debug.LogError("Health script not found in parent object!");
@@ -22,21 +23,18 @@ public class HealthBarController : MonoBehaviour, IPointerEnterHandler, IPointer
         SetHealthBarActive(false); // Initially, hide the health bar
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (isHovering)
-        {
             UpdateHealthBar();
-        }
     }
 
     // Update health bar UI
     void UpdateHealthBar()
     {
         float healthPercentage = (float)healthScript.currentHealth / healthScript.maxHealth;
-        int spriteIndex = Mathf.Max(0, Mathf.RoundToInt(healthPercentage * (healthSprites.Length - 1)));
-
-        healthBarImage.sprite = healthSprites[spriteIndex];
+        int spriteIndex = Mathf.Max(0, Mathf.RoundToInt((1 - healthPercentage) * (healthSprites.Length - 1)));
+        Debug.Log(spriteIndex);
+        healthBarImage.GetComponent<SpriteRenderer>().sprite = healthSprites[spriteIndex];
     }
 
     // Toggle health bar visibility on hover
@@ -55,7 +53,7 @@ public class HealthBarController : MonoBehaviour, IPointerEnterHandler, IPointer
     // Helper method to enable/disable health bar
     void SetHealthBarActive(bool isActive)
     {
-        healthBarImage.gameObject.SetActive(isActive);
+        //healthBarImage.gameObject.SetActive(isActive);
     }
 }
 
