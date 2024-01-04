@@ -9,7 +9,7 @@ public class EnemyManager : MonoBehaviour
     public GameObject[] EnemyList;
     TilemapScanner tilemapScanner;
 
-    private bool finishedTurn = false;
+    private bool finishedTurn = true;
     public bool isTurn = false;
 
     // Time delay between enemy turns

@@ -65,9 +65,9 @@ public class PlayerInputManager : MonoBehaviour
         ChangeState();
         cam = Camera.main;
 
-        Transform playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        cam.GetComponent<CameraFollow>().target = playerTransform;
-        cam.transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, cam.transform.position.z);
+        // Transform playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        // cam.GetComponent<CameraFollow>().target = playerTransform;
+        // cam.transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, cam.transform.position.z);
     }
 
 /*    private void FixedUpdate()
@@ -120,7 +120,7 @@ public class PlayerInputManager : MonoBehaviour
         } else if (currentSelection == null && trackTurn.Count > 0 && cam.GetComponent<CameraFollow>().target == null)
         {
             cam.GetComponent<CameraFollow>().target = trackTurn.Keys.GetEnumerator().Current.transform;
-        } else if (currentSelection == null && trackTurn.Count == 0)
+        } else if (currentSelection == null && trackTurn.Count != 0)
         {
             cam.GetComponent<CameraFollow>().target = trackTurn.ToArray()[0].Key.transform;
         }
