@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -46,7 +45,7 @@ public class PlayerInputManager : MonoBehaviour
     [SerializeField] GameObject[] abilitySprites = new GameObject[5];
     bool switching;
     [Range(0, 3)] int directionFacing; //0 is up, 1 is right, 2 is down, 3 is left
-    Vector3[] directionFacingVectors = new Vector3[4] { new Vector3(1, 0), new Vector3(0, 1), new Vector3(-1, 0), new Vector3(0, -1) };
+    Vector3[] directionFacingVectors = new Vector3[4] { new Vector3(0, 1), new Vector3(1, 0), new Vector3(0, -1), new Vector3(-1, 0) };
 
     GridManager gridManager;
     Tilemap tilemap; // Reference to your Tilemap component
@@ -66,9 +65,9 @@ public class PlayerInputManager : MonoBehaviour
         ChangeState();
         cam = Camera.main;
 
-        Transform playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        cam.GetComponent<CameraFollow>().target = playerTransform;
-        cam.transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, cam.transform.position.z);
+        // Transform playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        // cam.GetComponent<CameraFollow>().target = playerTransform;
+        // cam.transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, cam.transform.position.z);
     }
 
 /*    private void FixedUpdate()
@@ -78,6 +77,7 @@ public class PlayerInputManager : MonoBehaviour
 */
     public void UpdatePlayerList()
     {
+
         trackTurn.Clear();
         //find all players
         GameObject[] PlayerList = GameObject.FindGameObjectsWithTag("Player");
@@ -100,6 +100,17 @@ public class PlayerInputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //remove null players from list
+        foreach (KeyValuePair<GameObject, DicTurn> entry in trackTurn)
+        {
+            if (entry.Key == null)
+            {
+                trackTurn.Remove(entry.Key);
+            }
+        }
+
+        // TODO: Indicate when it is enemy's turn
+
         foreach (KeyValuePair<GameObject, DicTurn> entry in trackTurn)
         {
             if (entry.Value.Done)
@@ -115,10 +126,8 @@ public class PlayerInputManager : MonoBehaviour
         {
             cam.GetComponent<CameraFollow>().target = currentSelection.transform;
 
-        } else if (currentSelection == null && trackTurn.Count > 0 && cam.GetComponent<CameraFollow>().target == null)
-        {
-            cam.GetComponent<CameraFollow>().target = trackTurn.Keys.GetEnumerator().Current.transform;
-        } else if (currentSelection == null && trackTurn.Count == 0)
+        } 
+         else if (currentSelection == null && trackTurn.Count != 0)
         {
             cam.GetComponent<CameraFollow>().target = trackTurn.ToArray()[0].Key.transform;
         }
@@ -176,14 +185,13 @@ public class PlayerInputManager : MonoBehaviour
 
             GameObject target = gridManager.GetObjectAtGridPosition(new Vector2Int(tempVec.x, tempVec.y ));
 
-            if(currentState == 2)
+            if (currentState == 2)
             {
-                if(target != null && target.tag == "Enemy")
+                if (GetTargetAtSelector())
                 {
                     //turn currentSelection sprite green 
                     currentIndicator.gameObject.GetComponent<SpriteRenderer>().color = Color.green;
                     //Debug.Log("Targeting enemy");
-                    targetCurrent = target;
                 }
                 else
                 {
@@ -192,15 +200,58 @@ public class PlayerInputManager : MonoBehaviour
                     targetCurrent = null;
                 }
             }
+            else if (currentState == 0)
+            {
+                if (CanMoveToSelector())
+                {
+                    currentIndicator.gameObject.GetComponent<SpriteRenderer>().color = Color.cyan;
+                }
+                else
+                {
+                    currentIndicator.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+                }
+            }
             else
             {
-                //turn currentSelection sprite red
+                //turn currentSelection sprite cyan
                 currentIndicator.gameObject.GetComponent<SpriteRenderer>().color = Color.cyan;
                 //Debug.Log("Not targeting enemy");
 
             }
-        } 
 
+
+            
+        } 
+        if(primaryIndicator != null)
+            {
+                 //Debug.Log("Checking for target    " + currentState + " state");
+            Vector3Int tempVec = tilemap.WorldToCell(primaryIndicator.transform.position);
+
+            GameObject target = gridManager.GetObjectAtGridPosition(new Vector2Int(tempVec.x, tempVec.y ));
+                if(currentState == 3)
+                {
+                    if(target != null && target.tag == "Enemy")
+                    {
+                        //turn currentSelection sprite green 
+                        primaryIndicator.gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+                        //Debug.Log("Targeting enemy");
+                        targetCurrent = target;
+                    }
+                    else
+                    {
+                        //turn currentSelection sprite red
+                        primaryIndicator.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+                        targetCurrent = null;
+                    }
+                }
+                else
+                {
+                    //turn currentSelection sprite red
+                    primaryIndicator.gameObject.GetComponent<SpriteRenderer>().color = Color.cyan;
+                    //Debug.Log("Not targeting enemy");
+
+                }
+            }
 
 
 
@@ -233,16 +284,16 @@ public class PlayerInputManager : MonoBehaviour
         {
             ChangeState(3);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            ChangeState(4);
-        }
+        // else if (Input.GetKeyDown(KeyCode.Alpha5))
+        // {
+        //     ChangeState(4);
+        // }
         if (Input.GetMouseButtonDown(0)) // The mouse left click input
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if(currentSelection != null) { 
+            if (currentSelection != null) { 
                 //currentSelection.GetComponent<PathSearch>().Search(gameObject,5);
-                if (currentState == 0 && !switching && trackTurn[currentSelection].hasMoved == false)
+                if (currentState == 0 && !switching && trackTurn[currentSelection].hasMoved == false && CanMoveToSelector())
                 {
                     currentSelection.GetComponent<PlayerController>().Move(PositionOnGrid(mousePosition));
                     trackTurn[currentSelection].hasMoved = true;
@@ -258,17 +309,15 @@ public class PlayerInputManager : MonoBehaviour
                     }
                     trackTurn[currentSelection].hasAttacked = true;
                 }
-                else if (currentState == 2 && currentSelection.GetComponent<PlayerController>().isPlayer() && !switching && trackTurn[currentSelection].hasAttacked == false) // this is a player only ability
+                else if (currentState == 2 && currentSelection.GetComponent<PlayerController>().isPlayer() && !switching && trackTurn[currentSelection].hasAttacked == false && targetCurrent != null) // this is a player only ability
                 {
-                    if (targetCurrent != null)
-                    {
-                        currentSelection.GetComponent<PlayerController>().Spit(targetCurrent);
-                    }
+                    currentSelection.GetComponent<PlayerController>().Spit(targetCurrent);
                     trackTurn[currentSelection].hasAttacked = true;
                 }
                 else if (currentState == 3 && !switching && trackTurn[currentSelection].hasAttacked == false)
                 {
-                    currentSelection.GetComponent<PlayerController>().Rush();
+
+                    currentSelection.GetComponent<PlayerController>().Rush(targetCurrent);
                     trackTurn[currentSelection].hasAttacked = true;
                 }
                 else if (currentState == 4 && !switching && trackTurn[currentSelection].hasAttacked == false)
@@ -276,8 +325,16 @@ public class PlayerInputManager : MonoBehaviour
                     currentSelection.GetComponent<PlayerController>().Leap();
                     trackTurn[currentSelection].hasAttacked = true;
                 }
+                else
+                {
+                    Selection(mousePosition);
+                }
             }
-            Selection(mousePosition);
+            else
+            {
+                Selection(mousePosition);
+            }
+            ClearIndicator();
         }
 
         #endregion
@@ -294,7 +351,7 @@ public class PlayerInputManager : MonoBehaviour
         {
             currentIndicator = Instantiate(indicator, PositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition)) + indcatorOffset, Quaternion.identity);
         }
-        else if (currentState == 1 && trackTurn[currentSelection].hasAttacked == false)
+        else if (currentState == 1 && trackTurn[currentSelection].hasAttacked == false && currentSelection.GetComponent<PlayerController>().isPlayer())
         {
             if (primaryIndicator == null)
             {
@@ -327,8 +384,23 @@ public class PlayerInputManager : MonoBehaviour
                 currentIndicator.transform.position = PositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition))  + indcatorOffset;
             }
         }
-        else if (currentState == 3 && trackTurn[currentSelection].hasAttacked == false) { }
-        else if (currentState == 4 && trackTurn[currentSelection].hasAttacked == false) { }
+        else if (currentState == 3 && trackTurn[currentSelection].hasAttacked == false) 
+        { 
+            if (primaryIndicator == null)
+            {
+                primaryIndicator = Instantiate(indicator, currentSelection.transform.position + directionFacingVectors[directionFacing], Quaternion.identity);
+                //Debug.Log("Primary Indicator Created" + primaryIndicator.transform.position + " " + currentSelection.transform.position + " " + directionFacingVectors[directionFacing]);
+            }
+            else
+            {
+                primaryIndicator.transform.position = currentSelection.transform.position + directionFacingVectors[directionFacing];
+                //Debug.Log("Primary Indicator Moved" + primaryIndicator.transform.position + " " + currentSelection.transform.position + " " + directionFacingVectors[directionFacing]);
+            }
+        }
+        else if (currentState == 4 && trackTurn[currentSelection].hasAttacked == false) 
+        {
+
+         }
     }
     else
     {
@@ -357,7 +429,12 @@ public class PlayerInputManager : MonoBehaviour
                 primaryIndicator.transform.position = PositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             }
         }
-        else if (currentState == 3) { }
+        else if (currentState == 3) {
+            if (primaryIndicator != null)
+            {
+                primaryIndicator.transform.position = currentSelection.transform.position + directionFacingVectors[directionFacing];
+            }
+         }
         else if (currentState == 4) { }
     }
 }
@@ -441,17 +518,36 @@ public class PlayerInputManager : MonoBehaviour
 
 
 
-
         ClearIndicator();
         //Debug.Log("Current State: " + currentState);
         //selectionObject.transform.position = abilitySprites[currentState].transform.position;
-    }
-    public void CheckMoves()
+    }    
+
+    private bool CanMoveToSelector()
     {
-        if (trackTurn[currentSelection].hasMoved == false)
+        Movement movement = currentSelection.GetComponent<Movement>();
+        var paths = movement.CalculatePath(
+            movement.GetGridTilePosition(currentSelection.transform.position),
+            movement.GetGridTilePosition(currentIndicator.transform.position)
+        );
+        //Debug.Log(paths.Count);
+        if(paths.Count == 0)
         {
-            currentSelection.GetComponent<PlayerController>().Move(PositionOnGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
-        }
+            return false;
+        }   
+        return paths.Count <= currentSelection.GetComponent<PlayerController>().moveDistance;
     }
-    
+
+    private bool GetTargetAtSelector()
+    {
+        Vector3Int tempVec = tilemap.WorldToCell(currentIndicator.transform.position);
+
+        GameObject target = gridManager.GetObjectAtGridPosition(new Vector2Int(tempVec.x, tempVec.y));
+
+        bool validTarget = target != null && target.tag == "Enemy";
+        if (validTarget)
+            targetCurrent = target;
+
+        return validTarget;
+    }
 }

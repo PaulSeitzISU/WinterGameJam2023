@@ -32,20 +32,10 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(EnemyList.Length == 0)
-        {
-            //SceneManager.LoadScene("Win");
-        }
-        {
-
-        }
         
-        maxTime = maxTimeStart + EnemyList.Length ;
+        maxTime = maxTimeStart + (EnemyList.Length * 0.1f);
         //take turn on q
-        if (Input.GetKeyDown(KeyCode.Q) && !finishedTurn)
-        {
-            StartCoroutine(ExecuteEnemyTurns());
-        }
+        
         if(isTurn && !finishedTurn)
         {
             isTurn = false;
@@ -68,6 +58,17 @@ public class EnemyManager : MonoBehaviour
     {
         finishedTurn = true;
 
+        if (EnemyList.Length == 0)
+        {
+            //find all gameobjects with tag enemy'
+            EnemyList = GameObject.FindGameObjectsWithTag("Enemy");
+
+            if (EnemyList.Length == 0)
+            {
+                SceneManager.LoadScene("WinScene");
+            }
+        }
+
 
         foreach (GameObject enemy in EnemyList)
         {
@@ -75,11 +76,14 @@ public class EnemyManager : MonoBehaviour
             
             //see if enemy gameobject is null if so remove from list
 
-            if (enemy == null || enemy.GetComponent<EnemyBrain>().currentState == EnemyState.Dead)
+            if (enemy == null)
             {
                 EnemyList = GameObject.FindGameObjectsWithTag("Enemy");
                 continue;
             }
+
+
+
 
             EnemyBrain enemyBrain = enemy.GetComponent<EnemyBrain>();
 

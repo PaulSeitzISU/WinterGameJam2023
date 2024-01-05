@@ -161,6 +161,7 @@ MonoBehaviour:
   totalSlime: 0
   damage: 30
   splitCost: 10
+  moveDistance: 10
 --- !u!114 &9008527375254509527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,7 +352,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1779881147
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -144435923, guid: 307dec942dabfa94d80aac41bf8ef564, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

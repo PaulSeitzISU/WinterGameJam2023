@@ -45,6 +45,7 @@ public class HealthBarController : MonoBehaviour, IPointerEnterHandler, IPointer
         float healthPercentage = (float)healthScript.currentHealth / healthScript.maxHealth;
         int spriteIndex = Mathf.Max(0, Mathf.RoundToInt((1 - healthPercentage) * (healthSprites.Length - 1)));
         //Debug.Log(spriteIndex);
+        if(spriteIndex > healthSprites.Length) spriteIndex = healthSprites.Length;
         healthBarImage.GetComponent<SpriteRenderer>().sprite = healthSprites[spriteIndex];
     }
 

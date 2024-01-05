@@ -32,6 +32,8 @@ public class LevelGenerator: MonoBehaviour
     {
         GenerateLevel();
         levelPopulator.PopulateLevel(scaleFactor, rooms);
+        //find tile map scanner
+        GameObject.Find("Tilemap").GetComponent<TilemapScanner>().ScanTilemap();
     }
 
     private void Update()

@@ -161,6 +161,7 @@ MonoBehaviour:
   totalSlime: 0
   damage: 10
   splitCost: 0
+  moveDistance: 7
 --- !u!58 &8195723326435020497
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -246,12 +247,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5500962313511131147}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+        m_TargetAssemblyTypeName: DeadAnimation, Assembly-CSharp
+        m_MethodName: Blink
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

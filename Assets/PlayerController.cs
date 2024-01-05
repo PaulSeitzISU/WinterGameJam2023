@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,7 +16,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int startingSlime;
     [SerializeField] int totalSlime;
     [SerializeField] int damage;
-    [SerializeField] int splitCost;  
+    [SerializeField] int splitCost;
+    [SerializeField] public int moveDistance;
 
 
     Projectile projectile;
@@ -35,6 +37,16 @@ public class PlayerController : MonoBehaviour
     {
         totalSlime  = health.currentHealth;
     }
+
+    void FixedUpdate()
+    {
+        if (health.currentHealth <= 0 && !isPlayerlet)
+        {
+            //go to lose screen
+            SceneManager.LoadScene("LoseScene");
+        }
+    }
+
     public void AddSlime(int slimeNow)
     {
         totalSlime = slimeNow;
@@ -54,7 +66,7 @@ public class PlayerController : MonoBehaviour
     public void Move(Vector3Int gridPosition)
     {
         Debug.Log("Moving!");
-        GetComponent<Movement>().MoveToGrid(gridPosition);
+        GetComponent<Movement>().MoveToGrid(gridPosition, moveDistance);
     }
     public void Split(bool horizontal)
     {
@@ -68,12 +80,12 @@ public class PlayerController : MonoBehaviour
         }
         
         Debug.Log("Splitting!");
-        if (horizontal)
+        if (!horizontal)
         {
             Instantiate(playerlet, transform.position + Vector3.left, Quaternion.identity);
 
             Instantiate(playerlet, transform.position + Vector3.right, Quaternion.identity);
-        }else if (!horizontal)
+        }else if (horizontal)
         {
             Instantiate(playerlet, transform.position + Vector3.up, Quaternion.identity);
 
@@ -86,8 +98,10 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Spitting!");
         projectile.FireProjectile(target, damage);
     }
-    public void Rush()
+    public void Rush(GameObject target)
     {
+        projectile.FireProjectile(target, damage * 2);
+
         Debug.Log("Rushing!");
     }
     public void Leap()
