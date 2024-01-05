@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (health.currentHealth <= 0)
+        if (health.currentHealth <= 0 && !isPlayerlet)
         {
             //go to lose screen
             SceneManager.LoadScene("LoseScene");

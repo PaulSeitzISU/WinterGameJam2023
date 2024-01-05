@@ -9,7 +9,7 @@ public class EnemyManager : MonoBehaviour
     public GameObject[] EnemyList;
     TilemapScanner tilemapScanner;
 
-    private bool finishedTurn = true;
+    private bool finishedTurn = false;
     public bool isTurn = false;
 
     // Time delay between enemy turns
@@ -32,10 +32,6 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        {
-
-        }
         
         maxTime = maxTimeStart + (EnemyList.Length * 0.1f);
         //take turn on q
@@ -64,7 +60,13 @@ public class EnemyManager : MonoBehaviour
 
         if (EnemyList.Length == 0)
         {
-            SceneManager.LoadScene("WinScene");
+            //find all gameobjects with tag enemy'
+            EnemyList = GameObject.FindGameObjectsWithTag("Enemy");
+
+            if (EnemyList.Length == 0)
+            {
+                SceneManager.LoadScene("WinScene");
+            }
         }
 
 
