@@ -1059,6 +1059,14 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 2007703766015881261, guid: 9d25c0b4ae49f7245a89d0ab1c896c3e, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007703766948023657, guid: 9d25c0b4ae49f7245a89d0ab1c896c3e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.6
+      objectReference: {fileID: 0}
     - target: {fileID: 2007703767687831522, guid: 9d25c0b4ae49f7245a89d0ab1c896c3e, type: 3}
       propertyPath: m_Name
       value: UI-HUD2.0

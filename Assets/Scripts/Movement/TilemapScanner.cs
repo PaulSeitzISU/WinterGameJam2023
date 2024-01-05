@@ -21,7 +21,7 @@ public class TilemapScanner : MonoBehaviour
             Debug.LogError("No GridManager found. Assign a GridManager in the inspector.");
             return;
         }
-        Debug.Log("Tilemap scanning?");
+        //Debug.Log("Tilemap scanning?");
 
         //ScanTilemap();
     }
@@ -57,6 +57,6 @@ public class TilemapScanner : MonoBehaviour
                 }
             }
         }
-        Debug.Log("Tilemap scanned");
+        //Debug.Log("Tilemap scanned");
     }
 }
