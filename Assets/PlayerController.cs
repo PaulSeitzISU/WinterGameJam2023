@@ -80,12 +80,12 @@ public class PlayerController : MonoBehaviour
         }
         
         Debug.Log("Splitting!");
-        if (horizontal)
+        if (!horizontal)
         {
             Instantiate(playerlet, transform.position + Vector3.left, Quaternion.identity);
 
             Instantiate(playerlet, transform.position + Vector3.right, Quaternion.identity);
-        }else if (!horizontal)
+        }else if (horizontal)
         {
             Instantiate(playerlet, transform.position + Vector3.up, Quaternion.identity);
 

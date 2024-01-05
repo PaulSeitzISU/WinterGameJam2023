@@ -37,7 +37,7 @@ public class EnemyManager : MonoBehaviour
 
         }
         
-        maxTime = maxTimeStart + EnemyList.Length ;
+        maxTime = maxTimeStart + (EnemyList.Length * 0.1f);
         //take turn on q
         
         if(isTurn && !finishedTurn)
