@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Trey/MainMenu.unity
     guid: 90c2e6dc6ef75ec42beb34645782a7c7
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/Scenes/Paul/NewGridMovement.unity
+    guid: 0a7bbb9c3e5ba0143ad96f221b9c3200
+  - enabled: 1
+    path: Assets/Scenes/Trey/WinScene.unity
+    guid: 7dcbf25e0c552ad4c8155218a1a73c08
+  - enabled: 1
+    path: Assets/Scenes/Trey/LoseScene.unity
+    guid: 7054112629279104fbab34456b177852
   m_configObjects: {}
