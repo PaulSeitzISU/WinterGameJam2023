@@ -521,7 +521,8 @@ public class PlayerInputManager : MonoBehaviour
             movement.GetGridTilePosition(currentSelection.transform.position),
             movement.GetGridTilePosition(currentIndicator.transform.position)
         );
-        if(paths == null)
+        Debug.Log(paths.Count);
+        if(paths.Count == 0)
         {
             return false;
         }   
