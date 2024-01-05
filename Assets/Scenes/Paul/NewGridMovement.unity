@@ -355,7 +355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerManager: {fileID: 139581568}
   enemyManager: {fileID: 810239721}
-  isPlayerTurn: 0
+  isPlayerTurn: 1
   buttonEndTurn: {fileID: 370653276}
 --- !u!4 &871575074
 Transform:

@@ -100,6 +100,15 @@ public class PlayerInputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //remove null players from list
+        foreach (KeyValuePair<GameObject, DicTurn> entry in trackTurn)
+        {
+            if (entry.Key == null)
+            {
+                trackTurn.Remove(entry.Key);
+            }
+        }
+
         // TODO: Indicate when it is enemy's turn
 
         foreach (KeyValuePair<GameObject, DicTurn> entry in trackTurn)

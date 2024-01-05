@@ -37,6 +37,10 @@ public class Health : MonoBehaviour
                 enemyBrain.currentState = EnemyState.Dead;
                 enemyBrain.UpdateState();
                 AnimationEventDead.Invoke();
+            }else
+            {
+                AnimationEventDead.Invoke();
+
             }
             return true;
         }
