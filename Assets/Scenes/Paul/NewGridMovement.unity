@@ -1634,6 +1634,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3427908760525177870, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
+      propertyPath: levelSize
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7286372324287764640, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
       propertyPath: propTiles.Array.size
       value: 19
@@ -1718,6 +1722,10 @@ PrefabInstance:
       propertyPath: tilemap
       value: 
       objectReference: {fileID: 1059129053}
+    - target: {fileID: 7286372324287764641, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
+      propertyPath: gridSize
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7286372324287764641, guid: 3e032addbaa36c743968c1b86e001237, type: 3}
       propertyPath: textParent
       value: 
