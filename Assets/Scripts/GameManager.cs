@@ -9,13 +9,14 @@ public class GameManager : MonoBehaviour
     public bool isPlayerTurn = false;
     public GameObject buttonEndTurn;
     Camera cam;
+    CameraFollow camFollow;
 
 
     // Start is called before the first frame update
     void Start()
     {
         cam = Camera.main;
-
+        camFollow = cam.GetComponent<CameraFollow>();
     }
 
     // Update is called once per frame
@@ -23,16 +24,19 @@ public class GameManager : MonoBehaviour
     {
         if(!enemyManager.isTurn && !playerManager.isTurn && isPlayerTurn)
         {
-            //find all players
-            GameObject[] PlayerList = GameObject.FindGameObjectsWithTag("Player");
-            foreach(GameObject player in PlayerList)
-            {
-                if(player.GetComponent<PlayerController>().isPlayer())
-                {
-                    cam.GetComponent<CameraFollow>().target = player.transform;
 
-                }
-            }
+            if(camFollow.target == null)
+            {
+                GameObject[] PlayerList = GameObject.FindGameObjectsWithTag("Player");
+                foreach(GameObject player in PlayerList)
+                {
+                    if(player.GetComponent<PlayerController>().isPlayer())
+                    {
+                        cam.GetComponent<CameraFollow>().target = player.transform;
+
+                    }
+            }            }
+
 
        
 
